@@ -17,6 +17,7 @@ public class LSGBaseException extends RuntimeException{
     private ResultEnum resultEnum;
 
     public LSGBaseException(ResultEnum resultEnum) {
+        super(resultEnum.getDescription());
         this.resultEnum = resultEnum;
     }
 }
