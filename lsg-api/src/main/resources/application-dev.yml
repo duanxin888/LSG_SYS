@@ -4,7 +4,7 @@ spring:
     druid:
       url: jdbc:mysql://localhost:3306/lsg_sys?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
       username: root
-      password: root
+      password: ENC(crRQ4MChROAdWrnaGMI/h3vq5jjdOZC3iCIqVgBz3b73YTD1qJL3ogT68yGGsPy9)
       validation-query: select 1 from dual
       initial-size: 5
       max-active: 20
@@ -16,3 +16,36 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-aliases-package: com.duanxin.lsg.persistent.module
+
+## 微信登陆
+wx:
+  miniapp:
+    appid: ENC(U8Z6P3piQM0YcFDr8V6/zD5C2kiA+ZnsnLRbAa22ENEo6OFacIc5JCFY5iWyz1eN3GP/otIv3hhAowKQVQApzQ==)
+    secret: ENC(Qd4eCUdP32WQ9QPzyGf8IvuQnM2RNekxC0Izo5DGkcldTbR0LreS+bsSTfjJdnXOePa5hijpBE653IVdNvkuUNGnOI0vOCmW1aQalwh1fDs=)
+    token:
+    aes-key:
+    msg-data-format:
+    config-storage:
+      type: redistemplate
+      key-prefix: wx
+      redis:
+        host: 192.168.100.137
+        port: 6379
+        password: ENC(crRQ4MChROAdWrnaGMI/h3vq5jjdOZC3iCIqVgBz3b73YTD1qJL3ogT68yGGsPy9)
+
+
+## 加密解密
+jasypt:
+  encryptor:
+    password: 135792468
+
+## redis
+redis:
+  cluster:
+    url: 192.168.100.137:6379
+    password: ENC(crRQ4MChROAdWrnaGMI/h3vq5jjdOZC3iCIqVgBz3b73YTD1qJL3ogT68yGGsPy9)
+    max-Idle: 10
+    min-Idle: 0
+    max-total: 20
+    shutdown-timeout: 300000
+    command-timeout: 30000

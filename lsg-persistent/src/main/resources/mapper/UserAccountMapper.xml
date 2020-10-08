@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duanxin.lsg.persistent.mapper.UserAccountMapper">
+
+    <resultMap type="com.duanxin.lsg.persistent.module.UserAccount" id="UserAccountMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="accountSn" column="ACCOUNT_SN" jdbcType="VARCHAR"/>
+        <result property="balance" column="BALANCE" jdbcType="NUMERIC"/>
+        <result property="deleted" column="DELETED" jdbcType="INTEGER"/>
+        <result property="cdate" column="CDATE" jdbcType="TIMESTAMP"/>
+        <result property="creator" column="CREATOR" jdbcType="VARCHAR"/>
+        <result property="edate" column="EDATE" jdbcType="TIMESTAMP"/>
+        <result property="editor" column="EDITOR" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="user">
+        ID, ACCOUNT_SN, BALANCE, DELETED, CDATE, CREATOR, EDATE, EDITOR
+    </sql>
+    <insert id="insert">
+        insert into T_USER_ACCOUNT(ACCOUNT_SN, BALANCE, DELETED, CDATE, CREATOR, EDATE, EDITOR)
+        values(#{userAccount.accountSn}, #{userAccount.balance}, #{userAccount.deleted}, #{userAccount.cdate},
+        #{userAccount.creator}, #{userAccount.edate}, #{userAccount.editor})
+    </insert>
+
+</mapper>
