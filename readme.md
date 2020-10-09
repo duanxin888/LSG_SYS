@@ -11,7 +11,7 @@
 ```  
 说明：  
 1、request success --> code = 200, data --> 为下面的response, msg --> "operator success!"  
-2、request fail --> code and msg 见[!ResultEnum](https://github.com/duanxin888/LSG_SYS/blob/master/lsg-core/src/main/java/com/duanxin/lsg/core/exception/ResultEnum.java)
+2、request fail --> code and msg 见[ResultEnum](https://github.com/duanxin888/LSG_SYS/blob/master/lsg-core/src/main/java/com/duanxin/lsg/core/exception/ResultEnum.java)
   
 #### 微信登陆  
 api: /lsg/api/v1/users/login  
