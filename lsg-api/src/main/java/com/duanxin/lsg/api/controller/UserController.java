@@ -23,7 +23,7 @@ public class UserController {
     private WXService wxService;
 
     @PostMapping("/login")
-    public ResponseResult login(@RequestBody WXLoginRequest request) {
-        return ResponseResult.success(wxService.login(request));
+    public ResponseResult login(@RequestBody WXLoginRequest wxLoginRequest) {
+        return ResponseResult.success(wxService.login(wxLoginRequest));
     }
 }
