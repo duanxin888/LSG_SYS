@@ -5,6 +5,7 @@ import com.duanxin.lsg.common.utils.HttpUtil;
 import com.duanxin.lsg.core.enums.ConstantEnum;
 import com.duanxin.lsg.persistent.mapper.UserMapper;
 import com.duanxin.lsg.persistent.module.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
  * @date 2020/10/06 09:13
  */
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -34,14 +36,16 @@ public class UserServiceImpl implements UserService {
         user.setEdate(LocalDateTime.now());
         user.setEditor(ConstantEnum.CREATOR.getKey());
         userMapper.insert(user);
+        log.info("success to insert user [{}]", user.getId());
         return user;
     }
 
     @Override
-    public User updateUser(User user) {
+    public User updateWXSessionKey(User user) {
         user.setEdate(LocalDateTime.now());
         user.setEditor(HttpUtil.request().getRemoteAddr());
         userMapper.updateWXSessionKey(user);
+        log.info("success to update user [{}] wxSessionKey", user.getId());
         return user;
     }
 }
