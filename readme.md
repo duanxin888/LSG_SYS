@@ -30,7 +30,7 @@ param: wxLoginRequest
   }
 }
 ```  
-说明：gender 0男 1女  
+说明：gender 0女 1男  
   
 response:  
 ```json
