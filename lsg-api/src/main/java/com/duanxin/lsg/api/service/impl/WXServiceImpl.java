@@ -9,22 +9,17 @@ import com.duanxin.lsg.api.service.WXService;
 import com.duanxin.lsg.common.service.CacheService;
 import com.duanxin.lsg.common.service.UserAccountService;
 import com.duanxin.lsg.common.service.UserService;
-import com.duanxin.lsg.common.utils.JwtUtil;
 import com.duanxin.lsg.core.enums.*;
 import com.duanxin.lsg.core.exception.LSGBaseException;
 import com.duanxin.lsg.core.exception.ResultEnum;
 import com.duanxin.lsg.persistent.module.User;
 import com.duanxin.lsg.persistent.module.UserAccount;
-import com.sun.org.apache.regexp.internal.RE;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.security.pkcs11.wrapper.Constants;
 
-import java.awt.event.FocusEvent;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.Duration;
@@ -90,7 +85,7 @@ public class WXServiceImpl implements WXService {
         // storage redis
         String thirdSession = UUID.randomUUID().toString();
         String value = code2SessionResponse.getOpenid() + "--" + code2SessionResponse.getSessionKey();
-        cacheService.cache(thirdSession, value, Duration.ofDays(30L));
+        cacheService.refreshCache(thirdSession, value, Duration.ofDays(30L));
 
         WXLoginResponse response = new WXLoginResponse();
         response.setThirdSession(thirdSession);
@@ -100,7 +95,7 @@ public class WXServiceImpl implements WXService {
 
     private User updateUser(WxMaJscode2SessionResult code2SessionResponse, User user) {
         user.setWxSessionKey(code2SessionResponse.getSessionKey());
-        return userService.updateUser(user);
+        return userService.updateWXSessionKey(user);
     }
 
     private User createUser(WxMaJscode2SessionResult code2SessionResponse, UserInfo userInfo) {
