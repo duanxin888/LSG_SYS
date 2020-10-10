@@ -9,7 +9,7 @@ import lombok.Setter;
  * @className LSGBaseException
  * @date 2020/09/30 09:13
  */
-public class LSGBaseException extends RuntimeException{
+public abstract class LSGBaseException extends RuntimeException{
     private static final long serialVersionUID = 1997278138515098842L;
 
     @Getter

@@ -1,7 +1,7 @@
 package com.duanxin.lsg.core.exception.handler;
 
 import com.duanxin.lsg.core.base.ResponseResult;
-import com.duanxin.lsg.core.exception.LSGBaseException;
+import com.duanxin.lsg.core.exception.LSGCheckException;
 import com.duanxin.lsg.core.exception.ResultEnum;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class LSGExceptionHandler {
 
-    @ExceptionHandler(LSGBaseException.class)
+    @ExceptionHandler(LSGCheckException.class)
     @ResponseBody
-    public ResponseResult lsgBaseExceptionHandler(LSGBaseException exception) {
+    public ResponseResult lsgBaseExceptionHandler(LSGCheckException exception) {
         ResultEnum resultEnum = exception.getResultEnum();
         return ResponseResult.error(resultEnum.getCode(), resultEnum.getDescription());
     }
