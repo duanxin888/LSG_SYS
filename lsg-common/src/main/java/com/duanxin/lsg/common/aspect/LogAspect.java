@@ -2,7 +2,7 @@ package com.duanxin.lsg.common.aspect;
 
 import com.duanxin.lsg.common.utils.HttpUtil;
 import com.duanxin.lsg.common.utils.JsonUtil;
-import com.duanxin.lsg.core.exception.LSGBaseException;
+import com.duanxin.lsg.core.exception.LSGCheckException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -42,7 +42,7 @@ public class LogAspect {
         Object res = null;
         try {
             res = point.proceed();
-        } catch (LSGBaseException ex) {
+        } catch (LSGCheckException ex) {
             log.warn("request uri [{}] method [{}] args {} exception",
                     uri, methodName, args, ex);
             throw ex;

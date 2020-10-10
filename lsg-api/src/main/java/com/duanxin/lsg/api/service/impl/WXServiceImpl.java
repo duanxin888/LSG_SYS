@@ -10,7 +10,7 @@ import com.duanxin.lsg.common.service.CacheService;
 import com.duanxin.lsg.common.service.UserAccountService;
 import com.duanxin.lsg.common.service.UserService;
 import com.duanxin.lsg.core.enums.*;
-import com.duanxin.lsg.core.exception.LSGBaseException;
+import com.duanxin.lsg.core.exception.LSGCheckException;
 import com.duanxin.lsg.core.exception.ResultEnum;
 import com.duanxin.lsg.persistent.module.User;
 import com.duanxin.lsg.persistent.module.UserAccount;
@@ -53,7 +53,7 @@ public class WXServiceImpl implements WXService {
         // validate
         if (StringUtils.isBlank(code) || Objects.isNull(userInfo)) {
             log.warn("failed to login with non code or userInfo is null");
-            throw new LSGBaseException(ResultEnum.WX_LOGIN_CODE_OR_USERINFO_IS_NULL);
+            throw new LSGCheckException(ResultEnum.WX_LOGIN_CODE_OR_USERINFO_IS_NULL);
         }
 
         log.info("login with wx code [{}]", code);
@@ -63,13 +63,13 @@ public class WXServiceImpl implements WXService {
             code2SessionResponse = wxMaService.getUserService().getSessionInfo(code);
         } catch (WxErrorException e) {
             log.warn("request wx code [{}] to session exception", code, e);
-            throw new LSGBaseException(ResultEnum.REQUEST_WX_CODE2SESSION_API_FAIL);
+            throw new LSGCheckException(ResultEnum.REQUEST_WX_CODE2SESSION_API_FAIL);
         }
 
         if (StringUtils.isBlank(code2SessionResponse.getOpenid()) ||
                 StringUtils.isBlank(code2SessionResponse.getSessionKey())) {
             log.warn("request wx code [{}] to session with openid is null or sessionKey is null", code);
-            throw new LSGBaseException(ResultEnum.REQUEST_WX_CODE2SESSION_API_FAIL);
+            throw new LSGCheckException(ResultEnum.REQUEST_WX_CODE2SESSION_API_FAIL);
         }
 
         // get user by openid

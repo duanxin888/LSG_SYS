@@ -11,6 +11,16 @@ spring:
       min-idle: 5
       max-wait: 60000
     driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 192.168.100.137
+    port: 6379
+    password: ENC(crRQ4MChROAdWrnaGMI/h3vq5jjdOZC3iCIqVgBz3b73YTD1qJL3ogT68yGGsPy9)
+    lettuce:
+      pool:
+        min-idle: 0
+        max-active: 3
+        max-idle: 10
+        max-wait: 30000
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
   configuration:
@@ -25,27 +35,9 @@ wx:
     token:
     aes-key:
     msg-data-format:
-    config-storage:
-      type: redistemplate
-      key-prefix: wx
-      redis:
-        host: 192.168.100.137
-        port: 6379
-        password: ENC(crRQ4MChROAdWrnaGMI/h3vq5jjdOZC3iCIqVgBz3b73YTD1qJL3ogT68yGGsPy9)
 
 
 ## 加密解密
 jasypt:
   encryptor:
     password: 135792468
-
-## redis
-redis:
-  cluster:
-    url: 192.168.100.137:6379
-    password: ENC(crRQ4MChROAdWrnaGMI/h3vq5jjdOZC3iCIqVgBz3b73YTD1qJL3ogT68yGGsPy9)
-    max-Idle: 10
-    min-Idle: 0
-    max-total: 20
-    shutdown-timeout: 300000
-    command-timeout: 30000

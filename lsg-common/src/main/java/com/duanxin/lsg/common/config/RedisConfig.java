@@ -10,26 +10,20 @@ import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.cache.RedisCacheWriter;
-import org.springframework.data.redis.connection.RedisClusterConfiguration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.RedisPassword;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import java.time.Duration;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -39,47 +33,7 @@ import java.util.stream.Stream;
  * @date 2020/10/08 08:47
  */
 @Configuration
-public class RedisClusterConfig {
-
-    @Value("${redis.cluster.url}")
-    private String[] clusterUrls;
-    @Value("${redis.cluster.password}")
-    private String clusterPassword;
-    @Value("${redis.cluster.max-Idle}")
-    private int clusterMaxIdle;
-    @Value("${redis.cluster.min-Idle}")
-    private int clusterMinIdle;
-    @Value("${redis.cluster.max-total}")
-    private int clusterMaxTotal;
-    @Value("${redis.cluster.shutdown-timeout}")
-    private int clusterShutdownTimeout;
-    @Value("${redis.cluster.command-timeout}")
-    private int clusterCommandTimeout;
-
-    @Bean
-    public RedisConnectionFactory connectionFactory(LettucePoolingClientConfiguration clientConfiguration) {
-        Set<String> clusterHostAndPorts = new HashSet<>();
-        Collections.addAll(clusterHostAndPorts, clusterUrls);
-        RedisClusterConfiguration clusterConfig = new RedisClusterConfiguration(clusterHostAndPorts);
-        clusterConfig.setPassword(RedisPassword.of(clusterPassword));
-        LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(clusterConfig, clientConfiguration);
-        lettuceConnectionFactory.setValidateConnection(true);
-        return lettuceConnectionFactory;
-    }
-
-    @Bean
-    public LettucePoolingClientConfiguration clientConfiguration() {
-        GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
-        poolConfig.setMaxIdle(clusterMaxIdle);
-        poolConfig.setMinIdle(clusterMinIdle);
-        poolConfig.setMaxTotal(clusterMaxTotal);
-        return LettucePoolingClientConfiguration
-                .builder()
-                .commandTimeout(Duration.ofSeconds(clusterCommandTimeout))
-                .shutdownTimeout(Duration.ofSeconds(clusterShutdownTimeout))
-                .poolConfig(poolConfig)
-                .build();
-    }
+public class RedisConfig {
 
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
