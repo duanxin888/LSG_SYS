@@ -18,18 +18,19 @@
         <result property="creator" column="CREATOR" jdbcType="VARCHAR"/>
         <result property="edate" column="EDATE" jdbcType="TIMESTAMP"/>
         <result property="editor" column="EDITOR" jdbcType="VARCHAR"/>
+        <result property="gender" column="GENDER" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="user">
         ID, USER_NAME, PASSWORD, PHONE, USER_IMG_URL, USER_ACCOUNT_ID, NICKNAME,
-        WX_OPENID, WX_SESSION_KEY, STATUS, DELETED, CDATE, CREATOR, EDATE, EDITOR
+        WX_OPENID, WX_SESSION_KEY, STATUS, DELETED, CDATE, CREATOR, EDATE, EDITOR, GENDER
     </sql>
     <insert id="insert">
         insert into T_USER(USER_NAME, PASSWORD, PHONE, USER_IMG_URL, USER_ACCOUNT_ID, NICKNAME,
-        WX_OPENID, WX_SESSION_KEY, STATUS, DELETED, CDATE, CREATOR, EDATE, EDITOR)
+        WX_OPENID, WX_SESSION_KEY, STATUS, DELETED, CDATE, CREATOR, EDATE, EDITOR, GENDER)
         values(#{user.userName}, #{user.password}, #{user.phone}, #{user.userImgUrl}, #{user.userAccountId},
         #{user.nickname}, #{user.wxOpenid}, #{user.wxSessionKey}, #{user.status}, #{user.deleted},
-        #{user.cdate}, #{user.creator}, #{user.edate}, #{user.editor});
+        #{user.cdate}, #{user.creator}, #{user.edate}, #{user.editor}, #{user.gender});
     </insert>
     <update id="updateWXSessionKey">
         update T_USER

@@ -101,7 +101,7 @@ public class WXServiceImpl implements WXService {
     private User createUser(WxMaJscode2SessionResult code2SessionResponse, UserInfo userInfo) {
         User user = new User();
         String openId = code2SessionResponse.getOpenid();
-        user.setUserName(openId);
+        user.setUserName(userInfo.getNickName());
         user.setUserImgUrl(userInfo.getAvatarUrl());
         UserAccount account = createAccount();
         user.setUserAccountId(account.getId());
@@ -110,6 +110,7 @@ public class WXServiceImpl implements WXService {
         user.setWxSessionKey(code2SessionResponse.getSessionKey());
         user.setStatus(UserStatusEnum.AVAILABLE.getCode());
         user.setDeleted(DeletedEnum.NOT_DELETE.getCode());
+        user.setGender(userInfo.getGender());
         return userService.insert(user);
     }
 

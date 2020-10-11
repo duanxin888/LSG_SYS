@@ -76,4 +76,6 @@ public class User implements Serializable {
      * 更新者
      */
     private String editor;
+
+    private int gender;
 }

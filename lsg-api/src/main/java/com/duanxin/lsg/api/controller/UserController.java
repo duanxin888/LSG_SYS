@@ -4,10 +4,7 @@ import com.duanxin.lsg.api.module.WXLoginRequest;
 import com.duanxin.lsg.api.service.WXService;
 import com.duanxin.lsg.core.base.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author duanxin
@@ -25,5 +22,10 @@ public class UserController {
     @PostMapping("/login")
     public ResponseResult login(@RequestBody WXLoginRequest wxLoginRequest) {
         return ResponseResult.success(wxService.login(wxLoginRequest));
+    }
+
+    @GetMapping("/test")
+    public ResponseResult test() {
+        return ResponseResult.success();
     }
 }
