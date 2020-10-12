@@ -23,9 +23,4 @@ public class UserController {
     public ResponseResult login(@RequestBody WXLoginRequest wxLoginRequest) {
         return ResponseResult.success(wxService.login(wxLoginRequest));
     }
-
-    @GetMapping("/test")
-    public ResponseResult test() {
-        return ResponseResult.success();
-    }
 }

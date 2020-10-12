@@ -11,4 +11,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserAccountMapper {
     void insert(@Param("userAccount") UserAccount userAccount);
+
+    UserAccount selectUserAccountById(@Param("id") Integer userAccountId);
 }

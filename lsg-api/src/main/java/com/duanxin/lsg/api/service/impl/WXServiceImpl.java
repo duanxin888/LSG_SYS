@@ -19,6 +19,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -47,6 +48,7 @@ public class WXServiceImpl implements WXService {
     private UserAccountService userAccountService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public WXLoginResponse login(WXLoginRequest request) {
         String code = request.getCode();
         UserInfo userInfo = request.getUserInfo();
@@ -90,6 +92,7 @@ public class WXServiceImpl implements WXService {
         WXLoginResponse response = new WXLoginResponse();
         response.setThirdSession(thirdSession);
         response.setUserInfo(request.getUserInfo());
+        response.setUserBalance(userAccountService.selectUserAccountById(user.getUserAccountId()).getBalance());
         return response;
     }
 
@@ -100,7 +103,6 @@ public class WXServiceImpl implements WXService {
 
     private User createUser(WxMaJscode2SessionResult code2SessionResponse, UserInfo userInfo) {
         User user = new User();
-        String openId = code2SessionResponse.getOpenid();
         user.setUserName(userInfo.getNickName());
         user.setUserImgUrl(userInfo.getAvatarUrl());
         UserAccount account = createAccount();

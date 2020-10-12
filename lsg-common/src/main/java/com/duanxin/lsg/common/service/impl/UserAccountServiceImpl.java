@@ -33,4 +33,9 @@ public class UserAccountServiceImpl implements UserAccountService {
         log.info("success to insert user account [{}]", userAccount.getId());
         return userAccount;
     }
+
+    @Override
+    public UserAccount selectUserAccountById(Integer userAccountId) {
+        return userAccountMapper.selectUserAccountById(userAccountId);
+    }
 }

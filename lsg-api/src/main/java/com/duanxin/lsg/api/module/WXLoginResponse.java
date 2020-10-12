@@ -3,6 +3,8 @@ package com.duanxin.lsg.api.module;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -16,4 +18,6 @@ public class WXLoginResponse {
     private String thirdSession;
 
     private UserInfo userInfo;
+
+    private BigDecimal userBalance;
 }

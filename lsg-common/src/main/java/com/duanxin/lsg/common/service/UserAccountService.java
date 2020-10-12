@@ -1,6 +1,7 @@
 package com.duanxin.lsg.common.service;
 
 import com.duanxin.lsg.persistent.module.UserAccount;
+import javafx.scene.media.AudioClip;
 
 /**
  * @author duanxin
@@ -10,4 +11,6 @@ import com.duanxin.lsg.persistent.module.UserAccount;
  */
 public interface UserAccountService {
     UserAccount insert(UserAccount userAccount);
+
+    UserAccount selectUserAccountById(Integer userAccountId);
 }
