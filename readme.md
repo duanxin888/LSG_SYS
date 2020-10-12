@@ -36,6 +36,7 @@ response:
 ```json
 {
   "thirdSession": "",
+  "userBalance": 0.00,
   "userInfo": {
       "nickName": "",
       "avatarUrl": "",
