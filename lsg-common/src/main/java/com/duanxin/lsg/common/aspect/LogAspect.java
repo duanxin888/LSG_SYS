@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * @author duanxin
@@ -36,26 +37,27 @@ public class LogAspect {
         String args = JsonUtil.toString(Arrays.asList(point.getArgs()));
         String uri = request.getRequestURI();
         String methodName = point.getSignature().getName();
-        log.info("request uri [{}] method [{}] args {}",
-                uri, methodName, args);
+        String requestId = UUID.randomUUID().toString();
+        log.info("request uri [{}] requestId [{}] method [{}] args {}",
+                uri, requestId, methodName, args);
         // process
         Object res = null;
         try {
             res = point.proceed();
         } catch (LSGCheckException ex) {
-            log.warn("request uri [{}] method [{}] args {} exception",
-                    uri, methodName, args, ex);
+            log.warn("request uri [{}] requestId [{}] method [{}] args {}",
+                    uri, requestId, methodName, args, ex);
             throw ex;
         }catch (Exception ex) {
-            log.error("request uri [{}] method [{}] args {} exception",
-                    uri, methodName, args, ex);
+            log.error("request uri [{}] requestId [{}] method [{}] args {}",
+                    uri, requestId, methodName, args, ex);
             throw ex;
         }
         // response
         long end = System.currentTimeMillis();
         String result = JsonUtil.toString(res);
-        log.info("response uri [{}] spend {}s method [{}] result [{}]",
-                uri, (end - start) / 1000, methodName, StringUtils.substring(result, 0, 2000));
+        log.info("response uri [{}] requestId [{}] spend [{}s] method [{}] result [{}]",
+                uri, requestId, (end - start) / 1000, methodName, StringUtils.substring(result, 0, 2000));
         return res;
     }
 }
