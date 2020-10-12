@@ -16,7 +16,7 @@
     <sql id="user">
         ID, ACCOUNT_SN, BALANCE, DELETED, CDATE, CREATOR, EDATE, EDITOR
     </sql>
-    <insert id="insert">
+    <insert id="insert" parameterType="com.duanxin.lsg.persistent.module.UserAccount" useGeneratedKeys="true" keyProperty="id">
         insert into T_USER_ACCOUNT(ACCOUNT_SN, BALANCE, DELETED, CDATE, CREATOR, EDATE, EDITOR)
         values(#{userAccount.accountSn}, #{userAccount.balance}, #{userAccount.deleted}, #{userAccount.cdate},
         #{userAccount.creator}, #{userAccount.edate}, #{userAccount.editor})

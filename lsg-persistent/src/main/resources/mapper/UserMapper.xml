@@ -25,7 +25,7 @@
         ID, USER_NAME, PASSWORD, PHONE, USER_IMG_URL, USER_ACCOUNT_ID, NICKNAME,
         WX_OPENID, WX_SESSION_KEY, STATUS, DELETED, CDATE, CREATOR, EDATE, EDITOR, GENDER
     </sql>
-    <insert id="insert">
+    <insert id="insert" parameterType="com.duanxin.lsg.persistent.module.User" useGeneratedKeys="true" keyProperty="id">
         insert into T_USER(USER_NAME, PASSWORD, PHONE, USER_IMG_URL, USER_ACCOUNT_ID, NICKNAME,
         WX_OPENID, WX_SESSION_KEY, STATUS, DELETED, CDATE, CREATOR, EDATE, EDITOR, GENDER)
         values(#{user.userName}, #{user.password}, #{user.phone}, #{user.userImgUrl}, #{user.userAccountId},
@@ -34,7 +34,8 @@
     </insert>
     <update id="updateWXSessionKey">
         update T_USER
-        set WX_SESSION_KEY = #{user.wxSessionKey}
+        set WX_SESSION_KEY = #{user.wxSessionKey},
+        EDATE = #{user.edate}, EDITOR = #{user.editor}
         where ID = #{user.id};
     </update>
 
