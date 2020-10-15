@@ -24,7 +24,7 @@
     <select id="selectUserAccountById" resultMap="UserAccountMap">
         select <include refid="userAccount"/>
         from T_USER_ACCOUNT
-        where ID = #{id}
+        where ID = #{id} and DELETED = 0;
     </select>
 
 </mapper>

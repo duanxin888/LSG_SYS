@@ -42,7 +42,7 @@
     <select id="getUserByOpenId" resultMap="TUserMap">
         select <include refid="user"/>
         from T_USER
-        where WX_OPENID = #{openId};
+        where WX_OPENID = #{openId} and DELETED = 0;
     </select>
 
 </mapper>
