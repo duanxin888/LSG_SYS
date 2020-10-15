@@ -15,6 +15,7 @@
   
 #### 微信登陆  
 api: /lsg/api/v1/users/login  
+method: post  
 param: wxLoginRequest  
 ```json
 {
@@ -52,6 +53,7 @@ response:
   
 #### 获取首页信息  
 api: /lsg/api/v1/books/index  
+method: get  
 request:  
 response:  
 ```json
