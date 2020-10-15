@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duanxin.lsg.persistent.mapper.BookMapper">
+
+    <resultMap type="com.duanxin.lsg.persistent.module.Book" id="bookMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="bookName" column="BOOK_NAME" jdbcType="VARCHAR"/>
+        <result property="categoryId" column="CATEGORY_ID" jdbcType="INTEGER"/>
+        <result property="price" column="PRICE" jdbcType="NUMERIC"/>
+        <result property="picUrl" column="PIC_URL" jdbcType="VARCHAR"/>
+        <result property="details" column="DETAILS" jdbcType="VARCHAR"/>
+        <result property="sorted" column="SORTED" jdbcType="INTEGER"/>
+        <result property="deleted" column="DELETED" jdbcType="INTEGER"/>
+        <result property="cdate" column="CDATE" jdbcType="TIMESTAMP"/>
+        <result property="creator" column="CREATOR" jdbcType="VARCHAR"/>
+        <result property="edate" column="EDATE" jdbcType="TIMESTAMP"/>
+        <result property="editor" column="EDITOR" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="book">
+        ID, BOOK_NAME, CATEGORY_ID, PRICE, PIC_URL, DETAILS, SORTED, DELETED, CDATE, CREATOR, EDATE, EDITOR
+    </sql>
+    <select id="selectBooksByCategoryId" resultMap="bookMap">
+        select <include refid="book"/>
+        from T_BOOK
+        where CATEGORY_ID = #{categoryId} and DELETED = 0
+        order by SORTED desc
+        limit 100;
+    </select>
+
+</mapper>

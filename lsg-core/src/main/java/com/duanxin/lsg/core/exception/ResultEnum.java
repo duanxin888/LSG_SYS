@@ -17,7 +17,9 @@ public enum ResultEnum {
 
 
     REQUEST_WX_CODE2SESSION_API_FAIL(401, "failed to request wx code2session api"),
-    WX_LOGIN_CODE_OR_USERINFO_IS_NULL(402, "wx login code or userinfo is null");
+    WX_LOGIN_CODE_OR_USERINFO_IS_NULL(402, "wx login code or userinfo is null"),
+
+    BOOK_CATEGORY_NOT_EXIST(404, "book category not exist");
 
     private final int code;
     private final String description;
