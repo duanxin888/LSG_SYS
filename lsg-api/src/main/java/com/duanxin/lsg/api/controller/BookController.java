@@ -30,4 +30,9 @@ public class BookController {
     public ResponseResult bookInfo(@PathVariable("id") int bookId) {
         return ResponseResult.success(indexService.getBookInfoById(bookId));
     }
+
+    @GetMapping("/categories/{id}")
+    public ResponseResult booksByCategory(@PathVariable("id") int categoryId) {
+        return ResponseResult.success(indexService.getBooksByCategoryId(categoryId));
+    }
 }

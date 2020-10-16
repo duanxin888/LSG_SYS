@@ -1,7 +1,10 @@
 package com.duanxin.lsg.api.service;
 
+import com.duanxin.lsg.api.module.BookDto;
 import com.duanxin.lsg.api.module.BookInfoResponse;
 import com.duanxin.lsg.api.module.IndexResponse;
+
+import java.util.List;
 
 /**
  * @author duanxin
@@ -14,4 +17,6 @@ public interface IndexService {
     IndexResponse index();
 
     BookInfoResponse getBookInfoById(int bookId);
+
+    List<BookDto> getBooksByCategoryId(int categoryId);
 }

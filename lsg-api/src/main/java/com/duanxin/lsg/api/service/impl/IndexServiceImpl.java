@@ -7,6 +7,8 @@ import com.duanxin.lsg.api.module.IndexResponse;
 import com.duanxin.lsg.api.service.IndexService;
 import com.duanxin.lsg.common.service.BookCategoryService;
 import com.duanxin.lsg.common.service.BookService;
+import com.duanxin.lsg.common.utils.JsonUtil;
+import com.duanxin.lsg.core.base.ResponseResult;
 import com.duanxin.lsg.core.enums.BookCategoryLevelEnum;
 import com.duanxin.lsg.core.exception.LSGCheckException;
 import com.duanxin.lsg.core.exception.ResultEnum;
@@ -16,7 +18,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -57,6 +61,12 @@ public class IndexServiceImpl implements IndexService {
         return BookInfoResponse.fetchFromBook(book);
     }
 
+    @Override
+    public List<BookDto> getBooksByCategoryId(int categoryId) {
+        List<Book> books = bookService.selectBooksByCategoryId(categoryId);
+        return books2Dtos(books);
+    }
+
     private List<BookDto> books2Dtos(List<Book> books) {
         List<BookDto> dtos = new ArrayList<>(books.size());
         books.forEach(book -> {
@@ -75,5 +85,15 @@ public class IndexServiceImpl implements IndexService {
             dtos.add(dto);
         });
         return dtos;
+    }
+
+    public static void main(String[] args) {
+        Book book = new Book();
+        book.setId(1);
+        book.setBookName("活着");
+        book.setCategoryId(1);
+        book.setPrice(BigDecimal.TEN);
+        List<Book> books = Arrays.asList(book, book, book);
+        System.out.println(JsonUtil.toString(ResponseResult.success(books)));
     }
 }
