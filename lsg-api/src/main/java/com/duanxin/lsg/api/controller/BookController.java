@@ -4,6 +4,7 @@ import com.duanxin.lsg.api.service.IndexService;
 import com.duanxin.lsg.core.base.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,5 +24,10 @@ public class BookController {
     @GetMapping("/index")
     public ResponseResult index() {
         return ResponseResult.success(indexService.index());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseResult bookInfo(@PathVariable("id") int bookId) {
+        return ResponseResult.success(indexService.getBookInfoById(bookId));
     }
 }

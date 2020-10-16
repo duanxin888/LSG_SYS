@@ -28,4 +28,10 @@
         limit 100;
     </select>
 
+    <select id="selectBookById" resultMap="bookMap">
+        select <include refid="book"/>
+        from T_BOOK
+        where ID = #{id} and DELETED = 0;
+    </select>
+
 </mapper>

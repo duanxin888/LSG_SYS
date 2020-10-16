@@ -2,6 +2,7 @@ package com.duanxin.lsg.api.service.impl;
 
 import com.duanxin.lsg.api.module.BookCategoryDto;
 import com.duanxin.lsg.api.module.BookDto;
+import com.duanxin.lsg.api.module.BookInfoResponse;
 import com.duanxin.lsg.api.module.IndexResponse;
 import com.duanxin.lsg.api.service.IndexService;
 import com.duanxin.lsg.common.service.BookCategoryService;
@@ -11,8 +12,6 @@ import com.duanxin.lsg.core.exception.LSGCheckException;
 import com.duanxin.lsg.core.exception.ResultEnum;
 import com.duanxin.lsg.persistent.module.Book;
 import com.duanxin.lsg.persistent.module.BookCategory;
-import com.sun.org.apache.regexp.internal.RE;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +49,12 @@ public class IndexServiceImpl implements IndexService {
         response.setBooks(bookDtos);
         response.setBookCategories(bookCategoryDtos);
         return response;
+    }
+
+    @Override
+    public BookInfoResponse getBookInfoById(int bookId) {
+        Book book = bookService.selectBookById(bookId);
+        return BookInfoResponse.fetchFromBook(book);
     }
 
     private List<BookDto> books2Dtos(List<Book> books) {

@@ -24,4 +24,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> selectBooksByCategoryId(int firstCategoryId) {
         return bookMapper.selectBooksByCategoryId(firstCategoryId);
     }
+
+    @Override
+    public Book selectBookById(int bookId) {
+        return bookMapper.selectBookById(bookId);
+    }
 }

@@ -1,5 +1,6 @@
 package com.duanxin.lsg.api.service;
 
+import com.duanxin.lsg.api.module.BookInfoResponse;
 import com.duanxin.lsg.api.module.IndexResponse;
 
 /**
@@ -11,4 +12,6 @@ import com.duanxin.lsg.api.module.IndexResponse;
 public interface IndexService {
 
     IndexResponse index();
+
+    BookInfoResponse getBookInfoById(int bookId);
 }

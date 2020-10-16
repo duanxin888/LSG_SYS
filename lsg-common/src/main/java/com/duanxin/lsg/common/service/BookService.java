@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface BookService {
     List<Book> selectBooksByCategoryId(int firstCategoryId);
+
+    Book selectBookById(int bookId);
 }

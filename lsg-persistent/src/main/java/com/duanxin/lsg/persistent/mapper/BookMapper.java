@@ -13,4 +13,6 @@ import java.util.List;
  */
 public interface BookMapper {
     List<Book> selectBooksByCategoryId(@Param("categoryId") int firstCategoryId);
+
+    Book selectBookById(@Param("id") int id);
 }
