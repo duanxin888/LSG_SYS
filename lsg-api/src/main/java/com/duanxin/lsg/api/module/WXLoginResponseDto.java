@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 @Setter
 @Getter
-public class WXLoginResponse {
+public class WXLoginResponseDto {
 
     private String thirdSession;
 

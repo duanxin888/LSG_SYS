@@ -16,7 +16,7 @@
 #### 微信登陆  
 api: /lsg/api/v1/users/login  
 method: post  
-param: wxLoginRequest  
+param: wxLoginRequestDto  
 ```json
 {
   "code": 200,

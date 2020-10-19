@@ -11,7 +11,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class WXLoginRequest {
+public class WXLoginRequestDto {
 
     private String code;
 

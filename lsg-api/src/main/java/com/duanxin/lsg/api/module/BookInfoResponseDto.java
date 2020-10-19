@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 @Setter
 @Getter
-public class BookInfoResponse {
+public class BookInfoResponseDto {
 
     private int id;
 
@@ -27,11 +27,11 @@ public class BookInfoResponse {
 
     private String details;
 
-    public static BookInfoResponse fetchFromBook(Book book) {
+    public static BookInfoResponseDto fetchFromBook(Book book) {
         if (Objects.isNull(book)) {
             throw new LSGCheckException(ResultEnum.BOOK_NOT_EXIST);
         }
-        BookInfoResponse response = new BookInfoResponse();
+        BookInfoResponseDto response = new BookInfoResponseDto();
         response.setId(book.getId());
         response.setBookName(book.getBookName());
         response.setPrice(book.getPrice());

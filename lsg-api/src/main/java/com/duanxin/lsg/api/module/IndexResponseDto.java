@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Setter
 @Getter
-public class IndexResponse {
+public class IndexResponseDto {
 
     private List<BookCategoryDto> bookCategories;
 
