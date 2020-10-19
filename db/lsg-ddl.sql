@@ -1,0 +1,1 @@
+alter table t_book add AUTHOR VARCHAR(30) NOT NULL ;

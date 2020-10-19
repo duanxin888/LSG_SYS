@@ -20,6 +20,8 @@ public class Book {
 
     private String bookName;
 
+    private String author;
+
     private int categoryId;
 
     private BigDecimal price;

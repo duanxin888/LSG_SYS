@@ -18,6 +18,8 @@ public class BookDto {
 
     private String bookName;
 
+    private String author;
+
     private int categoryId;
 
     private BigDecimal price;

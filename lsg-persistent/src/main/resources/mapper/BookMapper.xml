@@ -5,6 +5,7 @@
     <resultMap type="com.duanxin.lsg.persistent.module.Book" id="bookMap">
         <result property="id" column="ID" jdbcType="INTEGER"/>
         <result property="bookName" column="BOOK_NAME" jdbcType="VARCHAR"/>
+        <result property="author" column="AUTHOR" jdbcType="VARCHAR"/>
         <result property="categoryId" column="CATEGORY_ID" jdbcType="INTEGER"/>
         <result property="price" column="PRICE" jdbcType="NUMERIC"/>
         <result property="picUrl" column="PIC_URL" jdbcType="VARCHAR"/>
@@ -18,7 +19,7 @@
     </resultMap>
 
     <sql id="book">
-        ID, BOOK_NAME, CATEGORY_ID, PRICE, PIC_URL, DETAILS, SORTED, DELETED, CDATE, CREATOR, EDATE, EDITOR
+        ID, BOOK_NAME, AUTHOR, CATEGORY_ID, PRICE, PIC_URL, DETAILS, SORTED, DELETED, CDATE, CREATOR, EDATE, EDITOR
     </sql>
     <select id="selectBooksByCategoryId" resultMap="bookMap">
         select <include refid="book"/>

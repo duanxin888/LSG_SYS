@@ -21,6 +21,8 @@ public class BookInfoResponseDto {
 
     private String bookName;
 
+    private String author;
+
     private BigDecimal price;
 
     private String picUrl;
@@ -33,6 +35,7 @@ public class BookInfoResponseDto {
         }
         BookInfoResponseDto response = new BookInfoResponseDto();
         response.setId(book.getId());
+        response.setAuthor(book.getAuthor());
         response.setBookName(book.getBookName());
         response.setPrice(book.getPrice());
         response.setPicUrl(book.getPicUrl());

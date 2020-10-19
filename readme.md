@@ -78,6 +78,7 @@ response:
           {
               "id": 4,
               "bookName": "尘埃落定",
+              "author": "阿来",
               "categoryId": 1,
               "price": 38.00,
               "picUrl": "//img12.360buyimg.com/n1/g10/M00/11/05/rBEQWVFbj0IIAAAAAAJBBvGVL3AAADWyAALYMYAAkEe119.jpg",
@@ -100,6 +101,7 @@ response:
   "data": {
       "id": 4,
       "bookName": "尘埃落定",
+      "author": "阿来",
       "price": 38.00,
       "picUrl": "//img12.360buyimg.com/n1/g10/M00/11/05/rBEQWVFbj0IIAAAAAAJBBvGVL3AAADWyAALYMYAAkEe119.jpg",
       "details": "一个声势显赫的康巴藏族土司，在酒后和汉族太太生了一个傻瓜儿子。这个人人都认定的傻子与现实生活格格不入，却有着超时代的预感和举止，成为土司制度兴衰的见证人。小说故事精彩曲折动人，以饱含激情的笔墨，超然物外的审视目光，展现了浓郁的民族风情和土司制度的浪漫神秘。"
@@ -120,6 +122,7 @@ response:
     {
       "id": 4,
       "bookName": "尘埃落定",
+      "author": "阿来",
       "categoryId": 1,
       "price": 38.00,
       "picUrl": "//img12.360buyimg.com/n1/g10/M00/11/05/rBEQWVFbj0IIAAAAAAJBBvGVL3AAADWyAALYMYAAkEe119.jpg",
