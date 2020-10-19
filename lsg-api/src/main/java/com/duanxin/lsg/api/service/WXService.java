@@ -1,7 +1,7 @@
 package com.duanxin.lsg.api.service;
 
-import com.duanxin.lsg.api.module.WXLoginRequestDto;
-import com.duanxin.lsg.api.module.WXLoginResponseDto;
+import com.duanxin.lsg.api.module.WXLoginRequest;
+import com.duanxin.lsg.api.module.WXLoginResponse;
 
 /**
  * @author duanxin
@@ -11,5 +11,5 @@ import com.duanxin.lsg.api.module.WXLoginResponseDto;
  */
 public interface WXService {
 
-    WXLoginResponseDto login(WXLoginRequestDto request);
+    WXLoginResponse login(WXLoginRequest request);
 }

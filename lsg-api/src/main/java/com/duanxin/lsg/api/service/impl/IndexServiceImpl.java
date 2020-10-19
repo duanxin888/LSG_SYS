@@ -2,8 +2,8 @@ package com.duanxin.lsg.api.service.impl;
 
 import com.duanxin.lsg.api.module.BookCategoryDto;
 import com.duanxin.lsg.api.module.BookDto;
-import com.duanxin.lsg.api.module.BookInfoResponseDto;
-import com.duanxin.lsg.api.module.IndexResponseDto;
+import com.duanxin.lsg.api.module.BookInfoResponse;
+import com.duanxin.lsg.api.module.IndexResponse;
 import com.duanxin.lsg.api.service.IndexService;
 import com.duanxin.lsg.common.service.BookCategoryService;
 import com.duanxin.lsg.common.service.BookService;
@@ -38,7 +38,7 @@ public class IndexServiceImpl implements IndexService {
     private BookService bookService;
 
     @Override
-    public IndexResponseDto index() {
+    public IndexResponse index() {
         // get categories
         List<BookCategory> bookCategories = bookCategoryService.selectCategoriesByLevel(BookCategoryLevelEnum.LEVEL1.getLevelName());
         List<BookCategoryDto> bookCategoryDtos = categories2Dtos(bookCategories);
@@ -49,16 +49,16 @@ public class IndexServiceImpl implements IndexService {
         List<Book> books = bookService.selectBooksByCategoryId(firstCategoryId);
         List<BookDto> bookDtos = books2Dtos(books);
 
-        IndexResponseDto response = new IndexResponseDto();
+        IndexResponse response = new IndexResponse();
         response.setBooks(bookDtos);
         response.setBookCategories(bookCategoryDtos);
         return response;
     }
 
     @Override
-    public BookInfoResponseDto getBookInfoById(int bookId) {
+    public BookInfoResponse getBookInfoById(int bookId) {
         Book book = bookService.selectBookById(bookId);
-        return BookInfoResponseDto.fetchFromBook(book);
+        return BookInfoResponse.fetchFromBook(book);
     }
 
     @Override

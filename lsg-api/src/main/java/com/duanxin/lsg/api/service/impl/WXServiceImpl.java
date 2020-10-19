@@ -3,8 +3,8 @@ package com.duanxin.lsg.api.service.impl;
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import com.duanxin.lsg.api.module.UserInfo;
-import com.duanxin.lsg.api.module.WXLoginRequestDto;
-import com.duanxin.lsg.api.module.WXLoginResponseDto;
+import com.duanxin.lsg.api.module.WXLoginRequest;
+import com.duanxin.lsg.api.module.WXLoginResponse;
 import com.duanxin.lsg.api.service.WXService;
 import com.duanxin.lsg.common.service.CacheService;
 import com.duanxin.lsg.common.service.UserAccountService;
@@ -49,7 +49,7 @@ public class WXServiceImpl implements WXService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public WXLoginResponseDto login(WXLoginRequestDto request) {
+    public WXLoginResponse login(WXLoginRequest request) {
         String code = request.getCode();
         UserInfo userInfo = request.getUserInfo();
         // validate
@@ -89,7 +89,7 @@ public class WXServiceImpl implements WXService {
         String value = code2SessionResponse.getOpenid() + "--" + code2SessionResponse.getSessionKey();
         cacheService.refreshCache(thirdSession, value, Duration.ofDays(30L));
 
-        WXLoginResponseDto response = new WXLoginResponseDto();
+        WXLoginResponse response = new WXLoginResponse();
         response.setThirdSession(thirdSession);
         response.setUserInfo(request.getUserInfo());
         response.setUserBalance(userAccountService.selectUserAccountById(user.getUserAccountId()).getBalance());
