@@ -1,6 +1,6 @@
 package com.duanxin.lsg.api.controller;
 
-import com.duanxin.lsg.api.module.WXLoginRequest;
+import com.duanxin.lsg.api.module.WXLoginRequestDto;
 import com.duanxin.lsg.api.service.WXService;
 import com.duanxin.lsg.core.base.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
