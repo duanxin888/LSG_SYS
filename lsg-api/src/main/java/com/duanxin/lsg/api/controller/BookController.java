@@ -35,4 +35,9 @@ public class BookController {
     public ResponseResult booksByCategory(@PathVariable("id") int categoryId) {
         return ResponseResult.success(indexService.getBooksByCategoryId(categoryId));
     }
+
+    @GetMapping("/levels/{id}")
+    public ResponseResult showBookLevels(@PathVariable("id") int bookId) {
+        return ResponseResult.success(indexService.getLevelsByBookId(bookId));
+    }
 }

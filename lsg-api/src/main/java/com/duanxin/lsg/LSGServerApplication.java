@@ -3,6 +3,7 @@ package com.duanxin.lsg;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * @author duanxin
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("com.duanxin.lsg.persistent.mapper")
+@EnableCaching
 public class LSGServerApplication {
 
     public static void main(String[] args) {

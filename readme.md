@@ -131,4 +131,44 @@ response:
   }],
   "msg": "operator success"
 }
+```    
+  
+#### 根据书籍ID获取具体的详细等级和库存价格信息  
+api: lsg/api/v1/books/levels/{id}  
+request: 1  
+method: get  
+response:  
+```json
+{
+    "code": 200,
+    "data": {
+        "bookId": 1,
+        "bookName": "东野圭吾·沉默的巡游",
+        "picUrl": "//img13.360buyimg.com/n1/jfs/t1/102681/37/15355/229270/5e708291E88e39fdd/c00b26e445e830dc.jpg",
+        "bookLevelsDtos": [
+            {
+                "levelId": 1,
+                "levelName": "全新",
+                "details": "非二手书籍，理书阁从出版社采购的未拆分新书",
+                "stock": 10,
+                "price": 53.10
+            },
+            {
+                "levelId": 2,
+                "levelName": "优良",
+                "details": "八九成新，有不明显的使用痕迹或瑕疵（扉页/衬页、可能存在少量文字或盖章）",
+                "stock": 100,
+                "price": 35.40
+            },
+            {
+                "levelId": 3,
+                "levelName": "普通",
+                "details": "有较明显的使用痕迹和折痕、标注、磨损等轻微瑕疵问题，但不影响正常阅读",
+                "stock": 20,
+                "price": 11.80
+            }
+        ]
+    },
+    "msg": "operator success!"
+}
 ```  

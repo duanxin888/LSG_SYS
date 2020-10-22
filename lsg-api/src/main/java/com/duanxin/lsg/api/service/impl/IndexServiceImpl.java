@@ -1,27 +1,26 @@
 package com.duanxin.lsg.api.service.impl;
 
-import com.duanxin.lsg.api.module.BookCategoryDto;
-import com.duanxin.lsg.api.module.BookDto;
-import com.duanxin.lsg.api.module.BookInfoResponseDto;
-import com.duanxin.lsg.api.module.IndexResponseDto;
+import com.duanxin.lsg.api.module.*;
 import com.duanxin.lsg.api.service.IndexService;
 import com.duanxin.lsg.common.service.BookCategoryService;
+import com.duanxin.lsg.common.service.BookLevelService;
 import com.duanxin.lsg.common.service.BookService;
-import com.duanxin.lsg.common.utils.JsonUtil;
-import com.duanxin.lsg.core.base.ResponseResult;
+import com.duanxin.lsg.common.service.BookStockService;
 import com.duanxin.lsg.core.enums.BookCategoryLevelEnum;
 import com.duanxin.lsg.core.exception.LSGCheckException;
 import com.duanxin.lsg.core.exception.ResultEnum;
 import com.duanxin.lsg.persistent.module.Book;
 import com.duanxin.lsg.persistent.module.BookCategory;
+import com.duanxin.lsg.persistent.module.BookLevel;
+import com.duanxin.lsg.persistent.module.BookStock;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author duanxin
@@ -30,12 +29,17 @@ import java.util.List;
  * @date 2020/10/12 22:26
  */
 @Service
+@Slf4j
 public class IndexServiceImpl implements IndexService {
 
     @Autowired
     private BookCategoryService bookCategoryService;
     @Autowired
     private BookService bookService;
+    @Autowired
+    private BookLevelService bookLevelService;
+    @Autowired
+    private BookStockService bookStockService;
 
     @Override
     public IndexResponseDto index() {
@@ -67,6 +71,58 @@ public class IndexServiceImpl implements IndexService {
         return books2Dtos(books);
     }
 
+    @Override
+    public ShowBookLevelsResponseDto getLevelsByBookId(int bookId) {
+        // get level ids
+        log.info("begin to get levels by book id [{}]", bookId);
+        List<BookLevel> bookLevels = bookLevelService.getLevels();
+        List<Integer> levelIds = bookLevels.stream().map(BookLevel::getId).collect(Collectors.toList());
+        Map<Integer, BookLevel> levelMap = bookLevels.stream().collect(Collectors.toMap(BookLevel::getId, l -> l));
+
+        // validate stock
+        List<BookStock> bookStocks = bookStockService.selectByBookIdAndLevelIds(bookId, levelIds);
+        if (CollectionUtils.isEmpty(bookStocks)) {
+            log.info("book [{}] stock is empty", bookId);
+            return null;
+        }
+        // fetch response dto
+        Book book = bookService.selectBookById(bookId);
+        if (Objects.isNull(book)) {
+            log.warn("book [{}] info not exist", bookId);
+            throw new LSGCheckException(ResultEnum.BOOK_NOT_EXIST);
+        }
+
+        ShowBookLevelsResponseDto responseDto = fetchShowBookLevelsResponseDto(book, bookStocks, levelMap);
+        log.info("success to get showBookLevelsResponseDto by book id [{}]", bookId);
+        return responseDto;
+    }
+
+    private ShowBookLevelsResponseDto fetchShowBookLevelsResponseDto(Book book,
+                                                                           List<BookStock> bookStocks,
+                                                                           Map<Integer, BookLevel> levelMap) {
+        ShowBookLevelsResponseDto dto = new ShowBookLevelsResponseDto();
+        dto.setBookId(book.getId());
+        dto.setBookName(book.getBookName());
+        dto.setPicUrl(book.getPicUrl());
+
+        // fetch book levels
+        List<BookLevelsDto> bookLevelsDtos = new ArrayList<>(bookStocks.size());
+        bookStocks.forEach(stock -> {
+            BookLevel bookLevel = levelMap.get(stock.getBookLevelId());
+
+            BookLevelsDto bookLevelsDto = new BookLevelsDto();
+            bookLevelsDto.setLevelId(stock.getBookLevelId());
+            bookLevelsDto.setLevelName(bookLevel.getLevelName());
+            bookLevelsDto.setDetails(bookLevel.getDetails());
+            bookLevelsDto.setStock(stock.getStock());
+            bookLevelsDto.setPrice(book.getPrice().multiply(bookLevel.getConditionFactor()).setScale(2));
+            bookLevelsDtos.add(bookLevelsDto);
+        });
+
+        dto.setBookLevelsDtos(bookLevelsDtos);
+        return dto;
+    }
+
     private List<BookDto> books2Dtos(List<Book> books) {
         List<BookDto> dtos = new ArrayList<>(books.size());
         books.forEach(book -> {
@@ -85,15 +141,5 @@ public class IndexServiceImpl implements IndexService {
             dtos.add(dto);
         });
         return dtos;
-    }
-
-    public static void main(String[] args) {
-        Book book = new Book();
-        book.setId(1);
-        book.setBookName("活着");
-        book.setCategoryId(1);
-        book.setPrice(BigDecimal.TEN);
-        List<Book> books = Arrays.asList(book, book, book);
-        System.out.println(JsonUtil.toString(ResponseResult.success(books)));
     }
 }

@@ -15,7 +15,8 @@ import java.time.Duration;
 @AllArgsConstructor
 public enum CacheTypeEnum {
 
-    DEFAULT("DEFAULT", Duration.ofDays(1L));
+    DEFAULT("DEFAULT::", Duration.ofDays(1L)),
+    BOOK_LEVEL_CACHE("BOOK_LEVEL_CACHE::", Duration.ofDays(15L));
 
     private final String prefix;
     private final Duration ttl;
