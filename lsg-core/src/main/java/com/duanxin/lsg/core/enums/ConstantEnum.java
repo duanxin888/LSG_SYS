@@ -13,7 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ConstantEnum {
 
-    CACHE_SEP(":"),
+    CACHE_SEP("::"),
     CACHE_DEFAULT_KEY("DEFAULT_KEY"),
     CREATOR("SYSTEM");
 

@@ -29,7 +29,7 @@ public class BookLevelServiceImpl implements BookLevelService {
     private BookLevelMapper bookLevelMapper;
 
     @Override
-    @Cacheable(value = "BOOK_LEVEL_CACHE", key = "'id::' + #p0")
+    @Cacheable(value = "BOOK_LEVEL_CACHE", key = "'::id::' + #p0")
     public BookLevel getExist(int id) {
         BookLevel bookLevel = bookLevelMapper.selectById(id);
         if (Objects.isNull(bookLevel)) {
@@ -40,7 +40,7 @@ public class BookLevelServiceImpl implements BookLevelService {
     }
 
     @Override
-    @Cacheable(value = "BOOK_LEVEL_CACHE", key = "'name::' + #p0")
+    @Cacheable(value = "BOOK_LEVEL_CACHE", key = "'::name::' + #p0")
     public BookLevel getExist(String name) {
         BookLevel bookLevel = bookLevelMapper.selectByName(name);
         if (Objects.isNull(bookLevel)) {
@@ -51,7 +51,7 @@ public class BookLevelServiceImpl implements BookLevelService {
     }
 
     @Override
-    @Cacheable(value = "BOOK_LEVEL_CACHE", key = "'list'")
+    @Cacheable(value = "BOOK_LEVEL_CACHE", key = "'::list'")
     public List<BookLevel> getLevels() {
         List<BookLevel> bookLevels = bookLevelMapper.selectAll();
         if (CollectionUtils.isEmpty(bookLevels)) {
