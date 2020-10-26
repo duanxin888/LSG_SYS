@@ -16,7 +16,8 @@ import java.time.Duration;
 public enum CacheTypeEnum {
 
     DEFAULT("DEFAULT", Duration.ofDays(1L)),
-    BOOK_LEVEL_CACHE("BOOK_LEVEL_CACHE", Duration.ofDays(15L));
+    BOOK_LEVEL_CACHE("BOOK_LEVEL_CACHE", Duration.ofDays(15L)),
+    SHOPPING_CART_CACHE("SHOPPING_CART_CACHE", Duration.ofDays(1L));
 
     private final String prefix;
     private final Duration ttl;

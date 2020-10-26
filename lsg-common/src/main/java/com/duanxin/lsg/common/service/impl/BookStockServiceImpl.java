@@ -24,4 +24,9 @@ public class BookStockServiceImpl implements BookStockService {
     public List<BookStock> selectByBookIdAndLevelIds(int bookId, List<Integer> levelIds) {
         return bookStockMapper.selectByBookIdAndLevelIds(bookId, levelIds);
     }
+
+    @Override
+    public List<BookStock> selectByBookIdAndLevelId(int bookId, int bookLevelId) {
+        return bookStockMapper.selectByBookIdAndLevelId(bookId, bookLevelId);
+    }
 }

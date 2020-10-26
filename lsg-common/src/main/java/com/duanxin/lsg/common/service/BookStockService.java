@@ -2,6 +2,7 @@ package com.duanxin.lsg.common.service;
 
 import com.duanxin.lsg.persistent.module.BookStock;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -12,4 +13,6 @@ import java.util.List;
  */
 public interface BookStockService {
     List<BookStock> selectByBookIdAndLevelIds(int bookId, List<Integer> levelIds);
+
+    List<BookStock> selectByBookIdAndLevelId(int bookId, int bookLevelId);
 }

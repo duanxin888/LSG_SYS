@@ -45,4 +45,10 @@
         where WX_OPENID = #{openId} and DELETED = 0;
     </select>
 
+    <select id="selectByPrimaryKey" resultMap="TUserMap">
+        select <include refid="user"/>
+        from T_USER
+        where ID = #{id}
+    </select>
+
 </mapper>

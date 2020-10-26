@@ -48,4 +48,9 @@ public class UserServiceImpl implements UserService {
         log.info("success to update user [{}] wxSessionKey", user.getId());
         return user;
     }
+
+    @Override
+    public User selectByPrimaryId(int userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
 }

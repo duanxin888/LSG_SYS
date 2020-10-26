@@ -14,4 +14,7 @@ import java.util.List;
 public interface BookStockMapper {
     List<BookStock> selectByBookIdAndLevelIds(@Param("bookId") int bookId,
                                               @Param("levelIds") List<Integer> levelIds);
+
+    List<BookStock> selectByBookIdAndLevelId(@Param("bookId") int bookId,
+                                             @Param("bookLevelId") int bookLevelId);
 }

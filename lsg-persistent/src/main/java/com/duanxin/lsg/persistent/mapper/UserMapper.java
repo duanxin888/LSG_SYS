@@ -16,4 +16,6 @@ public interface UserMapper {
     void insert(@Param("user") User user);
 
     void updateWXSessionKey(@Param("user") User user);
+
+    User selectByPrimaryKey(@Param("id") int userId);
 }

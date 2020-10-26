@@ -15,4 +15,6 @@ public interface UserService {
     User insert(User user);
 
     User updateWXSessionKey(User user);
+
+    User selectByPrimaryId(int userId);
 }

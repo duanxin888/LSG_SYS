@@ -29,4 +29,11 @@
         </foreach>
     </select>
 
+    <select id="selectByBookIdAndLevelId" resultMap="bookStockMap">
+        select <include refid="bookStock"/>
+        from T_BOOK_STOCK
+        where BOOK_ID = #{bookId} and
+        BOOK_LEVEL_ID = #{bookLevelId}
+    </select>
+
 </mapper>

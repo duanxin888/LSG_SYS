@@ -172,3 +172,51 @@ response:
     "msg": "operator success!"
 }
 ```  
+  
+#### 添加书籍到购物车  
+api: /api/v1/carts  
+method: post  
+request:  
+```json
+{
+    "userId": 5,
+    "cartInfos": [
+        {
+            "bookId": 1,
+            "bookLevelId": 1,
+            "quantity":1
+        }
+    ]
+}
+```      
+response:   
+1、request success： 
+```json
+{
+    "code": 200,
+    "data": null,
+    "msg": "operator success!"
+}
+```   
+2、request failed: 
+```json
+{
+    "code": 401,
+    "data": null,
+    "msg": "user not exist"
+}
+```    
+```json
+{
+    "code": 401,
+    "data": null,
+    "msg": "when add book to cart, cart request info is empty"
+}
+```  
+```json
+{
+    "code": 404,
+    "data": null,
+    "msg": "this kind of book is out of stock"
+}
+```

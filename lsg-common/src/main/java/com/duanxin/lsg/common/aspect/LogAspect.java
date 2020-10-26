@@ -56,8 +56,8 @@ public class LogAspect {
         // response
         long end = System.currentTimeMillis();
         String result = JsonUtil.toString(res);
-        log.info("response uri [{}] requestId [{}] spend [{}s] method [{}] result [{}]",
-                uri, requestId, (end - start) / 1000, methodName, StringUtils.substring(result, 0, 2000));
+        log.info("response uri [{}] requestId [{}] spend [{}ms] method [{}] result [{}]",
+                uri, requestId, (end - start), methodName, StringUtils.substring(result, 0, 2000));
         return res;
     }
 }
