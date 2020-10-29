@@ -91,7 +91,8 @@ public class WXServiceImpl implements WXService {
 
         WXLoginResponseDto response = new WXLoginResponseDto();
         response.setThirdSession(thirdSession);
-        response.setUserInfo(request.getUserInfo());
+        userInfo.setUserId(user.getId());
+        response.setUserInfo(userInfo);
         response.setUserBalance(userAccountService.selectUserAccountById(user.getUserAccountId()).getBalance());
         return response;
     }

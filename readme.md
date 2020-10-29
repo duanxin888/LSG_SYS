@@ -23,6 +23,7 @@ param: wxLoginRequestDto
   "data": {
      "code": "",
      "userInfo": {
+         "userId": 1,
          "nickName": "",
          "avatarUrl": "",
          "country": "",
@@ -174,7 +175,7 @@ response:
 ```  
   
 #### 添加书籍到购物车  
-api: /api/v1/carts  
+api: /lsg/api/v1/carts  
 method: post  
 request:  
 ```json

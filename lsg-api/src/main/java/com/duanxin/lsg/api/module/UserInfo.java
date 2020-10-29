@@ -13,6 +13,8 @@ import lombok.Setter;
 @Getter
 public class UserInfo {
 
+    private int userId;
+
     private String nickName;
 
     private String avatarUrl;
