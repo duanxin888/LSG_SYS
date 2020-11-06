@@ -1,5 +1,6 @@
 package com.duanxin.lsg.api.module;
 
+import com.duanxin.lsg.common.module.CartRequestInfo;
 import lombok.Getter;
 import lombok.Setter;
 

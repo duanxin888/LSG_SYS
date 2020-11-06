@@ -18,9 +18,33 @@
         <result property="editor" column="EDITOR" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <sql id="bookLevel">
+    <sql id="userShoppingCart">
         ID, USER_ID, BOOK_ID, BOOK_NAME, BOOK_PIC_URL, QUANTITY, BOOK_LEVEL_NAME, PRICE,
         DELETED, CDATE, CREATOR, EDATE, EDITOR
     </sql>
+
+    <insert id="insert" parameterType="com.duanxin.lsg.persistent.module.UserShoppingCart" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into T_USER_SHOPPING_CART(USER_ID, BOOK_ID, BOOK_NAME, BOOK_PIC_URL,
+        QUANTITY, BOOK_LEVEL_NAME, PRICE)
+        values (#{cart.userId}, #{cart.bookId}, #{cart.bookName}, #{cart.bookPicUrl},
+        #{cart.quantity}, #{cart.bookLevelName}, #{cart.price});
+    </insert>
+
+    <update id="updateCartQuantity" parameterType="map">
+        update T_USER_SHOPPING_CART
+        set QUANTITY = QUANTITY + #{quantity}
+        where USER_ID = #{userId} and
+         BOOK_LEVEL_NAME = #{levelName} and
+         BOOK_ID = #{bookId}
+    </update>
+
+    <select id="selectCartsByUserId" resultMap="userShoppingCartMap">
+        select
+        <include refid="userShoppingCart"/>
+        from T_USER_SHOPPING_CART
+        where USER_ID = #{userId} and
+        DELETED = 0;
+    </select>
 
 </mapper>

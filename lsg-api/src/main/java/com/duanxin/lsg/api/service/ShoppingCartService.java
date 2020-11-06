@@ -1,6 +1,7 @@
 package com.duanxin.lsg.api.service;
 
 import com.duanxin.lsg.api.module.AddBook2CartRequestDto;
+import com.duanxin.lsg.api.module.GetUserCartsResponseDto;
 
 /**
  * @author duanxin
@@ -11,4 +12,6 @@ import com.duanxin.lsg.api.module.AddBook2CartRequestDto;
 public interface ShoppingCartService {
 
     void addBook2Cart(AddBook2CartRequestDto request);
+
+    GetUserCartsResponseDto getUserCarts(int userId);
 }

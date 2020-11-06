@@ -1,4 +1,4 @@
-package com.duanxin.lsg.api.module;
+package com.duanxin.lsg.common.module;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

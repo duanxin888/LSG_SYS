@@ -62,6 +62,12 @@ public class CacheServiceImpl implements CacheService {
         return JsonUtil.toObject(value, cls);
     }
 
+    @Override
+    public boolean removeCache(String key, String... args) {
+        key = generateKey(key, args);
+        return redisTemplate.delete(key);
+    }
+
     private String generateKey(String k, String[] args) {
         if (StringUtils.isAllBlank(args)) {
             return k;

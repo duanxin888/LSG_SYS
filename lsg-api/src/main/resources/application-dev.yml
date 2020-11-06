@@ -23,8 +23,8 @@ spring:
         max-wait: 30000
 mybatis:
   mapper-locations: classpath*:mapper/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-aliases-package: com.duanxin.lsg.persistent.module
 
 ## 微信登陆
@@ -43,3 +43,12 @@ wx:
 jasypt:
   encryptor:
     password: 135792468
+
+## 线程池参数
+event:
+  task:
+    corePoolSize: 8
+    maximumPoolSize: 16
+    keepAliveTime: 3000
+    workQueueSize: 500
+    threadPoolName: event-task

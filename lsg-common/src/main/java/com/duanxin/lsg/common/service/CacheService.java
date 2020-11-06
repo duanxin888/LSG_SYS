@@ -17,4 +17,6 @@ public interface CacheService {
     void refreshCache(String key, Object value, Duration ttl, String... args);
 
     <T> Optional<T> getValue(String key, Class<T> cls, String... args);
+
+    boolean removeCache(String key, String... args);
 }
