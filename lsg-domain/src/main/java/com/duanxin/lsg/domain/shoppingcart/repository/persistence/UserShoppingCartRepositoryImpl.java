@@ -48,4 +48,11 @@ public class UserShoppingCartRepositoryImpl implements UserShoppingCartRepositor
     public UserShoppingCartPO selectByUserIdAndBookIdAndLevelId(int userId, int bookId, String bookLevelName) {
         return userShoppingCartMapper.selectByUserIdAndBookIdAndLevelId(userId, bookId, bookLevelName);
     }
+
+    @Override
+    public void deletedUserCart(int userId, int bookId, String bookLevelName, int deleted) {
+        userShoppingCartMapper.updateUserCartStatus(userId, bookId, bookLevelName, deleted);
+        log.info("success to delete user [{}] level [{}] book [{}] status [{}]",
+                userId, bookLevelName, bookId, Deleted.format(deleted));
+    }
 }

@@ -37,4 +37,8 @@ public class ShoppingCartApplicationService {
     public List<UserShoppingCartDO> getUserCarts(int userId) {
         return shoppingCartDomainService.getCartsByUserId(userId);
     }
+
+    public void deleteUserCart(UserShoppingCartDO toDO) {
+        shoppingCartDomainService.deleteUserCart(toDO);
+    }
 }

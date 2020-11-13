@@ -14,4 +14,6 @@ public interface ShoppingCartDomainService {
     List<UserShoppingCartDO> getCartsByUserId(int userId);
 
     void updateUserCarts(UserShoppingCartDO shoppingCartDO);
+
+    void deleteUserCart(UserShoppingCartDO cartDO);
 }

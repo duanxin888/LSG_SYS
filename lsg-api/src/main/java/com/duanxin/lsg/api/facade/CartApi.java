@@ -29,6 +29,12 @@ public class CartApi {
     @Autowired
     private ShoppingCartApplicationService shoppingCartApplicationService;
 
+    @DeleteMapping
+    public ResponseResult deleteUserCart(@RequestBody ShoppingCartDto shoppingCartDto) {
+        shoppingCartApplicationService.deleteUserCart(ShoppingCartAssembler.toDO(shoppingCartDto));
+        return ResponseResult.success();
+    }
+
     @PostMapping
     public ResponseResult updateUserCarts(@RequestBody ShoppingCartDto shoppingCartDto) {
         checkParam(shoppingCartDto);

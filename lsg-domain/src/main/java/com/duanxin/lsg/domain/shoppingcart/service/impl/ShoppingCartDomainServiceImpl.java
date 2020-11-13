@@ -53,6 +53,14 @@ public class ShoppingCartDomainServiceImpl implements ShoppingCartDomainService 
         downBookFromCarts(shoppingCartDO, bookInfo, po);
     }
 
+    @Override
+    public void deleteUserCart(UserShoppingCartDO cartDO) {
+        cartDO.deletedStatus();
+        BookInfo info = cartDO.getBookInfo();
+        userShoppingCartRepository.deletedUserCart(cartDO.getUserId(), info.getBookId(),
+                info.getBookLevelName(), cartDO.getDeleted().getCode());
+    }
+
     private void downBookFromCarts(UserShoppingCartDO shoppingCartDO, BookInfo bookInfo, UserShoppingCartPO po) {
         if (Objects.isNull(po)) {
             log.warn("fail to delete level [{}] book [{}] to user [{}] cart",

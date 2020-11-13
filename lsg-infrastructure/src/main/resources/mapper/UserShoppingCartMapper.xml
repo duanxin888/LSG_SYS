@@ -40,6 +40,15 @@
          DELETED = 0
     </update>
 
+    <update id="updateUserCartStatus">
+        update T_USER_SHOPPING_CART
+        set DELETED = #{deleted}
+        where USER_ID = #{userId} and
+        BOOK_ID = #{bookId} and
+        BOOK_LEVEL_NAME = #{bookLevelName} and
+        DELETED = 0;
+    </update>
+
     <select id="selectCartsByUserId" resultMap="userShoppingCartMap">
         select
         <include refid="userShoppingCart"/>

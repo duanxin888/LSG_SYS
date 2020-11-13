@@ -53,4 +53,9 @@ public class UserShoppingCartDO {
         this.bookInfo.setQuantity(this.bookInfo.getQuantity() + quantity);
         return this;
     }
+
+    public UserShoppingCartDO deletedStatus() {
+        this.deleted = Deleted.IS_DELETED;
+        return this;
+    }
 }

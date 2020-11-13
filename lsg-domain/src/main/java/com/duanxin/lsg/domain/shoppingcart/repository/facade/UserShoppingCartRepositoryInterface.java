@@ -20,4 +20,6 @@ public interface UserShoppingCartRepositoryInterface {
     void updateCartQuantity(UserShoppingCartPO userShoppingCartPO);
 
     UserShoppingCartPO selectByUserIdAndBookIdAndLevelId(int userId, int bookId, String bookLevelName);
+
+    void deletedUserCart(int userId, int bookId, String bookLevelName, int deleted);
 }

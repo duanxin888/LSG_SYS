@@ -27,4 +27,9 @@ public interface UserShoppingCartMapper {
     UserShoppingCartPO selectByUserIdAndBookIdAndLevelId(@Param("userId") int userId,
                                                          @Param("bookId") int bookId,
                                                          @Param("bookLevelName") String bookLevelName);
+
+    void updateUserCartStatus(@Param("userId") int userId,
+                              @Param("bookId") int bookId,
+                              @Param("bookLevelName") String bookLevelName,
+                              @Param("deleted") int deleted);
 }

@@ -322,4 +322,23 @@ response:
     ],
     "msg": "operator success!"
 }
+```  
+#### 删除用户购物车  
+api: /lsg/api/v1/carts  
+method: get  
+request:   
+```json
+{
+    "userId": 6,
+    "bookId": 1,
+    "bookLevelName": "普通"
+}
+```  
+response:  
+```json
+{
+    "code": 200,
+    "data": null,
+    "msg": "operator success!"
+}
 ```
