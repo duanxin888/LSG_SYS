@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duanxin.lsg.infrastructure.repository.mapper.BookLevelMapper">
+
+    <resultMap type="com.duanxin.lsg.infrastructure.repository.po.BookLevelPO" id="bookLevelMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="levelName" column="LEVEL_NAME" jdbcType="VARCHAR"/>
+        <result property="conditionFactor" column="CONDITION_FACTOR" jdbcType="NUMERIC"/>
+        <result property="details" column="DETAILS" jdbcType="VARCHAR"/>
+        <result property="cdate" column="CDATE" jdbcType="TIMESTAMP"/>
+        <result property="creator" column="CREATOR" jdbcType="VARCHAR"/>
+        <result property="edate" column="EDATE" jdbcType="TIMESTAMP"/>
+        <result property="editor" column="EDITOR" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="bookLevel">
+        ID, LEVEL_NAME, CONDITION_FACTOR, DETAILS, CDATE, CREATOR, EDATE, EDITOR
+    </sql>
+
+    <select id="selectById" resultMap="bookLevelMap">
+        select <include refid="bookLevel"/>
+        from T_BOOK_LEVEL
+        where ID = #{id}
+    </select>
+
+    <select id="selectByName" resultMap="bookLevelMap">
+        select <include refid="bookLevel"/>
+        from T_BOOK_LEVEL
+        where LEVEL_NAME = #{name}
+    </select>
+
+    <select id="selectAll" resultMap="bookLevelMap">
+        select <include refid="bookLevel"/>
+        from T_BOOK_LEVEL
+    </select>
+
+</mapper>

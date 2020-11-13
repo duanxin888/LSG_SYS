@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @date 2020/09/30 14:16
  */
 @SpringBootApplication
-@MapperScan("com.duanxin.lsg.persistent.mapper")
+@MapperScan("com.duanxin.lsg.infrastructure.repository.mapper")
 @EnableCaching
 @EnableAsync
 public class LSGServerApplication {
