@@ -325,7 +325,7 @@ response:
 ```  
 #### 删除用户购物车  
 api: /lsg/api/v1/carts  
-method: get  
+method: delete  
 request:   
 ```json
 {
