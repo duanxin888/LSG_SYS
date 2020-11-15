@@ -341,4 +341,29 @@ response:
     "data": null,
     "msg": "operator success!"
 }
+```   
+#### 添加用户收货地址  
+api: /lsg/api/v1/users/address  
+method: post  
+request:  
+```json
+{
+    "name":"",
+    "userId":5,
+    "province":"",
+    "city":"",
+    "county":"",
+    "addressDetails":"",
+    "phone":"13323234444",
+    "acquiescence":"DEFAULT"
+}
+```  
+备注：默认地址 --》 ("acquiescence":"DEFAULT"), 不是默认地址 --》 ("acquiescence":"DENY")  
+response:  
+```json
+{
+    "code": 200,
+    "data": null,
+    "msg": "operator success!"
+}
 ```

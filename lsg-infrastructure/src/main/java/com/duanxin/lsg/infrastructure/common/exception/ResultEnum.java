@@ -33,7 +33,16 @@ public enum ResultEnum {
     SHOPPING_CART_BOOK_NAME_IS_BLANK(404, "shopping cart book name is blank"),
     SHOPPING_CART_BOOK_PIC_IS_BLANK(404, "shopping cart book pic is blank"),
     SHOPPING_CART_BOOK_LEVEL_NAME_IS_BLANK(404, "shopping cart book level name is blank"),
-    SHOPPING_CART_BOOK_PRICE_IS_EMPTY(404, "shopping cart book price is empty");
+    SHOPPING_CART_BOOK_PRICE_IS_EMPTY(404, "shopping cart book price is empty"),
+
+    USER_ADDRESS_NAME_IS_BLANK(403, "user address name is blank"),
+    USER_ADDRESS_USER_ID_IS_NULL(403, "user address userId is null"),
+    USER_ADDRESS_PROVINCE_IS_BLANK(403, "user address province is blank"),
+    USER_ADDRESS_CITY_IS_BLANK(403, "user address city is blank"),
+    USER_ADDRESS_COUNTY_IS_BLANK(403, "user address county is blank"),
+    USER_ADDRESS_ADDRESS_DETAILS_IS_BLANK(403, "user address addressDetails is blank"),
+    USER_ADDRESS_PHONE_IS_BLANK(403, "user address phone is blank"),
+    USER_ADDRESS_ACQUIESCENCE_IS_NULL(403, "user address acquiescence is null");
 
     private final int code;
     private final String description;

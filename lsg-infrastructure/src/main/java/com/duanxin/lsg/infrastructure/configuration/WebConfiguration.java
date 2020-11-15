@@ -18,6 +18,8 @@ public class WebConfiguration implements WebMvcConfigurer {
         registry.addInterceptor(new LoginInterceptor()).
                 excludePathPatterns("/api/v1/users/login").
                 excludePathPatterns("/api/v1/books/**").
-                excludePathPatterns("/api/v1/carts/**");
+                excludePathPatterns("/api/v1/carts/**").
+                excludePathPatterns("/api/v1/users/**").
+                excludePathPatterns("/api/v1/orders/**");
     }
 }
