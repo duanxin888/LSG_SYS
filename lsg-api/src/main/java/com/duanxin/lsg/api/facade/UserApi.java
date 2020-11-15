@@ -6,6 +6,7 @@ import com.duanxin.lsg.api.dto.UserAddressDto;
 import com.duanxin.lsg.api.dto.WXLoginRequestDto;
 import com.duanxin.lsg.application.service.LoginApplicationService;
 import com.duanxin.lsg.application.service.UserApplicationService;
+import com.duanxin.lsg.domain.user.entity.UserAddressDO;
 import com.duanxin.lsg.domain.user.entity.UserDO;
 import com.duanxin.lsg.infrastructure.common.api.ResponseResult;
 import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
@@ -17,7 +18,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author duanxin
@@ -58,6 +61,12 @@ public class UserApi {
     @GetMapping("/address/default/{userId}")
     public ResponseResult getDefaultUserAddress(@PathVariable("userId") int userId) {
         return ResponseResult.success(UserAddressAssembler.toDto(userApplicationService.getDefaultUserAddress(userId)));
+    }
+
+    @GetMapping("/address/{userId}")
+    public ResponseResult getUserAddressList(@PathVariable("userId") int userId) {
+        List<UserAddressDO> userAddressDOS = userApplicationService.getUserAddressList(userId);
+        return ResponseResult.success(userAddressDOS.stream().map(UserAddressAssembler::toDto).collect(Collectors.toList()));
     }
 
     private void checkDto(UserAddressDto dto) {

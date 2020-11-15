@@ -3,6 +3,8 @@ package com.duanxin.lsg.infrastructure.repository.mapper;
 import com.duanxin.lsg.infrastructure.repository.po.UserAddressPO;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -13,4 +15,6 @@ public interface UserAddressMapper {
     void insert(@Param("userAddress") UserAddressPO userAddressPO);
 
     UserAddressPO selectDefaultUserAddress(@Param("userId") int userId);
+
+    List<UserAddressPO> selectUserAddressList(@Param("userId") int userId);
 }

@@ -2,6 +2,8 @@ package com.duanxin.lsg.domain.user.service;
 
 import com.duanxin.lsg.domain.user.entity.UserAddressDO;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -13,4 +15,6 @@ public interface UserAddressDomainService {
     void addAddress(UserAddressDO addressDO);
 
     UserAddressDO getDefaultUserAddress(int userId);
+
+    List<UserAddressDO> getUserAddressList(int userId);
 }

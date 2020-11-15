@@ -1,6 +1,9 @@
 package com.duanxin.lsg.domain.user.repository.facade;
 
+import com.duanxin.lsg.domain.user.entity.UserAddressDO;
 import com.duanxin.lsg.infrastructure.repository.po.UserAddressPO;
+
+import java.util.List;
 
 /**
  * @author duanxin
@@ -12,4 +15,6 @@ public interface UserAddressRepositoryInterface {
     UserAddressPO insert(UserAddressPO userAddressPO);
 
     UserAddressPO getDefaultUserAddress(int userId);
+
+    List<UserAddressPO> getUserAddressList(int userId);
 }

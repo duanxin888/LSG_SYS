@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -31,5 +33,10 @@ public class UserAddressRepositoryImpl implements UserAddressRepositoryInterface
     @Override
     public UserAddressPO getDefaultUserAddress(int userId) {
         return userAddressMapper.selectDefaultUserAddress(userId);
+    }
+
+    @Override
+    public List<UserAddressPO> getUserAddressList(int userId) {
+        return userAddressMapper.selectUserAddressList(userId);
     }
 }

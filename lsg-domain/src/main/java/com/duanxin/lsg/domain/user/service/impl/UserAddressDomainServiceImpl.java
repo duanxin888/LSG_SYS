@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -32,5 +35,11 @@ public class UserAddressDomainServiceImpl implements UserAddressDomainService {
     @Override
     public UserAddressDO getDefaultUserAddress(int userId) {
         return userAddressFactory.createUserAddressDO(userAddressRepository.getDefaultUserAddress(userId));
+    }
+
+    @Override
+    public List<UserAddressDO> getUserAddressList(int userId) {
+        return userAddressRepository.getUserAddressList(userId).stream().
+                map(userAddressFactory::createUserAddressDO).collect(Collectors.toList());
     }
 }

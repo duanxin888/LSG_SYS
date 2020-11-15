@@ -6,6 +6,8 @@ import com.duanxin.lsg.domain.user.service.UserDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -21,12 +23,21 @@ public class UserApplicationService {
     private UserDomainService userDomainService;
 
     public void addAddress(UserAddressDO addressDO) {
-        userDomainService.getUserById(addressDO.getUserId());
+        checkUserExist(addressDO.getUserId());
         userAddressDomainService.addAddress(addressDO);
     }
 
     public UserAddressDO getDefaultUserAddress(int userId) {
-        userDomainService.getUserById(userId);
+        checkUserExist(userId);
         return userAddressDomainService.getDefaultUserAddress(userId);
+    }
+
+    public List<UserAddressDO> getUserAddressList(int userId) {
+        checkUserExist(userId);
+        return userAddressDomainService.getUserAddressList(userId);
+    }
+
+    private void checkUserExist(int id) {
+        userDomainService.getUserById(id);
     }
 }

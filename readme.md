@@ -388,4 +388,39 @@ response:
     },
     "msg": "operator success!"
 }
+```  
+#### 获取用户收货地址集合  
+api: /lsg/api/v1/users/address/{5}  
+method: get  
+request: 5 (userId)  
+response:  
+```json
+{
+    "code": 200,
+    "data": [
+        {
+            "name": "Chris",
+            "userId": 5,
+            "province": "江西省",
+            "city": "赣州市",
+            "county": "石城县",
+            "addressDetails": "幸福里333栋999室",
+            "postalCode": null,
+            "phone": "13323234444",
+            "acquiescence": "DEFAULT"
+        },
+        {
+            "name": "Chris2",
+            "userId": 5,
+            "province": "天津市",
+            "city": "天津市",
+            "county": "和平区",
+            "addressDetails": "滨江道333楼22室",
+            "postalCode": null,
+            "phone": "13323234443",
+            "acquiescence": "DENY"
+        }
+    ],
+    "msg": "operator success!"
+}
 ```

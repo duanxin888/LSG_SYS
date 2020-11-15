@@ -39,5 +39,10 @@
         from T_USER_ADDRESS
         where USER_ID = #{userId} and DELETED = 0;
     </select>
+    <select id="selectUserAddressList" resultMap="userAddressMap">
+        select <include refid="userAddress"/>
+        from T_USER_ADDRESS
+        where USER_ID = #{userId} and DELETED = 0;
+    </select>
 
 </mapper>
