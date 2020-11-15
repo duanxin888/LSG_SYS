@@ -37,6 +37,11 @@ public class UserApplicationService {
         return userAddressDomainService.getUserAddressList(userId);
     }
 
+    public void updateDefaultUserAddress(UserAddressDO addressDO) {
+        checkUserExist(addressDO.getUserId());
+        userAddressDomainService.updateDefaultUserAddress(addressDO);
+    }
+
     private void checkUserExist(int id) {
         userDomainService.getUserById(id);
     }

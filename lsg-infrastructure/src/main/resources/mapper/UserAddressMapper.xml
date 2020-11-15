@@ -26,7 +26,7 @@
     </sql>
 
     <insert id="insert" parameterType="com.duanxin.lsg.infrastructure.repository.po.UserAddressPO"
-    useGeneratedKeys="true" keyProperty="id">
+            useGeneratedKeys="true" keyProperty="id">
         insert into T_USER_ADDRESS(NAME, USER_ID, PROVINCE, CITY, COUNTY, ADDRESS_DETAILS, POSTAL_CODE, PHONE,
         ACQUIESCENCE, DELETED, CDATE, CREATOR, EDATE, EDITOR)
         values(#{userAddress.name}, #{userAddress.userId}, #{userAddress.province}, #{userAddress.city},
@@ -34,13 +34,25 @@
         #{userAddress.acquiescence}, #{userAddress.deleted}, #{userAddress.cdate}, #{userAddress.creator},
         #{userAddress.edate}, #{userAddress.editor});
     </insert>
+
+    <update id="updateUserAddressAcquiescence">
+        update T_USER_ADDRESS
+        set ACQUIESCENCE = #{acquiescence}
+        where ID = #{id};
+    </update>
+
     <select id="selectDefaultUserAddress" resultMap="userAddressMap">
-        select <include refid="userAddress"/>
+        select
+        <include refid="userAddress"/>
         from T_USER_ADDRESS
-        where USER_ID = #{userId} and DELETED = 0;
+        where USER_ID = #{userId} and
+        ACQUIESCENCE = 0 and
+        DELETED = 0;
     </select>
+
     <select id="selectUserAddressList" resultMap="userAddressMap">
-        select <include refid="userAddress"/>
+        select
+        <include refid="userAddress"/>
         from T_USER_ADDRESS
         where USER_ID = #{userId} and DELETED = 0;
     </select>

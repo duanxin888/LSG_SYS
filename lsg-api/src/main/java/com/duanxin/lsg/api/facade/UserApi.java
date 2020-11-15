@@ -69,6 +69,21 @@ public class UserApi {
         return ResponseResult.success(userAddressDOS.stream().map(UserAddressAssembler::toDto).collect(Collectors.toList()));
     }
 
+    @PutMapping("/address/default")
+    public ResponseResult updateDefaultUserAddress(@RequestBody UserAddressDto userAddressDto) {
+        if (Objects.isNull(userAddressDto.getId())) {
+            throw new LSGCheckException(ResultEnum.USER_ADDRESS_ID_IS_NULL);
+        }
+        if (Objects.isNull(userAddressDto.getUserId())) {
+            throw new LSGCheckException(ResultEnum.USER_ADDRESS_USER_ID_IS_NULL);
+        }
+        if (Objects.isNull(userAddressDto.getAcquiescence())) {
+            throw new LSGCheckException(ResultEnum.USER_ADDRESS_ACQUIESCENCE_IS_NULL);
+        }
+        userApplicationService.updateDefaultUserAddress(UserAddressAssembler.toDO(userAddressDto));
+        return ResponseResult.success();
+    }
+
     private void checkDto(UserAddressDto dto) {
         if (StringUtils.isBlank(dto.getName())) {
             throw new LSGCheckException(ResultEnum.USER_ADDRESS_NAME_IS_BLANK);

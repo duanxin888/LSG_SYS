@@ -423,4 +423,23 @@ response:
     ],
     "msg": "operator success!"
 }
+```  
+#### 更改用户默认收货地址  
+api: /lsg/api/v1/users/address/default  
+method: put  
+request:  
+```json
+{
+    "id":2,
+    "userId":5,
+    "acquiescence":"DEFAULT"
+}
+```  
+response:  
+```json
+{
+    "code": 200,
+    "data": null,
+    "msg": "operator success!"
+}
 ```

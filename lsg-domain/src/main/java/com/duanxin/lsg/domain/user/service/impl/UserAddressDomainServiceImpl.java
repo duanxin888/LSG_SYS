@@ -1,9 +1,9 @@
 package com.duanxin.lsg.domain.user.service.impl;
 
 import com.duanxin.lsg.domain.user.entity.UserAddressDO;
+import com.duanxin.lsg.domain.user.entity.valueobject.AddressAcquiescence;
 import com.duanxin.lsg.domain.user.repository.facade.UserAddressRepositoryInterface;
 import com.duanxin.lsg.domain.user.service.UserAddressDomainService;
-import com.duanxin.lsg.infrastructure.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +41,13 @@ public class UserAddressDomainServiceImpl implements UserAddressDomainService {
     public List<UserAddressDO> getUserAddressList(int userId) {
         return userAddressRepository.getUserAddressList(userId).stream().
                 map(userAddressFactory::createUserAddressDO).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateDefaultUserAddress(UserAddressDO addressDO) {
+        userAddressRepository.updateUserAddressAcquiescence(userAddressRepository.getDefaultUserAddress(addressDO.getUserId()).getId(),
+                AddressAcquiescence.NOT_ACQUIESCENCE);
+        userAddressRepository.updateUserAddressAcquiescence(addressDO.getId(),
+                AddressAcquiescence.IS_ACQUIESCENCE);
     }
 }

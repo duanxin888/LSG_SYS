@@ -17,4 +17,6 @@ public interface UserAddressDomainService {
     UserAddressDO getDefaultUserAddress(int userId);
 
     List<UserAddressDO> getUserAddressList(int userId);
+
+    void updateDefaultUserAddress(UserAddressDO addressDO);
 }

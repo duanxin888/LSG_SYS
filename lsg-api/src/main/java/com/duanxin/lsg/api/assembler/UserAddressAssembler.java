@@ -14,6 +14,7 @@ public class UserAddressAssembler {
 
     public static UserAddressDO toDO(UserAddressDto dto) {
         UserAddressDO addressDO = new UserAddressDO();
+        addressDO.setId(dto.getId());
         addressDO.setUserId(dto.getUserId());
         addressDO.setName(dto.getName());
         addressDO.setProvince(dto.getProvince());
@@ -28,6 +29,7 @@ public class UserAddressAssembler {
 
     public static UserAddressDto toDto(UserAddressDO addressDO) {
         UserAddressDto dto = new UserAddressDto();
+        dto.setId(addressDO.getId());
         dto.setName(addressDO.getName());
         dto.setProvince(addressDO.getProvince());
         dto.setUserId(addressDO.getUserId());

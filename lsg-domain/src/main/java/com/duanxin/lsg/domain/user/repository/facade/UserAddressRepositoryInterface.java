@@ -1,6 +1,6 @@
 package com.duanxin.lsg.domain.user.repository.facade;
 
-import com.duanxin.lsg.domain.user.entity.UserAddressDO;
+import com.duanxin.lsg.domain.user.entity.valueobject.AddressAcquiescence;
 import com.duanxin.lsg.infrastructure.repository.po.UserAddressPO;
 
 import java.util.List;
@@ -17,4 +17,6 @@ public interface UserAddressRepositoryInterface {
     UserAddressPO getDefaultUserAddress(int userId);
 
     List<UserAddressPO> getUserAddressList(int userId);
+
+    void updateUserAddressAcquiescence(int id, AddressAcquiescence acquiescence);
 }

@@ -14,6 +14,8 @@ import lombok.Setter;
 @Getter
 public class UserAddressDto {
 
+    private Integer id;
+
     private String name;
 
     private Integer userId;
