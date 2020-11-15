@@ -11,4 +11,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserAddressMapper {
     void insert(@Param("userAddress") UserAddressPO userAddressPO);
+
+    UserAddressPO selectDefaultUserAddress(@Param("userId") int userId);
 }

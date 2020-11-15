@@ -1,6 +1,8 @@
 package com.duanxin.lsg.domain.user.repository.persistence;
 
 import com.duanxin.lsg.domain.user.repository.facade.UserRepositoryInterface;
+import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
+import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
 import com.duanxin.lsg.infrastructure.repository.mapper.UserMapper;
 import com.duanxin.lsg.infrastructure.repository.po.UserPO;
 import com.duanxin.lsg.infrastructure.utils.HttpUtil;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * @author duanxin
@@ -46,6 +49,10 @@ public class UserRepositoryImpl implements UserRepositoryInterface {
 
     @Override
     public UserPO selectByPrimaryId(int userId) {
-        return userMapper.selectByPrimaryKey(userId);
+        UserPO userPO = userMapper.selectByPrimaryKey(userId);
+        if (Objects.isNull(userPO)) {
+            throw new LSGCheckException(ResultEnum.USER_NOT_EXIST);
+        }
+        return userPO;
     }
 }

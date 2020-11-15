@@ -28,4 +28,9 @@ public class UserAddressDomainServiceImpl implements UserAddressDomainService {
         addressDO.create();
         userAddressRepository.insert(userAddressFactory.createUserAddressPO(addressDO));
     }
+
+    @Override
+    public UserAddressDO getDefaultUserAddress(int userId) {
+        return userAddressFactory.createUserAddressDO(userAddressRepository.getDefaultUserAddress(userId));
+    }
 }

@@ -49,4 +49,9 @@ public class UserDomainServiceImpl implements UserDomainService {
         userDO.setWxSessionKey(sessionId);
         userRepositoryInterface.updateWXSessionKey(userFactory.createUserPO(userDO));
     }
+
+    @Override
+    public UserDO getUserById(int userId) {
+        return userFactory.createUserDO(userRepositoryInterface.selectByPrimaryId(userId));
+    }
 }

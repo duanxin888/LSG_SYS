@@ -32,7 +32,12 @@
         values(#{userAddress.name}, #{userAddress.userId}, #{userAddress.province}, #{userAddress.city},
         #{userAddress.county}, #{userAddress.addressDetails}, #{userAddress.postalCode}, #{userAddress.phone},
         #{userAddress.acquiescence}, #{userAddress.deleted}, #{userAddress.cdate}, #{userAddress.creator},
-        #{userAddress.edate}, #{userAddress.editor})
+        #{userAddress.edate}, #{userAddress.editor});
     </insert>
+    <select id="selectDefaultUserAddress" resultMap="userAddressMap">
+        select <include refid="userAddress"/>
+        from T_USER_ADDRESS
+        where USER_ID = #{userId} and DELETED = 0;
+    </select>
 
 </mapper>

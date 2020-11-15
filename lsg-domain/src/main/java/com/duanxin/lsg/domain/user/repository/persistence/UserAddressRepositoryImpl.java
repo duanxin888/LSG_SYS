@@ -27,4 +27,9 @@ public class UserAddressRepositoryImpl implements UserAddressRepositoryInterface
         log.info("success to add user [{}] address [{}]", userAddressPO.getUserId(), JsonUtil.toString(userAddressPO));
         return userAddressPO;
     }
+
+    @Override
+    public UserAddressPO getDefaultUserAddress(int userId) {
+        return userAddressMapper.selectDefaultUserAddress(userId);
+    }
 }

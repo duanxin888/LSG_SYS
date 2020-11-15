@@ -10,4 +10,6 @@ import com.duanxin.lsg.infrastructure.repository.po.UserAddressPO;
  */
 public interface UserAddressRepositoryInterface {
     UserAddressPO insert(UserAddressPO userAddressPO);
+
+    UserAddressPO getDefaultUserAddress(int userId);
 }

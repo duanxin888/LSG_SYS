@@ -15,4 +15,6 @@ public interface UserDomainService {
     void createUser(UserDO userDO, String openid, String sessionKey);
 
     void updateWXSessionKey(UserDO userDO, String sessionId);
+
+    UserDO getUserById(int userId);
 }

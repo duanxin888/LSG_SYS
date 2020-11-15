@@ -11,6 +11,7 @@ import com.duanxin.lsg.infrastructure.common.api.ResponseResult;
 import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
 import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
 import com.sun.org.apache.regexp.internal.RE;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,11 @@ public class UserApi {
         checkDto(userAddressDto);
         userApplicationService.addAddress(UserAddressAssembler.toDO(userAddressDto));
         return ResponseResult.success();
+    }
+
+    @GetMapping("/address/default/{userId}")
+    public ResponseResult getDefaultUserAddress(@PathVariable("userId") int userId) {
+        return ResponseResult.success(UserAddressAssembler.toDto(userApplicationService.getDefaultUserAddress(userId)));
     }
 
     private void checkDto(UserAddressDto dto) {

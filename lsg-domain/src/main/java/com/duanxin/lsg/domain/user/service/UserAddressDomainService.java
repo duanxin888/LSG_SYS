@@ -11,4 +11,6 @@ import com.duanxin.lsg.domain.user.entity.UserAddressDO;
 public interface UserAddressDomainService {
 
     void addAddress(UserAddressDO addressDO);
+
+    UserAddressDO getDefaultUserAddress(int userId);
 }

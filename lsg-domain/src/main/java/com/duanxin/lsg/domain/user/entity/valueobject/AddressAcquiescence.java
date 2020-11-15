@@ -20,9 +20,18 @@ public enum AddressAcquiescence {
     private final int code;
     private final AddressAcquiescenceEnum acquiescence;
 
-    public static AddressAcquiescence format(AddressAcquiescenceEnum acquiescence) {
+    public static AddressAcquiescence formatByAddressAcquiescenceEnum(AddressAcquiescenceEnum acquiescence) {
         for (AddressAcquiescence value : values()) {
             if (acquiescence.equals(value.acquiescence)) {
+                return value;
+            }
+        }
+        return IS_ACQUIESCENCE;
+    }
+
+    public static AddressAcquiescence formatByCode(int code) {
+        for (AddressAcquiescence value : values()) {
+            if (code == value.code) {
                 return value;
             }
         }

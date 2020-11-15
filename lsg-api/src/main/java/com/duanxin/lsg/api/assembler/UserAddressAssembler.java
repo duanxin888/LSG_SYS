@@ -22,7 +22,21 @@ public class UserAddressAssembler {
         addressDO.setAddressDetails(dto.getAddressDetails());
         addressDO.setPostalCode(dto.getPostalCode());
         addressDO.setPhone(dto.getPhone());
-        addressDO.setAcquiescence(AddressAcquiescence.format(dto.getAcquiescence()));
+        addressDO.setAcquiescence(AddressAcquiescence.formatByAddressAcquiescenceEnum(dto.getAcquiescence()));
         return addressDO;
+    }
+
+    public static UserAddressDto toDto(UserAddressDO addressDO) {
+        UserAddressDto dto = new UserAddressDto();
+        dto.setName(addressDO.getName());
+        dto.setProvince(addressDO.getProvince());
+        dto.setUserId(addressDO.getUserId());
+        dto.setCity(addressDO.getCity());
+        dto.setCounty(addressDO.getCounty());
+        dto.setAddressDetails(addressDO.getAddressDetails());
+        dto.setPostalCode(addressDO.getPostalCode());
+        dto.setPhone(addressDO.getPhone());
+        dto.setAcquiescence(addressDO.getAcquiescence().getAcquiescence());
+        return dto;
     }
 }

@@ -366,4 +366,26 @@ response:
     "data": null,
     "msg": "operator success!"
 }
+```  
+#### 获取用户默认地址  
+api: /lsg/api/v1/users/address/default/5  
+method: get  
+request: 5 (userId)  
+response:  
+```json
+{
+    "code": 200,
+    "data": {
+        "name": "Chris",
+        "userId": 5,
+        "province": "江西省",
+        "city": "赣州市",
+        "county": "石城县",
+        "addressDetails": "幸福里333栋999室",
+        "postalCode": null,
+        "phone": "13323234444",
+        "acquiescence": "DEFAULT"
+    },
+    "msg": "operator success!"
+}
 ```
