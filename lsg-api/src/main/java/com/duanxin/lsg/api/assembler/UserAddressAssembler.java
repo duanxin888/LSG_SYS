@@ -4,6 +4,8 @@ import com.duanxin.lsg.api.dto.UserAddressDto;
 import com.duanxin.lsg.domain.user.entity.UserAddressDO;
 import com.duanxin.lsg.domain.user.entity.valueobject.AddressAcquiescence;
 
+import java.util.Objects;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -14,7 +16,9 @@ public class UserAddressAssembler {
 
     public static UserAddressDO toDO(UserAddressDto dto) {
         UserAddressDO addressDO = new UserAddressDO();
-        addressDO.setId(dto.getId());
+        if (!Objects.isNull(dto.getId())) {
+            addressDO.setId(dto.getId());
+        }
         addressDO.setUserId(dto.getUserId());
         addressDO.setName(dto.getName());
         addressDO.setProvince(dto.getProvince());
