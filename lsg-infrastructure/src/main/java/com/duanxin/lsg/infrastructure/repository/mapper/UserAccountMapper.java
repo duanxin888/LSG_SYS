@@ -13,4 +13,6 @@ public interface UserAccountMapper {
     void insert(@Param("userAccount") UserAccountPO userAccount);
 
     UserAccountPO selectUserAccountById(@Param("id") Integer userAccountId);
+
+    UserAccountPO selectByUserId(@Param("userId") int userId);
 }

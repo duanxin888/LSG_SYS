@@ -54,4 +54,9 @@ public class UserDomainServiceImpl implements UserDomainService {
     public UserDO getUserById(int userId) {
         return userFactory.createUserDO(userRepositoryInterface.selectByPrimaryId(userId));
     }
+
+    @Override
+    public UserAccountDO getUserAccount(int userId) {
+        return userFactory.createUserAccountDO(userAccountRepository.selectByUserId(userId));
+    }
 }

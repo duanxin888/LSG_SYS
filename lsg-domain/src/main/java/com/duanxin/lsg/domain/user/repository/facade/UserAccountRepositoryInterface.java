@@ -13,4 +13,6 @@ public interface UserAccountRepositoryInterface {
     UserAccountPO insert(UserAccountPO userAccount);
 
     UserAccountPO selectUserAccountById(Integer userAccountId);
+
+    UserAccountPO selectByUserId(int userId);
 }

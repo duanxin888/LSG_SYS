@@ -1,5 +1,6 @@
 package com.duanxin.lsg.domain.user.service;
 
+import com.duanxin.lsg.domain.user.entity.UserAccountDO;
 import com.duanxin.lsg.domain.user.entity.UserDO;
 
 /**
@@ -17,4 +18,6 @@ public interface UserDomainService {
     void updateWXSessionKey(UserDO userDO, String sessionId);
 
     UserDO getUserById(int userId);
+
+    UserAccountDO getUserAccount(int userId);
 }

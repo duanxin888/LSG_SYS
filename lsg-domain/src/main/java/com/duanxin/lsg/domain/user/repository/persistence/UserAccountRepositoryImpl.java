@@ -31,4 +31,9 @@ public class UserAccountRepositoryImpl implements UserAccountRepositoryInterface
     public UserAccountPO selectUserAccountById(Integer userAccountId) {
         return userAccountMapper.selectUserAccountById(userAccountId);
     }
+
+    @Override
+    public UserAccountPO selectByUserId(int userId) {
+        return userAccountMapper.selectByUserId(userId);
+    }
 }

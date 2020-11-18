@@ -16,15 +16,24 @@
     <sql id="userAccount">
         ID, ACCOUNT_SN, BALANCE, DELETED, CDATE, CREATOR, EDATE, EDITOR
     </sql>
-    <insert id="insert" parameterType="com.duanxin.lsg.infrastructure.repository.po.UserAccountPO" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.duanxin.lsg.infrastructure.repository.po.UserAccountPO"
+            useGeneratedKeys="true" keyProperty="id">
         insert into T_USER_ACCOUNT(ACCOUNT_SN, BALANCE, DELETED, CDATE, CREATOR, EDATE, EDITOR)
         values(#{userAccount.accountSn}, #{userAccount.balance}, #{userAccount.deleted}, #{userAccount.cdate},
         #{userAccount.creator}, #{userAccount.edate}, #{userAccount.editor})
     </insert>
     <select id="selectUserAccountById" resultMap="UserAccountMap">
-        select <include refid="userAccount"/>
+        select
+        <include refid="userAccount"/>
         from T_USER_ACCOUNT
         where ID = #{id} and DELETED = 0;
+    </select>
+    <select id="selectByUserId" resultMap="UserAccountMap">
+        select
+        TUA.ID, TUA.ACCOUNT_SN, TUA.BALANCE, TUA.DELETED, TUA.CDATE, TUA.CREATOR, TUA.EDATE, TUA.EDITOR
+        from T_USER_ACCOUNT TUA
+        inner join T_USER TU on TUA.ID = TU.USER_ACCOUNT_ID
+        where TU.ID = #{userId} and TUA.DELETED = 0;
     </select>
 
 </mapper>

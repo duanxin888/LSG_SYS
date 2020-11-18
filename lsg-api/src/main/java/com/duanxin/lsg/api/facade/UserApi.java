@@ -1,11 +1,13 @@
 package com.duanxin.lsg.api.facade;
 
+import com.duanxin.lsg.api.assembler.UserAccountAssembler;
 import com.duanxin.lsg.api.assembler.UserAddressAssembler;
 import com.duanxin.lsg.api.assembler.WxLoginAssembler;
 import com.duanxin.lsg.api.dto.UserAddressDto;
 import com.duanxin.lsg.api.dto.WXLoginRequestDto;
 import com.duanxin.lsg.application.service.LoginApplicationService;
 import com.duanxin.lsg.application.service.UserApplicationService;
+import com.duanxin.lsg.domain.user.entity.UserAccountDO;
 import com.duanxin.lsg.domain.user.entity.UserAddressDO;
 import com.duanxin.lsg.domain.user.entity.UserDO;
 import com.duanxin.lsg.infrastructure.common.api.ResponseResult;
@@ -82,6 +84,11 @@ public class UserApi {
         }
         userApplicationService.updateDefaultUserAddress(UserAddressAssembler.toDO(userAddressDto));
         return ResponseResult.success();
+    }
+
+    @GetMapping("/accounts/{userId}")
+    public ResponseResult getUserAccount(@PathVariable("userId") int userId) {
+        return ResponseResult.success(UserAccountAssembler.toDto(userApplicationService.getUserAccount(userId), userId));
     }
 
     private void checkDto(UserAddressDto dto) {

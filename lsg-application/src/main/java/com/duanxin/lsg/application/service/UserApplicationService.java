@@ -1,5 +1,6 @@
 package com.duanxin.lsg.application.service;
 
+import com.duanxin.lsg.domain.user.entity.UserAccountDO;
 import com.duanxin.lsg.domain.user.entity.UserAddressDO;
 import com.duanxin.lsg.domain.user.service.UserAddressDomainService;
 import com.duanxin.lsg.domain.user.service.UserDomainService;
@@ -40,6 +41,11 @@ public class UserApplicationService {
     public void updateDefaultUserAddress(UserAddressDO addressDO) {
         checkUserExist(addressDO.getUserId());
         userAddressDomainService.updateDefaultUserAddress(addressDO);
+    }
+
+    public UserAccountDO getUserAccount(int userId) {
+        checkUserExist(userId);
+        return userDomainService.getUserAccount(userId);
     }
 
     private void checkUserExist(int id) {

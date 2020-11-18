@@ -481,4 +481,21 @@ response:
     "data": null,
     "msg": "operator success!"
 }
+```  
+#### 查询用户账户信息  
+api: /lsg/api/v1/users/accounts/{userId}
+method: get    
+request: 5 (userId)  
+response:  
+```json
+{
+    "code": 200,
+    "data": {
+        "id": 6,
+        "userId": 5,
+        "accountSn": "012020101221385401",
+        "balance": 0.00
+    },
+    "msg": "operator success!"
+}
 ```
