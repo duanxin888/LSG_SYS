@@ -18,6 +18,12 @@
         ID, BOOK_ID, BOOK_LEVEL_ID, STOCK, SALE, CDATE, CREATOR, EDATE, EDITOR
     </sql>
 
+    <update id="updateStockAndSale">
+        update T_BOOK_STOCK
+        set STOCK = STOCK - #{bookStockPO.stock}, SALE = SALE + #{bookStockPO.stock}
+        where BOOK_ID = #{bookStockPO.bookId} and BOOK_LEVEL_ID = #{bookStockPO.bookLevelId};
+    </update>
+
     <select id="selectByBookIdAndLevelIds" resultMap="bookStockMap">
         select <include refid="bookStock"/>
         from T_BOOK_STOCK

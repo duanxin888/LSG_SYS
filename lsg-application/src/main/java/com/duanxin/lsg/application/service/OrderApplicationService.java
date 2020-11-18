@@ -1,6 +1,8 @@
 package com.duanxin.lsg.application.service;
 
+import com.duanxin.lsg.domain.book.entity.BookStockDO;
 import com.duanxin.lsg.domain.book.entity.valueobject.BookLevel;
+import com.duanxin.lsg.domain.book.service.BookDomainService;
 import com.duanxin.lsg.domain.order.entity.OrderDO;
 import com.duanxin.lsg.domain.order.service.OrderDomainService;
 import com.duanxin.lsg.domain.shoppingcart.entity.BookInfo;
@@ -10,9 +12,6 @@ import com.duanxin.lsg.domain.user.service.UserDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author duanxin
@@ -29,20 +28,30 @@ public class OrderApplicationService {
     private UserDomainService userDomainService;
     @Autowired
     private ShoppingCartDomainService shoppingCartDomainService;
+    @Autowired
+    private BookDomainService bookDomainService;
 
     @Transactional
     public void addOrder(OrderDO toDO) {
         checkUserExist(toDO.getUserInfo().getUserId());
         orderDomainService.addOrder(toDO);
-        deleteUserCarts(toDO);
+        checkAndDeleteUserCarts(toDO);
     }
 
     private void checkUserExist(int userId) {
         userDomainService.getUserById(userId);
     }
 
-    private void deleteUserCarts(OrderDO orderDO) {
+    private void checkAndDeleteUserCarts(OrderDO orderDO) {
         orderDO.getOrderDetailsDOS().forEach(orderDetails -> {
+            // check stock
+            BookStockDO bookStockDO = new BookStockDO();
+            bookStockDO.setBookId(orderDetails.getBookId());
+            bookStockDO.setBookLevel(bookDomainService.getBookLevelById(orderDetails.getBookLevelId()));
+            bookStockDO.setStock(orderDetails.getQuantity());
+            bookDomainService.checkStock(bookStockDO);
+
+            // deleted cart
             UserShoppingCartDO shoppingCartDO = new UserShoppingCartDO();
             shoppingCartDO.setUserId(orderDO.getUserInfo().getUserId());
             shoppingCartDO.setBookInfo(BookInfo.builder().
@@ -54,6 +63,9 @@ public class OrderApplicationService {
                     price(orderDetails.getPrice()).
                     quantity(orderDetails.getQuantity()).build());
             shoppingCartDomainService.deleteUserCart(shoppingCartDO);
+
+            // down stock
+            bookDomainService.downStock(bookStockDO);
         });
     }
 }

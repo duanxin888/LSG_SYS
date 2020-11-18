@@ -53,7 +53,8 @@ public enum ResultEnum {
     ORDER_CONSIGNEE_IS_BLANK(405, "order consignee is blank"),
     ORDER_PHONE_IS_BLANK(405, "order phone is blank"),
     ORDER_ADDRESS_IS_BLANK(405, "order address is blank"),
-    ORDER_TOTAL_PRICE_IS_ERROR(405, "order total price is error");
+    ORDER_TOTAL_PRICE_IS_ERROR(405, "order total price is error"),
+    BOOK_STOCK_NOT_ENOUGH(405, "book stock not enough");
 
     private final int code;
     private final String description;

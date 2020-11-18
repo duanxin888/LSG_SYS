@@ -32,4 +32,8 @@ public class BookStockDO {
     private LocalDateTime edate;
 
     private String editor;
+
+    public boolean checkStock(int stock) {
+        return this.getStock() <= stock;
+    }
 }

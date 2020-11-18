@@ -68,7 +68,7 @@ public class OrderDO {
     public boolean checkPrice() {
         BigDecimal addPrice = this.getOrderDetailsDOS().stream().map(orderDetails ->
                 orderDetails.getPrice().multiply(BigDecimal.valueOf(orderDetails.getQuantity()))).
-                reduce(BigDecimal.ZERO, BigDecimal::add);
+                reduce(BigDecimal.ZERO, BigDecimal::add).setScale(2);
         return addPrice.equals(this.getTotalPrice());
     }
 }

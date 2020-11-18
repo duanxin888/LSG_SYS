@@ -15,8 +15,10 @@ public interface BookStockMapper {
     List<BookStockPO> selectByBookIdAndLevelIds(@Param("bookId") int bookId,
                                                 @Param("levelIds") List<Integer> levelIds);
 
-    List<BookStockPO> selectByBookIdAndLevelId(@Param("bookId") int bookId,
+    BookStockPO selectByBookIdAndLevelId(@Param("bookId") int bookId,
                                              @Param("bookLevelId") int bookLevelId);
 
     List<BookStockPO> selectByBookId(@Param("bookId") int bookId);
+
+    void updateStockAndSale(@Param("bookStockPO") BookStockPO bookStockPO);
 }

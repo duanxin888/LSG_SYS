@@ -89,4 +89,18 @@ public class BookFactory {
         bookCategoryDO.setEditor(bookCategoryPO.getEditor());
         return bookCategoryDO;
     }
+
+    public BookStockPO createBookStockPO(BookStockDO bookStockDO) {
+        BookStockPO po = new BookStockPO();
+        po.setId(bookStockDO.getId());
+        po.setBookId(bookStockDO.getBookId());
+        po.setBookLevelId(bookStockDO.getBookLevel().getId());
+        po.setStock(bookStockDO.getStock());
+        po.setSale(bookStockDO.getStock());
+        po.setCdate(bookStockDO.getCdate());
+        po.setCreator(bookStockDO.getCreator());
+        po.setEdate(bookStockDO.getEdate());
+        po.setEditor(bookStockDO.getEditor());
+        return po;
+    }
 }

@@ -2,6 +2,9 @@ package com.duanxin.lsg.domain.book.service;
 
 import com.duanxin.lsg.domain.book.entity.BookCategoryDO;
 import com.duanxin.lsg.domain.book.entity.BookDO;
+import com.duanxin.lsg.domain.book.entity.BookLevelDO;
+import com.duanxin.lsg.domain.book.entity.BookStockDO;
+import com.duanxin.lsg.domain.book.entity.valueobject.BookLevel;
 
 import java.util.List;
 
@@ -20,4 +23,10 @@ public interface BookDomainService {
     BookDO getBookInfoById(int id);
 
     BookDO getLevelsByBookId(int bookId);
+
+    BookLevelDO getBookLevelById(int levelId);
+
+    void checkStock(BookStockDO bookStockDO);
+
+    void downStock(BookStockDO bookStockDO);
 }

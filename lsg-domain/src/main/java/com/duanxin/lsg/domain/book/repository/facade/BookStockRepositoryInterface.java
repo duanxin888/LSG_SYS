@@ -1,6 +1,7 @@
 package com.duanxin.lsg.domain.book.repository.facade;
 
 
+import com.duanxin.lsg.domain.book.entity.BookStockDO;
 import com.duanxin.lsg.infrastructure.repository.po.BookStockPO;
 
 import java.util.List;
@@ -14,7 +15,9 @@ import java.util.List;
 public interface BookStockRepositoryInterface {
     List<BookStockPO> selectByBookIdAndLevelIds(int bookId, List<Integer> levelIds);
 
-    List<BookStockPO> selectByBookIdAndLevelId(int bookId, int bookLevelId);
+    BookStockPO selectByBookIdAndLevelId(int bookId, int bookLevelId);
 
     List<BookStockPO> selectByBookId(int bookId);
+
+    void updateStockAndSale(BookStockPO bookStockPO);
 }
