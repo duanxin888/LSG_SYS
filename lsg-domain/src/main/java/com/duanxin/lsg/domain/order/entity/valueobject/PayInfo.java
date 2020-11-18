@@ -1,5 +1,6 @@
 package com.duanxin.lsg.domain.order.entity.valueobject;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
  */
 @Setter
 @Getter
+@Builder
 public class PayInfo {
 
     private String paySn;

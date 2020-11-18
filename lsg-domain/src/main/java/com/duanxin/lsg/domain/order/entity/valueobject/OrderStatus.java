@@ -1,5 +1,7 @@
 package com.duanxin.lsg.domain.order.entity.valueobject;
 
+import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
+import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -22,4 +24,13 @@ public enum OrderStatus {
 
     private final int id;
     private final String name;
+
+    public static OrderStatus formatByName(String name) {
+        for (OrderStatus status : values()) {
+            if (status.name.equals(name)) {
+                return status;
+            }
+        }
+        throw new LSGCheckException(ResultEnum.ORDER_STATUS_NAME_NOT_EXIST);
+    }
 }

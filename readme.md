@@ -442,4 +442,43 @@ response:
     "data": null,
     "msg": "operator success!"
 }
+```  
+#### 用户下单  
+api: /lsg/api/v1/orders  
+method: post  
+request:  
+```json
+{
+    "userId":5,
+    "totalPrice":177.00,
+    "totalQuantity":4,
+    "consignee":"Chris2",
+    "phone":"13323234443",
+    "address":"天津市 天津市 和平区 滨江道333楼22室",
+    "orderDetailsDtos":[
+        {
+            "bookId":1,
+            "bookName":"东野圭吾·沉默的巡游",
+            "bookPicUrl":"//img13.360buyimg.com/n1/jfs/t1/102681/37/15355/229270/5e708291E88e39fdd/c00b26e445e830dc.jpg",
+            "bookLevelName":"全新",
+            "quantity":2,
+            "price":53.10
+        },{
+            "bookId": 1,
+            "bookName": "东野圭吾·沉默的巡游",
+            "bookPicUrl": "//img13.360buyimg.com/n1/jfs/t1/102681/37/15355/229270/5e708291E88e39fdd/c00b26e445e830dc.jpg",
+            "bookLevelName": "优良",
+            "price": 35.40,
+            "quantity": 2
+        }
+    ]
+}
+```  
+response:  
+```json
+{
+    "code": 200,
+    "data": null,
+    "msg": "operator success!"
+}
 ```

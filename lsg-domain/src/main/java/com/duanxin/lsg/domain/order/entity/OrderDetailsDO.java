@@ -1,6 +1,8 @@
 package com.duanxin.lsg.domain.order.entity;
 
+import com.duanxin.lsg.infrastructure.common.enums.ConstantEnum;
 import com.duanxin.lsg.infrastructure.common.enums.Deleted;
+import com.duanxin.lsg.infrastructure.repository.po.OrderDetailsPO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,4 +44,14 @@ public class OrderDetailsDO {
     private LocalDateTime edate;
 
     private String editor;
+
+    public OrderDetailsDO create(int orderId) {
+        this.setOrderId(orderId);
+        this.setDeleted(Deleted.NOT_DELETE);
+        this.setCdate(LocalDateTime.now());
+        this.setCreator(ConstantEnum.CREATOR.getKey());
+        this.setEdate(LocalDateTime.now());
+        this.setEditor(ConstantEnum.CREATOR.getKey());
+        return this;
+    }
 }

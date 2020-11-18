@@ -4,6 +4,9 @@ import com.duanxin.lsg.domain.order.entity.valueobject.OrderStatus;
 import com.duanxin.lsg.domain.order.entity.valueobject.PayInfo;
 import com.duanxin.lsg.domain.order.entity.valueobject.ShipInfo;
 import com.duanxin.lsg.domain.order.entity.valueobject.UserInfo;
+import com.duanxin.lsg.infrastructure.common.enums.ConstantEnum;
+import com.duanxin.lsg.infrastructure.common.enums.Deleted;
+import com.duanxin.lsg.infrastructure.utils.SnUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,7 +42,7 @@ public class OrderDO {
 
     private LocalDateTime orderCloseTime;
 
-    private int deleted;
+    private Deleted deleted;
 
     private LocalDateTime cdate;
 
@@ -50,4 +53,22 @@ public class OrderDO {
     private String editor;
 
     private List<OrderDetailsDO> orderDetailsDOS;
+
+    public OrderDO create() {
+        this.setOrderSn(SnUtil.generateOrderSn(this.getUserInfo().getUserId()));
+        this.setOrderStatus(OrderStatus.SUBMIT_SUCCESS);
+        this.setDeleted(Deleted.NOT_DELETE);
+        this.setCdate(LocalDateTime.now());
+        this.setCreator(ConstantEnum.CREATOR.getKey());
+        this.setEdate(LocalDateTime.now());
+        this.setEditor(ConstantEnum.CREATOR.getKey());
+        return this;
+    }
+
+    public boolean checkPrice() {
+        BigDecimal addPrice = this.getOrderDetailsDOS().stream().map(orderDetails ->
+                orderDetails.getPrice().multiply(BigDecimal.valueOf(orderDetails.getQuantity()))).
+                reduce(BigDecimal.ZERO, BigDecimal::add);
+        return addPrice.equals(this.getTotalPrice());
+    }
 }

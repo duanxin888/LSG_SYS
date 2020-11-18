@@ -37,4 +37,20 @@
          DELETED, CDATE, CREATOR, EDATE, EDITOR
     </sql>
 
+    <insert id="insert" parameterType="com.duanxin.lsg.infrastructure.repository.po.UserOrderPO"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into T_USER_ORDER(USER_ID, ORDER_SN, TOTAL_PRICE, TOTAL_QUANTITY, ORDER_STATUS_ID,
+        CONSIGNEE, PHONE, ADDRESS, MESSAGE, FREIGHT_PRICE, PAY_SN, PAY_TYPE, PAY_TIME,
+         SHIP_SN, SHIP_CHANNEL, SHIP_TIME, REFUND_TIME, CONFIRM_TIME, ORDER_CLOSE_TIME,
+         DELETED, CDATE, CREATOR, EDATE, EDITOR)
+         values (#{userOrderPO.userId}, #{userOrderPO.orderSn}, #{userOrderPO.totalPrice},
+         #{userOrderPO.totalQuantity}, #{userOrderPO.orderStatusId}, #{userOrderPO.consignee},
+         #{userOrderPO.phone}, #{userOrderPO.address}, #{userOrderPO.message},
+          #{userOrderPO.freightPrice}, #{userOrderPO.paySn}, #{userOrderPO.payType},
+          #{userOrderPO.payTime}, #{userOrderPO.shipSn}, #{userOrderPO.shipChannel},
+          #{userOrderPO.shipTime}, #{userOrderPO.refundTime}, #{userOrderPO.confirmTime},
+          #{userOrderPO.orderCloseTime}, #{userOrderPO.deleted}, #{userOrderPO.cdate},
+          #{userOrderPO.creator}, #{userOrderPO.edate}, #{userOrderPO.editor})
+    </insert>
+
 </mapper>

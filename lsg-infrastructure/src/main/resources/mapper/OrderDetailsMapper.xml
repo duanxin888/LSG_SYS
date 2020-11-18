@@ -23,4 +23,14 @@
         DELETED, CDATE, CREATOR, EDATE, EDITOR
     </sql>
 
+    <insert id="insert" parameterType="com.duanxin.lsg.infrastructure.repository.po.OrderDetailsPO"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into T_ORDER_DETAILS(ORDER_ID, BOOK_ID, BOOK_NAME, BOOK_LEVEL_ID, QUANTITY, PRICE, BOOK_PIC_URL,
+        DELETED, CDATE, CREATOR, EDATE, EDITOR)
+        values (#{orderDetailsPO.orderId}, #{orderDetailsPO.bookId}, #{orderDetailsPO.bookName},
+        #{orderDetailsPO.bookLevelId}, #{orderDetailsPO.quantity}, #{orderDetailsPO.price},
+        #{orderDetailsPO.bookPicUrl}, #{orderDetailsPO.deleted}, #{orderDetailsPO.cdate},
+        #{orderDetailsPO.creator}, #{orderDetailsPO.edate}, #{orderDetailsPO.editor})
+    </insert>
+
 </mapper>

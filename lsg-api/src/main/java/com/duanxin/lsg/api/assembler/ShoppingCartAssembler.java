@@ -16,14 +16,13 @@ public class ShoppingCartAssembler {
     public static UserShoppingCartDO toDO(ShoppingCartDto dto) {
         UserShoppingCartDO shoppingCartDO = new UserShoppingCartDO();
         shoppingCartDO.setUserId(dto.getUserId());
-        BookInfo bookInfo = new BookInfo();
-        bookInfo.setBookId(dto.getUserId());
-        bookInfo.setBookName(dto.getBookName());
-        bookInfo.setBookLevelName(dto.getBookLevelName());
-        bookInfo.setBookPicUrl(dto.getBookPicUrl());
-        bookInfo.setPrice(dto.getPrice());
-        bookInfo.setQuantity(dto.getQuantity());
-        shoppingCartDO.setBookInfo(bookInfo);
+        shoppingCartDO.setBookInfo(BookInfo.builder().
+                bookId(dto.getBookId()).
+                bookName(dto.getBookName()).
+                bookLevelName(dto.getBookLevelName()).
+                bookPicUrl(dto.getBookPicUrl()).
+                price(dto.getPrice()).
+                quantity(dto.getQuantity()).build());
         shoppingCartDO.setDeleted(Deleted.NOT_DELETE);
         return shoppingCartDO;
     }

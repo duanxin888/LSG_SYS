@@ -13,7 +13,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum VersionEnum {
 
-    ACCOUNT_SN_VERSION("01");
+    ACCOUNT_SN_VERSION("01"),
+    ORDER_SN_VERSION("02");
 
     private final String versionId;
 }

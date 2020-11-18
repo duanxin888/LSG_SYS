@@ -4,7 +4,6 @@ import com.duanxin.lsg.domain.shoppingcart.entity.BookInfo;
 import com.duanxin.lsg.domain.shoppingcart.entity.UserShoppingCartDO;
 import com.duanxin.lsg.infrastructure.common.enums.Deleted;
 import com.duanxin.lsg.infrastructure.repository.po.UserShoppingCartPO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,14 +19,13 @@ public class ShoppingCartFactory {
         UserShoppingCartDO cartDO = new UserShoppingCartDO();
         cartDO.setId(po.getId());
         cartDO.setUserId(po.getUserId());
-        BookInfo info = new BookInfo();
-        info.setBookId(po.getBookId());
-        info.setBookName(po.getBookName());
-        info.setBookPicUrl(po.getBookPicUrl());
-        info.setBookLevelName(po.getBookLevelName());
-        info.setPrice(po.getPrice());
-        info.setQuantity(po.getQuantity());
-        cartDO.setBookInfo(info);
+        cartDO.setBookInfo(BookInfo.builder().
+                bookId(po.getBookId()).
+                bookName(po.getBookName()).
+                bookPicUrl(po.getBookPicUrl()).
+                bookLevelName(po.getBookLevelName()).
+                price(po.getPrice()).
+                quantity(po.getQuantity()).build());
         cartDO.setDeleted(Deleted.format(po.getDeleted()));
         cartDO.setCdate(po.getCdate());
         cartDO.setCreator(po.getCreator());

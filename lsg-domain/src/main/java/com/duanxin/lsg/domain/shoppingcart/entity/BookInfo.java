@@ -1,8 +1,6 @@
 package com.duanxin.lsg.domain.shoppingcart.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -15,6 +13,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = {"bookPicUrl", "quantity", "price"})
+@Builder
 public class BookInfo {
 
     private int bookId;
