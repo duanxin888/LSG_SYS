@@ -3,6 +3,7 @@ package com.duanxin.lsg.api.facade;
 import com.duanxin.lsg.api.assembler.OrderAssembler;
 import com.duanxin.lsg.api.dto.OrderDto;
 import com.duanxin.lsg.application.service.OrderApplicationService;
+import com.duanxin.lsg.domain.order.entity.OrderDO;
 import com.duanxin.lsg.infrastructure.common.api.ResponseResult;
 import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
 import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
@@ -32,8 +33,9 @@ public class OrderApi {
     @PostMapping
     public ResponseResult addOrder(@RequestBody OrderDto orderDto) {
         checkDto(orderDto);
-        orderApplicationService.addOrder(OrderAssembler.toDO(orderDto));
-        return ResponseResult.success();
+        OrderDO orderDO = OrderAssembler.toDO(orderDto);
+        orderApplicationService.addOrder(orderDO);
+        return ResponseResult.success(OrderAssembler.toDto(orderDO));
     }
 
     private void checkDto(OrderDto dto) {

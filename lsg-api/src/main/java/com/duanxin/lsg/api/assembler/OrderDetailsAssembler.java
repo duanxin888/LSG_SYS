@@ -25,4 +25,17 @@ public class OrderDetailsAssembler {
         orderDetails.setPrice(dto.getPrice());
         return orderDetails;
     }
+
+    public static OrderDetailsDto toDto(OrderDetailsDO orderDetailsDO) {
+        OrderDetailsDto dto = new OrderDetailsDto();
+        dto.setId(orderDetailsDO.getId());
+        dto.setOrderId(orderDetailsDO.getOrderId());
+        dto.setBookId(orderDetailsDO.getBookId());
+        dto.setBookName(orderDetailsDO.getBookName());
+        dto.setBookPicUrl(orderDetailsDO.getBookPicUrl());
+        dto.setBookLevelName(BookLevel.getById(orderDetailsDO.getBookLevelId()).getLevelName());
+        dto.setQuantity(orderDetailsDO.getQuantity());
+        dto.setPrice(orderDetailsDO.getPrice());
+        return dto;
+    }
 }

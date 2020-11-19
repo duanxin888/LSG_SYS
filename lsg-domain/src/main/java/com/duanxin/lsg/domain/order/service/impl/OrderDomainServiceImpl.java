@@ -7,6 +7,7 @@ import com.duanxin.lsg.domain.order.repository.facade.UserOrderRepositoryInterfa
 import com.duanxin.lsg.domain.order.service.OrderDomainService;
 import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
 import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
+import com.duanxin.lsg.infrastructure.repository.po.OrderDetailsPO;
 import com.duanxin.lsg.infrastructure.repository.po.UserOrderPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,12 +40,14 @@ public class OrderDomainServiceImpl implements OrderDomainService {
         toDO.create();
         // insert order
         UserOrderPO po = userOrderRepository.insert(orderFactory.createUserOrderPO(toDO));
+        toDO.setId(po.getId());
         // insert order details
         toDO.getOrderDetailsDOS().forEach(orderDetails -> addOrderDetails(orderDetails, po.getId()));
     }
 
     private void addOrderDetails(OrderDetailsDO orderDetails, int orderId) {
         orderDetails.create(orderId);
-        orderDetailsRepository.insert(orderFactory.createOrderDetailsPO(orderDetails));
+        OrderDetailsPO po = orderDetailsRepository.insert(orderFactory.createOrderDetailsPO(orderDetails));
+        orderDetails.setId(po.getId());
     }
 }

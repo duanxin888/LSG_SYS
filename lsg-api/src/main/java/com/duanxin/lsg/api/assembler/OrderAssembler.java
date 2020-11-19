@@ -51,4 +51,36 @@ public class OrderAssembler {
                 collect(Collectors.toList()));
         return orderDO;
     }
+
+    public static OrderDto toDto(OrderDO orderDO) {
+        OrderDto dto = new OrderDto();
+        UserInfo userInfo = orderDO.getUserInfo();
+        dto.setUserId(userInfo.getUserId());
+        dto.setId(orderDO.getId());
+        dto.setPhone(userInfo.getPhone());
+        dto.setAddress(userInfo.getAddress());
+        dto.setConsignee(userInfo.getConsignee());
+        dto.setMessage(userInfo.getMessage());
+        dto.setConfirmTime(userInfo.getConfirmTime());
+        dto.setRefundTime(userInfo.getRefundTime());
+        dto.setOrderSn(orderDO.getOrderSn());
+        dto.setTotalPrice(orderDO.getTotalPrice());
+        dto.setTotalQuantity(orderDO.getTotalQuantity());
+        dto.setOrderStatusName(orderDO.getOrderStatus().getName());
+
+        ShipInfo shipInfo = orderDO.getShipInfo();
+        dto.setFreightPrice(shipInfo.getFreightPrice());
+        dto.setShipSn(shipInfo.getShipSn());
+        dto.setShipChannel(shipInfo.getShipChannel());
+        dto.setShipTime(shipInfo.getShipTime());
+
+        PayInfo payInfo = orderDO.getPayInfo();
+        dto.setPaySn(payInfo.getPaySn());
+        dto.setPayType(payInfo.getPayType());
+        dto.setPayTime(payInfo.getPayTime());
+        dto.setOrderCloseTime(orderDO.getOrderCloseTime());
+        dto.setOrderDetailsDtos(orderDO.getOrderDetailsDOS().stream().
+                map(OrderDetailsAssembler::toDto).collect(Collectors.toList()));
+        return dto;
+    }
 }
