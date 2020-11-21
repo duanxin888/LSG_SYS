@@ -519,7 +519,7 @@ response:
 }
 ```   
 #### 获取用户订单列表  
-api: /lsg/api/v1/orders/{userId}  
+api: /lsg/api/v1/orders/users/{userId}  
 method: get  
 request: 5 (userId)  
 response:  
