@@ -16,7 +16,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>lsg-api</module>
-        <module>lsg-job</module>
         <module>lsg-application</module>
         <module>lsg-domain</module>
         <module>lsg-infrastructure</module>

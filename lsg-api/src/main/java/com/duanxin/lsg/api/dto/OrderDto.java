@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 public class OrderDto {
 
-    private int id;
+    private Integer id;
 
     private Integer userId;
 
@@ -25,7 +25,7 @@ public class OrderDto {
 
     private BigDecimal totalPrice;
 
-    private int totalQuantity;
+    private Integer totalQuantity;
 
     private String orderStatusName;
 

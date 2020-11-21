@@ -22,6 +22,12 @@
         values(#{userAccount.accountSn}, #{userAccount.balance}, #{userAccount.deleted}, #{userAccount.cdate},
         #{userAccount.creator}, #{userAccount.edate}, #{userAccount.editor})
     </insert>
+    <update id="updateForDeduction">
+        update T_USER_ACCOUNT
+        set BALANCE = #{userAccountPO.balance},
+        EDATE = #{userAccountPO.edate}, EDITOR = #{userAccountPO.editor}
+        where ID = #{userAccountPO.id};
+    </update>
     <select id="selectUserAccountById" resultMap="UserAccountMap">
         select
         <include refid="userAccount"/>

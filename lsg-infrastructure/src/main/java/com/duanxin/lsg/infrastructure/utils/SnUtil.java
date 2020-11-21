@@ -19,6 +19,20 @@ public class SnUtil {
 
     }
 
+    public static String generatePaySn(int userId) {
+        LocalDateTime now = LocalDateTime.now();
+        NumberFormat format = NumberFormat.getInstance();
+        return new StringBuilder(numberFormat(format, 11, userId)).
+                append(numberFormat(format, 4, now.getYear())).
+                append(numberFormat(format, 2, now.getMonthValue())).
+                append(numberFormat(format, 2, now.getDayOfMonth())).
+                append(numberFormat(format, 2, now.getHour())).
+                append(numberFormat(format, 2, now.getMinute())).
+                append(numberFormat(format, 2, now.getSecond())).
+                append(VersionEnum.PAY_SN_VERSION.getVersionId()).
+                toString();
+    }
+
     /**
      * order sn: 用户id(11位) + 年月日时分秒(16位) + 订单编号(2位)
      * */

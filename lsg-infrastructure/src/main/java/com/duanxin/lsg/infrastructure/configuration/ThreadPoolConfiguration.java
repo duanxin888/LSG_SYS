@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -18,15 +19,4 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class ThreadPoolConfiguration {
 
-    @Bean("eventTaskThreadPoolConfig")
-    @ConfigurationProperties(prefix = "event.task")
-    public ThreadPoolConfig eventTaskThreadPoolConfig() {
-        return new ThreadPoolConfig();
-    }
-
-    @Bean("eventTaskThreadPool")
-    public ThreadPoolExecutor eventTaskThreadPool(@Qualifier("eventTaskThreadPoolConfig")
-                                                              ThreadPoolConfig config) {
-        return ThreadPoolUtils.threadPoolExecutor(config);
-    }
 }

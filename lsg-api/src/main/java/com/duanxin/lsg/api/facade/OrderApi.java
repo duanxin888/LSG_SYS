@@ -10,10 +10,7 @@ import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -32,13 +29,32 @@ public class OrderApi {
 
     @PostMapping
     public ResponseResult addOrder(@RequestBody OrderDto orderDto) {
-        checkDto(orderDto);
+        checkForAdd(orderDto);
         OrderDO orderDO = OrderAssembler.toDO(orderDto);
         orderApplicationService.addOrder(orderDO);
         return ResponseResult.success(OrderAssembler.toDto(orderDO));
     }
 
-    private void checkDto(OrderDto dto) {
+    @PutMapping("/pay")
+    public ResponseResult payOrder(@RequestBody OrderDto orderDto) {
+        checkForPay(orderDto);
+        orderApplicationService.payOrder(OrderAssembler.toDO(orderDto));
+        return ResponseResult.success();
+    }
+
+    private void checkForPay(OrderDto dto) {
+        if (Objects.isNull(dto.getUserId())) {
+            throw new LSGCheckException(ResultEnum.ORDER_USER_ID_IS_NULL);
+        }
+        if (StringUtils.isBlank(dto.getOrderSn())) {
+            throw new LSGCheckException(ResultEnum.ORDER_SN_IS_BLANK);
+        }
+        if (StringUtils.isBlank(dto.getOrderStatusName())) {
+            throw new LSGCheckException(ResultEnum.ORDER_STATUS_NAME_IS_BLANK);
+        }
+    }
+
+    private void checkForAdd(OrderDto dto) {
         if (Objects.isNull(dto.getUserId())) {
             throw new LSGCheckException(ResultEnum.ORDER_USER_ID_IS_NULL);
         }

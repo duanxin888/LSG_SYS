@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.stream.Collectors;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -43,6 +45,20 @@ public class OrderDomainServiceImpl implements OrderDomainService {
         toDO.setId(po.getId());
         // insert order details
         toDO.getOrderDetailsDOS().forEach(orderDetails -> addOrderDetails(orderDetails, po.getId()));
+    }
+
+    @Override
+    public void payOrder(OrderDO toDO) {
+        toDO.pay();
+        userOrderRepository.updateForPay(orderFactory.createUserOrderPO(toDO));
+    }
+
+    @Override
+    public OrderDO selectByOrderSn(String orderSn) {
+        OrderDO userOrderDO = orderFactory.createUserOrderDO(userOrderRepository.selectByOrderSn(orderSn));
+        userOrderDO.addDetails(orderDetailsRepository.selectByOrderId(userOrderDO.getId()).
+                stream().map(orderFactory::createOrderDetailsDO).collect(Collectors.toList()));
+        return userOrderDO;
     }
 
     private void addOrderDetails(OrderDetailsDO orderDetails, int orderId) {

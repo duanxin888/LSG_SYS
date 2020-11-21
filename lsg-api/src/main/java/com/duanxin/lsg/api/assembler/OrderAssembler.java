@@ -8,6 +8,9 @@ import com.duanxin.lsg.domain.order.entity.valueobject.ShipInfo;
 import com.duanxin.lsg.domain.order.entity.valueobject.UserInfo;
 import com.duanxin.lsg.infrastructure.common.enums.Deleted;
 
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -21,7 +24,7 @@ public class OrderAssembler {
 
     public static OrderDO toDO(OrderDto dto) {
         OrderDO orderDO = new OrderDO();
-        orderDO.setId(dto.getId());
+        orderDO.setId(Optional.ofNullable(dto.getId()).orElse(0));
         orderDO.setUserInfo(UserInfo.builder().
                 userId(dto.getUserId()).
                 address(dto.getAddress()).
@@ -32,10 +35,8 @@ public class OrderAssembler {
                 confirmTime(dto.getConfirmTime()).build());
         orderDO.setOrderSn(dto.getOrderSn());
         orderDO.setTotalPrice(dto.getTotalPrice());
-        orderDO.setTotalQuantity(dto.getTotalQuantity());
-        if (dto.getId() != 0) {
-            orderDO.setOrderStatus(OrderStatus.formatByName(dto.getOrderStatusName()));
-        }
+        orderDO.setTotalQuantity(Optional.ofNullable(dto.getTotalQuantity()).orElse(0));
+        orderDO.setOrderStatus(OrderStatus.formatByName(dto.getOrderStatusName()));
         orderDO.setShipInfo(ShipInfo.builder().
                 shipSn(dto.getShipSn()).
                 shipChannel(dto.getShipChannel()).
@@ -46,9 +47,10 @@ public class OrderAssembler {
                 payType(dto.getPayType()).
                 payTime(dto.getPayTime()).build());
         orderDO.setOrderCloseTime(dto.getOrderCloseTime());
-        orderDO.setOrderDetailsDOS(dto.getOrderDetailsDtos().
+        orderDO.setOrderDetailsDOS(Optional.ofNullable(dto.getOrderDetailsDtos()).orElse(Collections.emptyList()).
                 stream().map(OrderDetailsAssembler::toDO).
                 collect(Collectors.toList()));
+        orderDO.setDeleted(Deleted.NOT_DELETE);
         return orderDO;
     }
 
@@ -69,10 +71,10 @@ public class OrderAssembler {
         dto.setOrderStatusName(orderDO.getOrderStatus().getName());
 
         ShipInfo shipInfo = orderDO.getShipInfo();
-        dto.setFreightPrice(shipInfo.getFreightPrice());
         dto.setShipSn(shipInfo.getShipSn());
-        dto.setShipChannel(shipInfo.getShipChannel());
+        dto.setFreightPrice(shipInfo.getFreightPrice());
         dto.setShipTime(shipInfo.getShipTime());
+        dto.setShipChannel(shipInfo.getShipChannel());
 
         PayInfo payInfo = orderDO.getPayInfo();
         dto.setPaySn(payInfo.getPaySn());

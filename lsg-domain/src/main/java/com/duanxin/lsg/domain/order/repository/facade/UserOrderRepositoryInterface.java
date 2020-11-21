@@ -10,4 +10,8 @@ import com.duanxin.lsg.infrastructure.repository.po.UserOrderPO;
  */
 public interface UserOrderRepositoryInterface {
     UserOrderPO insert(UserOrderPO userOrderPO);
+
+    UserOrderPO updateForPay(UserOrderPO userOrderPO);
+
+    UserOrderPO selectByOrderSn(String orderSn);
 }

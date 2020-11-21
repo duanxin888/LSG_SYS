@@ -53,4 +53,18 @@
           #{userOrderPO.creator}, #{userOrderPO.edate}, #{userOrderPO.editor})
     </insert>
 
+    <update id="updateForPay" parameterType="com.duanxin.lsg.infrastructure.repository.po.UserOrderPO">
+        update T_USER_ORDER
+        set PAY_SN = #{userOrderPO.paySn}, PAY_TYPE = #{userOrderPO.payType},
+        PAY_TIME = #{userOrderPO.payTime}, EDATE = #{userOrderPO.edate},
+        EDITOR = #{userOrderPO.editor}
+        where ORDER_SN = #{userOrderPO.orderSn};
+    </update>
+
+    <select id="selectByOrderSn" resultMap="orderMap">
+        select <include refid="order"/>
+        from T_USER_ORDER
+        where ORDER_SN = #{orderSn} and DELETED = 0;
+    </select>
+
 </mapper>

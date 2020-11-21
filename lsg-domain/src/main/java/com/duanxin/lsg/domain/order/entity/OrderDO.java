@@ -1,14 +1,13 @@
 package com.duanxin.lsg.domain.order.entity;
 
-import com.duanxin.lsg.domain.order.entity.valueobject.OrderStatus;
-import com.duanxin.lsg.domain.order.entity.valueobject.PayInfo;
-import com.duanxin.lsg.domain.order.entity.valueobject.ShipInfo;
-import com.duanxin.lsg.domain.order.entity.valueobject.UserInfo;
+import com.duanxin.lsg.domain.order.entity.valueobject.*;
 import com.duanxin.lsg.infrastructure.common.enums.ConstantEnum;
 import com.duanxin.lsg.infrastructure.common.enums.Deleted;
+import com.duanxin.lsg.infrastructure.utils.HttpUtil;
 import com.duanxin.lsg.infrastructure.utils.SnUtil;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -70,5 +69,21 @@ public class OrderDO {
                 orderDetails.getPrice().multiply(BigDecimal.valueOf(orderDetails.getQuantity()))).
                 reduce(BigDecimal.ZERO, BigDecimal::add).setScale(2);
         return addPrice.equals(this.getTotalPrice());
+    }
+
+    public OrderDO pay() {
+        PayInfo payInfo = PayInfo.builder().
+                paySn(SnUtil.generatePaySn(this.getUserInfo().getUserId())).
+                payType(PayType.BOOK_CURRENCY_PAY.name()).
+                payTime(LocalDateTime.now()).build();
+        this.setPayInfo(payInfo);
+        this.setOrderStatus(OrderStatus.PAY_SUCCESS);
+        this.setEdate(LocalDateTime.now());
+        this.setEditor(HttpUtil.request().getRemoteHost());
+        return this;
+    }
+
+    public void addDetails(List<OrderDetailsDO> orderDetailsDOS) {
+        this.setOrderDetailsDOS(orderDetailsDOS);
     }
 }

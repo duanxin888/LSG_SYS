@@ -31,6 +31,15 @@ public enum OrderStatus {
                 return status;
             }
         }
-        throw new LSGCheckException(ResultEnum.ORDER_STATUS_NAME_NOT_EXIST);
+        return SUBMIT_SUCCESS;
+    }
+
+    public static OrderStatus formatById(int id) {
+        for (OrderStatus status : values()) {
+            if (status.id == id) {
+                return status;
+            }
+        }
+        return SUBMIT_SUCCESS;
     }
 }

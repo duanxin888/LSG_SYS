@@ -32,5 +32,10 @@
         #{orderDetailsPO.bookPicUrl}, #{orderDetailsPO.deleted}, #{orderDetailsPO.cdate},
         #{orderDetailsPO.creator}, #{orderDetailsPO.edate}, #{orderDetailsPO.editor})
     </insert>
+    <select id="selectByOrderId" resultMap="orderDetailsMap">
+        select <include refid="orderDetails"/>
+        from T_ORDER_DETAILS
+        where ORDER_ID = #{orderId} and DELETED = 0;
+    </select>
 
 </mapper>

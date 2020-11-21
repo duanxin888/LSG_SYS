@@ -6,9 +6,12 @@ import com.duanxin.lsg.domain.user.repository.facade.UserAccountRepositoryInterf
 import com.duanxin.lsg.domain.user.repository.facade.UserRepositoryInterface;
 import com.duanxin.lsg.domain.user.service.UserDomainService;
 import com.duanxin.lsg.infrastructure.repository.po.UserAccountPO;
+import com.duanxin.lsg.infrastructure.repository.po.UserOrderPO;
 import com.duanxin.lsg.infrastructure.repository.po.UserPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 /**
  * @author duanxin
@@ -58,5 +61,12 @@ public class UserDomainServiceImpl implements UserDomainService {
     @Override
     public UserAccountDO getUserAccount(int userId) {
         return userFactory.createUserAccountDO(userAccountRepository.selectByUserId(userId));
+    }
+
+    @Override
+    public void deduction(int userId, BigDecimal totalPrice) {
+        UserAccountDO accountDO = userFactory.createUserAccountDO(userAccountRepository.selectByUserId(userId));
+        accountDO.deduction(totalPrice);
+        userAccountRepository.updateForDeduction(userFactory.createUserAccountPO(accountDO));
     }
 }

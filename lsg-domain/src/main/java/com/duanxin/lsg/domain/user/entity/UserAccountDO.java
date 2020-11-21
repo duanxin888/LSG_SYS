@@ -4,6 +4,7 @@ import com.duanxin.lsg.infrastructure.common.enums.ConstantEnum;
 import com.duanxin.lsg.infrastructure.common.enums.Deleted;
 import com.duanxin.lsg.infrastructure.common.enums.SerialNumberEnum;
 import com.duanxin.lsg.infrastructure.common.enums.VersionEnum;
+import com.duanxin.lsg.infrastructure.utils.HttpUtil;
 import com.duanxin.lsg.infrastructure.utils.SnUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,5 +49,10 @@ public class UserAccountDO {
         return this;
     }
 
-
+    public UserAccountDO deduction(BigDecimal totalPrice) {
+        this.setBalance(this.getBalance().subtract(totalPrice));
+        this.setEdate(LocalDateTime.now());
+        this.setEditor(HttpUtil.request().getRemoteHost());
+        return this;
+    }
 }

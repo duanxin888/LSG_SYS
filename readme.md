@@ -483,9 +483,9 @@ response:
 }
 ```  
 #### 查询用户账户信息  
-api: /lsg/api/v1/users/accounts/{userId}
-method: get    
-request: 5 (userId)  
+api: /lsg/api/v1/users/accounts/{userId}  
+method: get     
+request: 5 (userId)   
 response:  
 ```json
 {
@@ -496,6 +496,25 @@ response:
         "accountSn": "012020101221385401",
         "balance": 0.00
     },
+    "msg": "operator success!"
+}
+```  
+#### 用户付款  
+api: /lsg/api/v1/orders/pay  
+method: put  
+request:  
+```json
+{
+    "userId":5,
+    "orderSn":"000000000052020111816335902",
+    "orderStatusName":"提交成功"
+}
+```   
+response:  
+```json
+{
+    "code": 200,
+    "data": null,
     "msg": "operator success!"
 }
 ```

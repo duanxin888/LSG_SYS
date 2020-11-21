@@ -38,6 +38,17 @@ public class OrderApplicationService {
         checkAndDeleteUserCarts(toDO);
     }
 
+    @Transactional
+    public void payOrder(OrderDO toDO) {
+        // check
+        checkUserExist(toDO.getUserInfo().getUserId());
+        toDO = orderDomainService.selectByOrderSn(toDO.getOrderSn());
+        // update order status
+        orderDomainService.payOrder(toDO);
+        // deduction
+        userDomainService.deduction(toDO.getUserInfo().getUserId(), toDO.getTotalPrice());
+    }
+
     private void checkUserExist(int userId) {
         userDomainService.getUserById(userId);
     }

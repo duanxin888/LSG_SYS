@@ -10,4 +10,8 @@ import com.duanxin.lsg.domain.order.entity.OrderDO;
  */
 public interface OrderDomainService {
     void addOrder(OrderDO toDO);
+
+    void payOrder(OrderDO toDO);
+
+    OrderDO selectByOrderSn(String orderSn);
 }

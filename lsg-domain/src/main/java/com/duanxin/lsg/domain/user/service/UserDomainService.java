@@ -3,6 +3,8 @@ package com.duanxin.lsg.domain.user.service;
 import com.duanxin.lsg.domain.user.entity.UserAccountDO;
 import com.duanxin.lsg.domain.user.entity.UserDO;
 
+import java.math.BigDecimal;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -20,4 +22,6 @@ public interface UserDomainService {
     UserDO getUserById(int userId);
 
     UserAccountDO getUserAccount(int userId);
+
+    void deduction(int userId, BigDecimal totalPrice);
 }

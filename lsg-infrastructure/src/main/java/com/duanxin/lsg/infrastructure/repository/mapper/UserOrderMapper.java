@@ -11,4 +11,8 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserOrderMapper {
     void insert(@Param("userOrderPO") UserOrderPO userOrderPO);
+
+    void updateForPay(@Param("userOrderPO") UserOrderPO userOrderPO);
+
+    UserOrderPO selectByOrderSn(@Param("orderSn") String orderSn);
 }

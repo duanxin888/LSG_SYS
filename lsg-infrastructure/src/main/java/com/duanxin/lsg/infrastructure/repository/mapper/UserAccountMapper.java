@@ -15,4 +15,6 @@ public interface UserAccountMapper {
     UserAccountPO selectUserAccountById(@Param("id") Integer userAccountId);
 
     UserAccountPO selectByUserId(@Param("userId") int userId);
+
+    void updateForDeduction(@Param("userAccountPO") UserAccountPO userAccountPO);
 }

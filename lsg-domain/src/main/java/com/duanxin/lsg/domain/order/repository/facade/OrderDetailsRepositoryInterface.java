@@ -2,6 +2,8 @@ package com.duanxin.lsg.domain.order.repository.facade;
 
 import com.duanxin.lsg.infrastructure.repository.po.OrderDetailsPO;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -10,4 +12,6 @@ import com.duanxin.lsg.infrastructure.repository.po.OrderDetailsPO;
  */
 public interface OrderDetailsRepositoryInterface {
     OrderDetailsPO insert(OrderDetailsPO orderDetailsPO);
+
+    List<OrderDetailsPO> selectByOrderId(int id);
 }

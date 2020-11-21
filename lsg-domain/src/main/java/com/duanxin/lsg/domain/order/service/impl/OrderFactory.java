@@ -2,12 +2,15 @@ package com.duanxin.lsg.domain.order.service.impl;
 
 import com.duanxin.lsg.domain.order.entity.OrderDO;
 import com.duanxin.lsg.domain.order.entity.OrderDetailsDO;
+import com.duanxin.lsg.domain.order.entity.valueobject.OrderStatus;
 import com.duanxin.lsg.domain.order.entity.valueobject.PayInfo;
 import com.duanxin.lsg.domain.order.entity.valueobject.ShipInfo;
 import com.duanxin.lsg.domain.order.entity.valueobject.UserInfo;
+import com.duanxin.lsg.infrastructure.common.enums.Deleted;
 import com.duanxin.lsg.infrastructure.repository.po.OrderDetailsPO;
 import com.duanxin.lsg.infrastructure.repository.po.UserOrderPO;
 import org.aspectj.weaver.ast.Or;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,19 +24,8 @@ public class OrderFactory {
 
     public OrderDetailsPO createOrderDetailsPO(OrderDetailsDO orderDetails) {
         OrderDetailsPO po = new OrderDetailsPO();
-        po.setOrderId(orderDetails.getOrderId());
-        po.setId(orderDetails.getId());
-        po.setBookId(orderDetails.getBookId());
-        po.setBookName(orderDetails.getBookName());
-        po.setBookPicUrl(orderDetails.getBookPicUrl());
-        po.setBookLevelId(orderDetails.getBookLevelId());
-        po.setQuantity(orderDetails.getQuantity());
-        po.setPrice(orderDetails.getPrice());
+        BeanUtils.copyProperties(orderDetails, po);
         po.setDeleted(orderDetails.getDeleted().getCode());
-        po.setCdate(orderDetails.getCdate());
-        po.setCreator(orderDetails.getCreator());
-        po.setEdate(orderDetails.getEdate());
-        po.setEditor(orderDetails.getEditor());
         return po;
     }
 
@@ -71,5 +63,31 @@ public class OrderFactory {
         po.setEdate(orderDO.getEdate());
         po.setEditor(orderDO.getEditor());
         return po;
+    }
+
+    public OrderDO createUserOrderDO(UserOrderPO po) {
+        OrderDO orderDO = new OrderDO();
+        BeanUtils.copyProperties(po, orderDO);
+        UserInfo userInfo = UserInfo.builder().build();
+        BeanUtils.copyProperties(po, userInfo);
+        orderDO.setUserInfo(userInfo);
+        orderDO.setOrderStatus(OrderStatus.formatById(po.getOrderStatusId()));
+
+        ShipInfo shipInfo = ShipInfo.builder().build();
+        BeanUtils.copyProperties(po, shipInfo);
+        orderDO.setShipInfo(shipInfo);
+
+        PayInfo payInfo = PayInfo.builder().build();
+        BeanUtils.copyProperties(po, payInfo);
+        orderDO.setPayInfo(payInfo);
+        orderDO.setDeleted(Deleted.format(po.getDeleted()));
+        return orderDO;
+    }
+
+    public OrderDetailsDO createOrderDetailsDO(OrderDetailsPO orderDetailsPO) {
+        OrderDetailsDO orderDetailsDO = new OrderDetailsDO();
+        BeanUtils.copyProperties(orderDetailsPO, orderDetailsDO);
+        orderDetailsDO.setDeleted(Deleted.format(orderDetailsPO.getDeleted()));
+        return orderDetailsDO;
     }
 }

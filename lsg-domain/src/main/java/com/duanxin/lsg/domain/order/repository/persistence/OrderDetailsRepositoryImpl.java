@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -26,5 +28,10 @@ public class OrderDetailsRepositoryImpl implements OrderDetailsRepositoryInterfa
         orderDetailsMapper.insert(orderDetailsPO);
         log.info("success to insert orderDetails [{}]", JsonUtil.toString(orderDetailsPO));
         return orderDetailsPO;
+    }
+
+    @Override
+    public List<OrderDetailsPO> selectByOrderId(int id) {
+        return orderDetailsMapper.selectByOrderId(id);
     }
 }
