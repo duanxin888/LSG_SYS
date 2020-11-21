@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -78,5 +80,9 @@ public class OrderApplicationService {
             // down stock
             bookDomainService.downStock(bookStockDO);
         });
+    }
+
+    public List<OrderDO> getOrders(int userId) {
+        return orderDomainService.getOrders(userId);
     }
 }

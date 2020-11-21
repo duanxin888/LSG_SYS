@@ -66,5 +66,10 @@
         from T_USER_ORDER
         where ORDER_SN = #{orderSn} and DELETED = 0;
     </select>
+    <select id="selectByUserId" resultMap="orderMap">
+        select <include refid="order"/>
+        from T_USER_ORDER
+        where USER_ID = #{userId} and DELETED = 0;
+    </select>
 
 </mapper>

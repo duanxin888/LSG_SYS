@@ -2,6 +2,8 @@ package com.duanxin.lsg.domain.order.service;
 
 import com.duanxin.lsg.domain.order.entity.OrderDO;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -14,4 +16,6 @@ public interface OrderDomainService {
     void payOrder(OrderDO toDO);
 
     OrderDO selectByOrderSn(String orderSn);
+
+    List<OrderDO> getOrders(int userId);
 }

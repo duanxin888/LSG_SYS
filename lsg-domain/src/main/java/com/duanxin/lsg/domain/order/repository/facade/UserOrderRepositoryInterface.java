@@ -2,6 +2,8 @@ package com.duanxin.lsg.domain.order.repository.facade;
 
 import com.duanxin.lsg.infrastructure.repository.po.UserOrderPO;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -14,4 +16,6 @@ public interface UserOrderRepositoryInterface {
     UserOrderPO updateForPay(UserOrderPO userOrderPO);
 
     UserOrderPO selectByOrderSn(String orderSn);
+
+    List<UserOrderPO> selectByUserId(int userId);
 }

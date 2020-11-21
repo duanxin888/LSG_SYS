@@ -13,6 +13,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author duanxin
@@ -40,6 +41,12 @@ public class OrderApi {
         checkForPay(orderDto);
         orderApplicationService.payOrder(OrderAssembler.toDO(orderDto));
         return ResponseResult.success();
+    }
+
+    @GetMapping("/users/{userId}")
+    public ResponseResult getOrders(@PathVariable("userId") int userId) {
+        return ResponseResult.success(orderApplicationService.getOrders(userId).
+                stream().map(OrderAssembler::toDto).collect(Collectors.toList()));
     }
 
     private void checkForPay(OrderDto dto) {

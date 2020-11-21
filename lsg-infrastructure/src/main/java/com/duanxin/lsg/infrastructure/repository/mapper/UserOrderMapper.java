@@ -2,6 +2,9 @@ package com.duanxin.lsg.infrastructure.repository.mapper;
 
 import com.duanxin.lsg.infrastructure.repository.po.UserOrderPO;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 /**
  * @author duanxin
@@ -15,4 +18,6 @@ public interface UserOrderMapper {
     void updateForPay(@Param("userOrderPO") UserOrderPO userOrderPO);
 
     UserOrderPO selectByOrderSn(@Param("orderSn") String orderSn);
+
+    List<UserOrderPO> selectByUserId(@Param("userId") int userId);
 }

@@ -517,4 +517,144 @@ response:
     "data": null,
     "msg": "operator success!"
 }
+```   
+#### 获取用户订单列表  
+api: /lsg/api/v1/orders/{userId}  
+method: get  
+request: 5 (userId)  
+response:  
+```json
+{
+    "code": 200,
+    "data": [
+        {
+            "id": 2,
+            "userId": 5,
+            "orderSn": "000000000052020111810001502",
+            "totalPrice": 177.00,
+            "totalQuantity": 4,
+            "orderStatusName": "提交成功",
+            "consignee": "Chris2",
+            "phone": "13323234443",
+            "address": "天津市 天津市 和平区 滨江道333楼22室",
+            "orderDetailsDtos": [
+                {
+                    "id": 1,
+                    "orderId": 2,
+                    "bookId": 1,
+                    "bookName": "东野圭吾·沉默的巡游",
+                    "bookPicUrl": "//img13.360buyimg.com/n1/jfs/t1/102681/37/15355/229270/5e708291E88e39fdd/c00b26e445e830dc.jpg",
+                    "bookLevelName": "全新",
+                    "quantity": 2,
+                    "price": 53.10
+                },
+                {
+                    "id": 2,
+                    "orderId": 2,
+                    "bookId": 1,
+                    "bookName": "东野圭吾·沉默的巡游",
+                    "bookPicUrl": "//img13.360buyimg.com/n1/jfs/t1/102681/37/15355/229270/5e708291E88e39fdd/c00b26e445e830dc.jpg",
+                    "bookLevelName": "优良",
+                    "quantity": 2,
+                    "price": 35.40
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "userId": 5,
+            "orderSn": "000000000052020111810123802",
+            "totalPrice": 177.00,
+            "totalQuantity": 0,
+            "orderStatusName": "提交成功",
+            "consignee": "Chris2",
+            "phone": "13323234443",
+            "address": "天津市 天津市 和平区 滨江道333楼22室",
+            "orderDetailsDtos": [
+                {
+                    "id": 3,
+                    "orderId": 3,
+                    "bookId": 1,
+                    "bookName": "东野圭吾·沉默的巡游",
+                    "bookPicUrl": "//img13.360buyimg.com/n1/jfs/t1/102681/37/15355/229270/5e708291E88e39fdd/c00b26e445e830dc.jpg",
+                    "bookLevelName": "全新",
+                    "quantity": 2,
+                    "price": 53.10
+                },
+                {
+                    "id": 4,
+                    "orderId": 3,
+                    "bookId": 1,
+                    "bookName": "东野圭吾·沉默的巡游",
+                    "bookPicUrl": "//img13.360buyimg.com/n1/jfs/t1/102681/37/15355/229270/5e708291E88e39fdd/c00b26e445e830dc.jpg",
+                    "bookLevelName": "优良",
+                    "quantity": 2,
+                    "price": 35.40
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "userId": 5,
+            "orderSn": "000000000052020111810141302",
+            "totalPrice": 177.00,
+            "totalQuantity": 4,
+            "orderStatusName": "提交成功",
+            "consignee": "Chris2",
+            "phone": "13323234443",
+            "address": "天津市 天津市 和平区 滨江道333楼22室",
+            "orderDetailsDtos": [
+                {
+                    "id": 5,
+                    "orderId": 4,
+                    "bookId": 1,
+                    "bookName": "东野圭吾·沉默的巡游",
+                    "bookPicUrl": "//img13.360buyimg.com/n1/jfs/t1/102681/37/15355/229270/5e708291E88e39fdd/c00b26e445e830dc.jpg",
+                    "bookLevelName": "全新",
+                    "quantity": 2,
+                    "price": 53.10
+                },
+                {
+                    "id": 6,
+                    "orderId": 4,
+                    "bookId": 1,
+                    "bookName": "东野圭吾·沉默的巡游",
+                    "bookPicUrl": "//img13.360buyimg.com/n1/jfs/t1/102681/37/15355/229270/5e708291E88e39fdd/c00b26e445e830dc.jpg",
+                    "bookLevelName": "优良",
+                    "quantity": 2,
+                    "price": 35.40
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "userId": 5,
+            "orderSn": "000000000052020111816335902",
+            "totalPrice": 23.60,
+            "totalQuantity": 2,
+            "orderStatusName": "支付成功",
+            "consignee": "Chris2",
+            "phone": "13323234443",
+            "address": "天津市 天津市 和平区 滨江道333楼22室",
+            "message": null,
+            "freightPrice": null,
+            "paySn": "000000000052020112110305803",
+            "payType": "BOOK_CURRENCY_PAY",
+            "payTime": "2020-11-21T10:30:58",
+            "orderDetailsDtos": [
+                {
+                    "id": 10,
+                    "orderId": 7,
+                    "bookId": 1,
+                    "bookName": "东野圭吾·沉默的巡游",
+                    "bookPicUrl": "//img13.360buyimg.com/n1/jfs/t1/102681/37/15355/229270/5e708291E88e39fdd/c00b26e445e830dc.jpg",
+                    "bookLevelName": "普通",
+                    "quantity": 2,
+                    "price": 11.80
+                }
+            ]
+        }
+    ],
+    "msg": "operator success!"
+}
 ```
