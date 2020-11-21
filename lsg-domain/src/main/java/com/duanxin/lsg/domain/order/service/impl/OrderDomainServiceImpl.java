@@ -71,6 +71,15 @@ public class OrderDomainServiceImpl implements OrderDomainService {
         return orderDOS;
     }
 
+    @Override
+    public OrderDO getOrder(int userId, String orderSn) {
+        OrderDO userOrderDO =
+                orderFactory.createUserOrderDO(userOrderRepository.selectByUserIdAndOrderSn(userId, orderSn));
+        userOrderDO.addDetails(orderDetailsRepository.selectByOrderId(userOrderDO.getId()).
+                stream().map(orderFactory::createOrderDetailsDO).collect(Collectors.toList()));
+        return userOrderDO;
+    }
+
     private void addOrderDetails(OrderDetailsDO orderDetails, int orderId) {
         orderDetails.create(orderId);
         OrderDetailsPO po = orderDetailsRepository.insert(orderFactory.createOrderDetailsPO(orderDetails));

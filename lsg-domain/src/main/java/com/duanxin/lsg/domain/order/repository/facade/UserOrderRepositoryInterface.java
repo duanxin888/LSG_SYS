@@ -18,4 +18,6 @@ public interface UserOrderRepositoryInterface {
     UserOrderPO selectByOrderSn(String orderSn);
 
     List<UserOrderPO> selectByUserId(int userId);
+
+    UserOrderPO selectByUserIdAndOrderSn(int userId, String orderSn);
 }

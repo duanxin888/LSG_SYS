@@ -50,4 +50,10 @@ public class UserOrderRepositoryImpl implements UserOrderRepositoryInterface {
     public List<UserOrderPO> selectByUserId(int userId) {
         return userOrderMapper.selectByUserId(userId);
     }
+
+    @Override
+    public UserOrderPO selectByUserIdAndOrderSn(int userId, String orderSn) {
+        return Optional.ofNullable(userOrderMapper.selectByUserIdAndOrderSn(userId, orderSn)).
+                orElseThrow(() -> new LSGCheckException(ResultEnum.ORDER_NOT_EXIST));
+    }
 }

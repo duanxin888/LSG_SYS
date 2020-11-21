@@ -18,4 +18,6 @@ public interface OrderDomainService {
     OrderDO selectByOrderSn(String orderSn);
 
     List<OrderDO> getOrders(int userId);
+
+    OrderDO getOrder(int userId, String orderSn);
 }

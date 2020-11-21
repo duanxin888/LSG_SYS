@@ -49,6 +49,12 @@ public class OrderApi {
                 stream().map(OrderAssembler::toDto).collect(Collectors.toList()));
     }
 
+    @GetMapping("/users/{userId}/orderSn/{orderSn}")
+    public ResponseResult getOrder(@PathVariable("userId") int userId,
+                                   @PathVariable("orderSn") String orderSn) {
+        return ResponseResult.success(OrderAssembler.toDto(orderApplicationService.getOrder(userId, orderSn)));
+    }
+
     private void checkForPay(OrderDto dto) {
         if (Objects.isNull(dto.getUserId())) {
             throw new LSGCheckException(ResultEnum.ORDER_USER_ID_IS_NULL);

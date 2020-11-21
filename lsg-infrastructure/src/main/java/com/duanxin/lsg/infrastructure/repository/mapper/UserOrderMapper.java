@@ -20,4 +20,7 @@ public interface UserOrderMapper {
     UserOrderPO selectByOrderSn(@Param("orderSn") String orderSn);
 
     List<UserOrderPO> selectByUserId(@Param("userId") int userId);
+
+    UserOrderPO selectByUserIdAndOrderSn(@Param("userId") int userId,
+                                         @Param("orderSn") String orderSn);
 }

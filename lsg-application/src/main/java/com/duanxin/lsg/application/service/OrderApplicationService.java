@@ -85,4 +85,8 @@ public class OrderApplicationService {
     public List<OrderDO> getOrders(int userId) {
         return orderDomainService.getOrders(userId);
     }
+
+    public OrderDO getOrder(int userId, String orderSn) {
+        return orderDomainService.getOrder(userId, orderSn);
+    }
 }
