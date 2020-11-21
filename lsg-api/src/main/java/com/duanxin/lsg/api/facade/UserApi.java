@@ -49,8 +49,8 @@ public class UserApi {
             throw new LSGCheckException(ResultEnum.WX_LOGIN_CODE_OR_USERINFO_IS_NULL);
         }
         UserDO userDO = WxLoginAssembler.toDO(wxLoginRequestDto);
-        loginApplicationService.wxLogin(userDO, wxLoginRequestDto.getCode());
-        return ResponseResult.success(WxLoginAssembler.toDto(userDO));
+        return ResponseResult.success(WxLoginAssembler.toDto(loginApplicationService.wxLogin(userDO,
+                wxLoginRequestDto.getCode())));
     }
 
     @PostMapping("/address")

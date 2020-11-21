@@ -33,7 +33,7 @@ public class LoginApplicationService {
     @Autowired
     private RedisCacheClient redisCacheClient;
 
-    public void wxLogin(UserDO userDO, String code) {
+    public UserDO wxLogin(UserDO userDO, String code) {
         log.info("user [{}] begin to login with wx code [{}]", JsonUtil.toString(userDO), code);
         WxMaJscode2SessionResult sessionInfo = wxClient.getSessionInfo(code);
         UserDO user = userDomainService.getUserByOpenId(sessionInfo.getOpenid());
@@ -48,5 +48,6 @@ public class LoginApplicationService {
         redisCacheClient.refreshCache(thirdSession, value, Duration.ofDays(30L));
         userDO.setThirdSession(thirdSession);
         log.info("user [{}] success login with wx code [{}]", JsonUtil.toString(userDO), code);
+        return userDO;
     }
 }

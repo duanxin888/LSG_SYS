@@ -54,6 +54,7 @@ public class UserFactory {
 
     public UserPO createUserPO(UserDO userDO) {
         UserPO userPO = new UserPO();
+        userPO.setId(userDO.getId());
         userPO.setUserName(userDO.getUserName());
         userPO.setPassword(userDO.getPassword());
         userPO.setPhone(userDO.getPhone());
@@ -63,7 +64,6 @@ public class UserFactory {
         userPO.setWxOpenid(userDO.getWxOpenid());
         userPO.setWxSessionKey(userDO.getWxSessionKey());
         userPO.setStatus(userDO.getStatus().getCode());
-        userPO.setDeleted(userDO.getDeleted().getCode());
         userPO.setGender(userDO.getGender().getCode());
         userPO.setCdate(userDO.getCdate());
         userPO.setCreator(userDO.getCreator());
