@@ -57,7 +57,7 @@
         update T_USER_ORDER
         set PAY_SN = #{userOrderPO.paySn}, PAY_TYPE = #{userOrderPO.payType},
         PAY_TIME = #{userOrderPO.payTime}, EDATE = #{userOrderPO.edate},
-        EDITOR = #{userOrderPO.editor}
+        EDITOR = #{userOrderPO.editor}, ORDER_STATUS_ID = #{userOrderPO.orderStatusId}
         where ORDER_SN = #{userOrderPO.orderSn};
     </update>
     <update id="updateInvalidOrder">
