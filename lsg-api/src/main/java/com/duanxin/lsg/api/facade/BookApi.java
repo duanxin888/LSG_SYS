@@ -7,10 +7,7 @@ import com.duanxin.lsg.domain.book.entity.BookCategoryDO;
 import com.duanxin.lsg.domain.book.entity.BookDO;
 import com.duanxin.lsg.infrastructure.common.api.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +24,11 @@ public class BookApi {
 
     @Autowired
     private BookApplicationService bookApplicationService;
+
+    @PostMapping("/recycle")
+    public ResponseResult recycleBook() {
+        return ResponseResult.success();
+    }
 
     @GetMapping("/categories")
     public ResponseResult categories() {

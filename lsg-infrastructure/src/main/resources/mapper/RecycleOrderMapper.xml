@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duanxin.lsg.infrastructure.repository.mapper.RecycleOrderMapper">
+
+    <resultMap type="com.duanxin.lsg.infrastructure.repository.po.RecycleOrderPO" id="recycleOrderMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="recycleOrderSn" column="RECYCLE_ORDER_SN" jdbcType="VARCHAR"/>
+        <result property="userId" column="USER_ID" jdbcType="INTEGER"/>
+        <result property="recycleStatusId" column="RECYCLE_ORDER_ID" jdbcType="INTEGER"/>
+        <result property="recycleTime" column="RECYCLE_TIME" jdbcType="TIMESTAMP"/>
+        <result property="shipSn" column="SHIP_SN" jdbcType="VARCHAR"/>
+        <result property="shipChannel" column="SHIP_CHANNEL" jdbcType="VARCHAR"/>
+        <result property="shipTime" column="SHIP_TIME" jdbcType="TIMESTAMP"/>
+        <result property="verifyTime" column="VERIFY_TIME" jdbcType="TIMESTAMP"/>
+        <result property="deleted" column="DELETED" jdbcType="INTEGER"/>
+        <result property="cdate" column="CDATE" jdbcType="TIMESTAMP"/>
+        <result property="creator" column="CREATOR" jdbcType="VARCHAR"/>
+        <result property="edate" column="EDATE" jdbcType="TIMESTAMP"/>
+        <result property="editor" column="EDITOR" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="order">
+        ID, USER_ID, RECYCLE_ORDER_SN, RECYCLE_STATUS_ID, RECYCLE_TIME,
+        SHIP_SN, SHIP_CHANNEL, SHIP_TIME, VERIFY_TIME,
+         DELETED, CDATE, CREATOR, EDATE, EDITOR
+    </sql>
+</mapper>

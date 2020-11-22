@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duanxin.lsg.infrastructure.repository.mapper.RecycleOrderDetailsMapper">
+
+    <resultMap type="com.duanxin.lsg.infrastructure.repository.po.RecycleOrderDetails" id="recycleOrderMap">
+        <result property="id" column="ID" jdbcType="INTEGER"/>
+        <result property="recycleOrderId" column="RECYCLE_ORDER_ID" jdbcType="INTEGER"/>
+        <result property="bookName" column="BOOK_NAME" jdbcType="VARCHAR"/>
+        <result property="bookAuthor" column="BOOK_AUTHOR" jdbcType="VARCHAR"/>
+        <result property="bookPic" column="BOOK_PIC" jdbcType="VARCHAR"/>
+        <result property="bookDetails" column="BOOK_DETAILS" jdbcType="VARCHAR"/>
+        <result property="bookPrice" column="BOOK_PRICE" jdbcType="NUMERIC"/>
+        <result property="bookISBN10" column="BOOK_ISBN10" jdbcType="VARCHAR"/>
+        <result property="bookISBN13" column="BOOK_ISBN13" jdbcType="VARCHAR"/>
+        <result property="bookLevelId" column="BOOK_LEVEL_ID" jdbcType="INTEGER"/>
+        <result property="deleted" column="DELETED" jdbcType="INTEGER"/>
+        <result property="cdate" column="CDATE" jdbcType="TIMESTAMP"/>
+        <result property="creator" column="CREATOR" jdbcType="VARCHAR"/>
+        <result property="edate" column="EDATE" jdbcType="TIMESTAMP"/>
+        <result property="editor" column="EDITOR" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="order">
+        ID, RECYCLE_ORDER_ID, BOOK_NAME, BOOK_AUTHOR, BOOK_PIC, BOOK_DETAILS,
+        BOOK_PRICE, BOOK_ISBN10, BOOK_ISBN13, BOOK_LEVEL_ID, DELETED, CDATE, CREATOR, EDATE, EDITOR
+    </sql>
+</mapper>
