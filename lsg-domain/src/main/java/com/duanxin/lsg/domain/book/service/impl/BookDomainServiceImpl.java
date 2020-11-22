@@ -89,4 +89,10 @@ public class BookDomainServiceImpl implements BookDomainService {
     public void downStock(BookStockDO bookStockDO) {
         bookStockRepository.updateStockAndSale(bookFactory.createBookStockPO(bookStockDO));
     }
+
+    @Override
+    public void upStock(BookStockDO bookStockDO) {
+        bookStockDO.upStock();
+        bookStockRepository.updateStockAndSale(bookFactory.createBookStockPO(bookStockDO));
+    }
 }

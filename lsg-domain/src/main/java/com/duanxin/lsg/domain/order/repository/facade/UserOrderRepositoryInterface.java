@@ -1,7 +1,10 @@
 package com.duanxin.lsg.domain.order.repository.facade;
 
+import com.duanxin.lsg.domain.order.entity.OrderDO;
+import com.duanxin.lsg.domain.order.entity.valueobject.OrderStatus;
 import com.duanxin.lsg.infrastructure.repository.po.UserOrderPO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -20,4 +23,8 @@ public interface UserOrderRepositoryInterface {
     List<UserOrderPO> selectByUserId(int userId);
 
     UserOrderPO selectByUserIdAndOrderSn(int userId, String orderSn);
+
+    List<UserOrderPO> getInvalidOrders(LocalDateTime expiredTime, OrderStatus submitSuccess);
+
+    void updateInvalidOrder(UserOrderPO userOrderPO);
 }

@@ -5,6 +5,7 @@ import com.duanxin.lsg.domain.book.entity.valueobject.BookLevel;
 import com.duanxin.lsg.domain.book.service.BookDomainService;
 import com.duanxin.lsg.domain.order.entity.OrderDO;
 import com.duanxin.lsg.domain.order.service.OrderDomainService;
+import com.duanxin.lsg.domain.order.service.impl.OrderDomainServiceImpl;
 import com.duanxin.lsg.domain.shoppingcart.entity.BookInfo;
 import com.duanxin.lsg.domain.shoppingcart.entity.UserShoppingCartDO;
 import com.duanxin.lsg.domain.shoppingcart.service.ShoppingCartDomainService;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -51,6 +53,36 @@ public class OrderApplicationService {
         userDomainService.deduction(toDO.getUserInfo().getUserId(), toDO.getTotalPrice());
     }
 
+    public List<OrderDO> getOrders(int userId) {
+        return orderDomainService.getOrders(userId);
+    }
+
+    public OrderDO getOrder(int userId, String orderSn) {
+        return orderDomainService.getOrder(userId, orderSn);
+    }
+
+    public List<OrderDO> getInvalidOrders(LocalDateTime expiredTime) {
+        return orderDomainService.getInvalidOrders(expiredTime);
+    }
+
+    @Transactional
+    public void updateInvalidOrder(OrderDO orderDO) {
+        // update order status
+        orderDomainService.updateInvalidOrder(orderDO);
+        // restore stock
+        restoreStock(orderDO);
+    }
+
+    private void restoreStock(OrderDO orderDO) {
+        orderDO.getOrderDetailsDOS().forEach(orderDetails -> {
+            BookStockDO bookStockDO = new BookStockDO();
+            bookStockDO.setBookId(orderDetails.getBookId());
+            bookStockDO.setBookLevel(bookDomainService.getBookLevelById(orderDetails.getBookLevelId()));
+            bookStockDO.setStock(orderDetails.getQuantity());
+            bookDomainService.upStock(bookStockDO);
+        });
+    }
+
     private void checkUserExist(int userId) {
         userDomainService.getUserById(userId);
     }
@@ -82,11 +114,4 @@ public class OrderApplicationService {
         });
     }
 
-    public List<OrderDO> getOrders(int userId) {
-        return orderDomainService.getOrders(userId);
-    }
-
-    public OrderDO getOrder(int userId, String orderSn) {
-        return orderDomainService.getOrder(userId, orderSn);
-    }
 }

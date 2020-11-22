@@ -45,10 +45,13 @@ jasypt:
     password: 135792468
 
 ## 线程池参数
-event:
-  task:
-    corePoolSize: 8
-    maximumPoolSize: 16
-    keepAliveTime: 3000
-    workQueueSize: 500
-    threadPoolName: event-task
+check:
+  invalid:
+    orders:
+      task:
+        corePoolSize: 8
+        maximumPoolSize: 16
+        keepAliveTime: 3000
+        workQueueSize: 500
+        threadPoolName: checkInvalidOrders-task
+      job: 0 0/10 * * * ?  # 每十分钟运行一次

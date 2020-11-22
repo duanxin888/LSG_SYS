@@ -57,5 +57,7 @@ public class OrderDto {
 
     private LocalDateTime orderCloseTime;
 
+    private LocalDateTime cdate;
+
     private List<OrderDetailsDto> orderDetailsDtos;
 }

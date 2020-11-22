@@ -67,7 +67,7 @@ public class OrderDO {
     public boolean checkPrice() {
         BigDecimal addPrice = this.getOrderDetailsDOS().stream().map(orderDetails ->
                 orderDetails.getPrice().multiply(BigDecimal.valueOf(orderDetails.getQuantity()))).
-                reduce(BigDecimal.ZERO, BigDecimal::add).setScale(2);
+                reduce(BigDecimal.ZERO, BigDecimal::add);
         return addPrice.equals(this.getTotalPrice());
     }
 
@@ -85,5 +85,12 @@ public class OrderDO {
 
     public void addDetails(List<OrderDetailsDO> orderDetailsDOS) {
         this.setOrderDetailsDOS(orderDetailsDOS);
+    }
+
+    public void expired() {
+        this.setOrderStatus(OrderStatus.CLOSE);
+        this.setOrderCloseTime(LocalDateTime.now());
+        this.setEdate(LocalDateTime.now());
+        this.setEditor(ConstantEnum.CREATOR.getKey());
     }
 }

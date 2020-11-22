@@ -1,5 +1,6 @@
 package com.duanxin.lsg.domain.order.repository.persistence;
 
+import com.duanxin.lsg.domain.order.entity.valueobject.OrderStatus;
 import com.duanxin.lsg.domain.order.repository.facade.UserOrderRepositoryInterface;
 import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
 import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,5 +57,16 @@ public class UserOrderRepositoryImpl implements UserOrderRepositoryInterface {
     public UserOrderPO selectByUserIdAndOrderSn(int userId, String orderSn) {
         return Optional.ofNullable(userOrderMapper.selectByUserIdAndOrderSn(userId, orderSn)).
                 orElseThrow(() -> new LSGCheckException(ResultEnum.ORDER_NOT_EXIST));
+    }
+
+    @Override
+    public List<UserOrderPO> getInvalidOrders(LocalDateTime expiredTime, OrderStatus submitSuccess) {
+        return userOrderMapper.getInvalidOrders(expiredTime, submitSuccess.getId());
+    }
+
+    @Override
+    public void updateInvalidOrder(UserOrderPO userOrderPO) {
+        userOrderMapper.updateInvalidOrder(userOrderPO);
+        log.info("success to update invalid order [{}]", JsonUtil.toString(userOrderPO));
     }
 }

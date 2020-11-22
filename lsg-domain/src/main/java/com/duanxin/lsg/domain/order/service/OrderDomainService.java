@@ -2,6 +2,7 @@ package com.duanxin.lsg.domain.order.service;
 
 import com.duanxin.lsg.domain.order.entity.OrderDO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -20,4 +21,8 @@ public interface OrderDomainService {
     List<OrderDO> getOrders(int userId);
 
     OrderDO getOrder(int userId, String orderSn);
+
+    List<OrderDO> getInvalidOrders(LocalDateTime expiredTime);
+
+    void updateInvalidOrder(OrderDO orderDO);
 }

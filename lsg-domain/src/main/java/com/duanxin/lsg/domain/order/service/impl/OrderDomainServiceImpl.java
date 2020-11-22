@@ -2,6 +2,7 @@ package com.duanxin.lsg.domain.order.service.impl;
 
 import com.duanxin.lsg.domain.order.entity.OrderDO;
 import com.duanxin.lsg.domain.order.entity.OrderDetailsDO;
+import com.duanxin.lsg.domain.order.entity.valueobject.OrderStatus;
 import com.duanxin.lsg.domain.order.repository.facade.OrderDetailsRepositoryInterface;
 import com.duanxin.lsg.domain.order.repository.facade.UserOrderRepositoryInterface;
 import com.duanxin.lsg.domain.order.service.OrderDomainService;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,6 +80,21 @@ public class OrderDomainServiceImpl implements OrderDomainService {
         userOrderDO.addDetails(orderDetailsRepository.selectByOrderId(userOrderDO.getId()).
                 stream().map(orderFactory::createOrderDetailsDO).collect(Collectors.toList()));
         return userOrderDO;
+    }
+
+    @Override
+    public List<OrderDO> getInvalidOrders(LocalDateTime expiredTime) {
+        List<OrderDO> orderDOS = userOrderRepository.getInvalidOrders(expiredTime, OrderStatus.SUBMIT_SUCCESS).
+                stream().map(orderFactory::createUserOrderDO).collect(Collectors.toList());
+        orderDOS.forEach(order -> order.addDetails(orderDetailsRepository.selectByOrderId(order.getId()).
+                stream().map(orderFactory::createOrderDetailsDO).collect(Collectors.toList())));
+        return orderDOS;
+    }
+
+    @Override
+    public void updateInvalidOrder(OrderDO orderDO) {
+        orderDO.expired();
+        userOrderRepository.updateInvalidOrder(orderFactory.createUserOrderPO(orderDO));
     }
 
     private void addOrderDetails(OrderDetailsDO orderDetails, int orderId) {

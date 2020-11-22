@@ -81,6 +81,7 @@ public class OrderAssembler {
         dto.setPayType(payInfo.getPayType());
         dto.setPayTime(payInfo.getPayTime());
         dto.setOrderCloseTime(orderDO.getOrderCloseTime());
+        dto.setCdate(orderDO.getCdate());
         dto.setOrderDetailsDtos(orderDO.getOrderDetailsDOS().stream().
                 map(OrderDetailsAssembler::toDto).collect(Collectors.toList()));
         return dto;

@@ -29,4 +29,6 @@ public interface BookDomainService {
     void checkStock(BookStockDO bookStockDO);
 
     void downStock(BookStockDO bookStockDO);
+
+    void upStock(BookStockDO bookStockDO);
 }

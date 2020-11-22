@@ -36,4 +36,8 @@ public class BookStockDO {
     public boolean checkStock(int stock) {
         return this.getStock() <= stock;
     }
+
+    public void upStock() {
+        this.setStock(-this.getStock());
+    }
 }

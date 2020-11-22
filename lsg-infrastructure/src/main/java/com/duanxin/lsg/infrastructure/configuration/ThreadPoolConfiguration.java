@@ -19,4 +19,15 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class ThreadPoolConfiguration {
 
+    @Bean("checkInvalidOrdersThreadPoolConfig")
+    @ConfigurationProperties(prefix = "check.invalid.orders.task")
+    public ThreadPoolConfig checkInvalidOrdersThreadPoolConfig() {
+        return new ThreadPoolConfig();
+    }
+
+    @Bean("checkInvalidOrdersThreadPool")
+    public ThreadPoolExecutor checkInvalidOrdersThreadPool(@Qualifier("checkInvalidOrdersThreadPoolConfig")
+                                                                       ThreadPoolConfig config) {
+        return ThreadPoolUtils.threadPoolExecutor(config);
+    }
 }
