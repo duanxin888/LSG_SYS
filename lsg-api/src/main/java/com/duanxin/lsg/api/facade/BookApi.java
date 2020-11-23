@@ -54,6 +54,12 @@ public class BookApi {
         return ResponseResult.success(RecycleOrderAssembler.toDto(recycleOrder));
     }
 
+    @GetMapping("/users/{userId}/recycled")
+    public ResponseResult getRecycledOrders(@PathVariable("userId") int userId) {
+        return ResponseResult.success(recycleOrderApplicationService.getRecycledOrders(userId).stream().
+                map(RecycleOrderAssembler::toDto).collect(Collectors.toList()));
+    }
+
     @GetMapping("/categories")
     public ResponseResult categories() {
         List<BookCategoryDO> categories = bookApplicationService.categories();

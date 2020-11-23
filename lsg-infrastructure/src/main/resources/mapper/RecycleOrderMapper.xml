@@ -41,4 +41,10 @@
         where USER_ID = #{userId} and
         RECYCLE_STATUS_ID = 1 and DELETED = 0;
     </select>
+    <select id="selectOrdersByUserId" resultMap="recycleOrderMap">
+        select <include refid="recycleOrder"/>
+        from T_RECYCLE_ORDER
+        where USER_ID = #{userId} and
+        RECYCLE_STATUS_ID in (2, 3) and DELETED = 0;
+    </select>
 </mapper>

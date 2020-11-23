@@ -9,6 +9,8 @@ import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -32,5 +34,10 @@ public class RecycleOrderRepositoryImpl implements RecycleOrderRepositoryInterfa
         recycleOrderMapper.insert(recycleOrderPO);
         log.info("success to insert RecycleOrder [{}]", JsonUtil.toString(recycleOrderPO));
         return recycleOrderPO;
+    }
+
+    @Override
+    public List<RecycleOrderPO> selectOrdersByUserId(int userId) {
+        return recycleOrderMapper.selectOrdersByUserId(userId);
     }
 }

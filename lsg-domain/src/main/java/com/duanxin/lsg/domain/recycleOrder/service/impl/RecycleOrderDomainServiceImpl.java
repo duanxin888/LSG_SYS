@@ -13,12 +13,12 @@ import com.duanxin.lsg.infrastructure.repository.po.RecycleOrderDetailsPO;
 import com.duanxin.lsg.infrastructure.repository.po.RecycleOrderPO;
 import com.duanxin.lsg.infrastructure.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -91,6 +91,19 @@ public class RecycleOrderDomainServiceImpl implements RecycleOrderDomainService 
         recycleOrderDO.addDetails(detailsPOS.stream().
                 map(recycleOrderFactory::creRecycleOrderDetailsDO).collect(Collectors.toList()));
         return recycleOrderDO;
+    }
+
+    @Override
+    public List<RecycleOrderDO> getRecycledOrders(int userId) {
+        List<RecycleOrderPO> recycleOrderPOS = recycleOrderRepository.selectOrdersByUserId(userId);
+        if (CollectionUtils.isEmpty(recycleOrderPOS)) {
+            return Collections.emptyList();
+        }
+        List<RecycleOrderDO> orderDOS = recycleOrderPOS.stream().
+                map(recycleOrderFactory::createRecycleOrderDO).collect(Collectors.toList());
+        orderDOS.forEach(order -> order.addDetails(recycleOrderDetailsRepository.selectByOrderId(order.getId()).
+                stream().map(recycleOrderFactory::creRecycleOrderDetailsDO).collect(Collectors.toList())));
+        return orderDOS;
     }
 
     private void checkISBNOfDetails(String isbn, int recycleOrderId) {

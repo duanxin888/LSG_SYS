@@ -7,6 +7,8 @@ import com.duanxin.lsg.domain.user.service.UserDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -29,6 +31,11 @@ public class RecycleOrderApplicationService {
     public RecycleOrderDO getRecyclingOrders(int userId) {
         checkUserExisted(userId);
         return recycleOrderDomainService.getRecyclingOrders(userId);
+    }
+
+    public List<RecycleOrderDO> getRecycledOrders(int userId) {
+        checkUserExisted(userId);
+        return recycleOrderDomainService.getRecycledOrders(userId);
     }
 
     private void checkUserExisted(int userId) {

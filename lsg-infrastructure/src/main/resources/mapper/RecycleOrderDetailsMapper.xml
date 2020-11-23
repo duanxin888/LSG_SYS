@@ -39,11 +39,11 @@
         <include refid="recycleOrder"/>
         from T_RECYCLE_ORDER_DETAILS
         where (BOOK_ISBN10 = #{isbn} or BOOK_ISBN13 = #{isbn}) and
-        RECYCLE_ORDER_ID = #{recycleOrderId}
+        RECYCLE_ORDER_ID = #{recycleOrderId} and DELETED = 0;
     </select>
     <select id="selectByOrderId" resultMap="recycleOrderMap">
         select <include refid="recycleOrder"/>
         from T_RECYCLE_ORDER_DETAILS
-        where RECYCLE_ORDER_ID = #{recycleOrderId}
+        where RECYCLE_ORDER_ID = #{recycleOrderId} and DELETED = 0;
     </select>
 </mapper>
