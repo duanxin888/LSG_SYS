@@ -19,4 +19,13 @@ public enum RecycleOrderStatus {
 
     private final int id;
     private final String name;
+
+    public static RecycleOrderStatus formatById(int id) {
+        for (RecycleOrderStatus value : values()) {
+            if (value.getId() == id) {
+                return value;
+            }
+        }
+        return null;
+    }
 }

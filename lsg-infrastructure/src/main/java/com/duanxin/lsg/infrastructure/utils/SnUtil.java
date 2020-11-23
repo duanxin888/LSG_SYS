@@ -19,35 +19,19 @@ public class SnUtil {
 
     }
 
+    public static String generateRecycleOrderSn(int userId) {
+        return generateSnByUserId(userId, VersionEnum.RECYCLE_ORDER_SN_VERSION);
+    }
+
     public static String generatePaySn(int userId) {
-        LocalDateTime now = LocalDateTime.now();
-        NumberFormat format = NumberFormat.getInstance();
-        return new StringBuilder(numberFormat(format, 11, userId)).
-                append(numberFormat(format, 4, now.getYear())).
-                append(numberFormat(format, 2, now.getMonthValue())).
-                append(numberFormat(format, 2, now.getDayOfMonth())).
-                append(numberFormat(format, 2, now.getHour())).
-                append(numberFormat(format, 2, now.getMinute())).
-                append(numberFormat(format, 2, now.getSecond())).
-                append(VersionEnum.PAY_SN_VERSION.getVersionId()).
-                toString();
+        return generateSnByUserId(userId, VersionEnum.PAY_SN_VERSION);
     }
 
     /**
      * order sn: 用户id(11位) + 年月日时分秒(16位) + 订单编号(2位)
      * */
     public static String generateOrderSn(int userId) {
-        LocalDateTime now = LocalDateTime.now();
-        NumberFormat format = NumberFormat.getInstance();
-        return new StringBuilder(numberFormat(format, 11, userId)).
-                append(numberFormat(format, 4, now.getYear())).
-                append(numberFormat(format, 2, now.getMonthValue())).
-                append(numberFormat(format, 2, now.getDayOfMonth())).
-                append(numberFormat(format, 2, now.getHour())).
-                append(numberFormat(format, 2, now.getMinute())).
-                append(numberFormat(format, 2, now.getSecond())).
-                append(VersionEnum.ORDER_SN_VERSION.getVersionId()).
-                toString();
+        return generateSnByUserId(userId, VersionEnum.ORDER_SN_VERSION);
     }
 
     /**
@@ -64,6 +48,20 @@ public class SnUtil {
                 append(numberFormat(format, 2, now.getMinute())).
                 append(numberFormat(format, 2, now.getSecond())).
                 append(VersionEnum.ACCOUNT_SN_VERSION.getVersionId()).
+                toString();
+    }
+
+    private static String generateSnByUserId(int userId, VersionEnum versionEnum) {
+        LocalDateTime now = LocalDateTime.now();
+        NumberFormat format = NumberFormat.getInstance();
+        return new StringBuilder(numberFormat(format, 11, userId)).
+                append(numberFormat(format, 4, now.getYear())).
+                append(numberFormat(format, 2, now.getMonthValue())).
+                append(numberFormat(format, 2, now.getDayOfMonth())).
+                append(numberFormat(format, 2, now.getHour())).
+                append(numberFormat(format, 2, now.getMinute())).
+                append(numberFormat(format, 2, now.getSecond())).
+                append(versionEnum.getVersionId()).
                 toString();
     }
 

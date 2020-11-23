@@ -15,7 +15,8 @@ public enum VersionEnum {
 
     ACCOUNT_SN_VERSION("01"),
     ORDER_SN_VERSION("02"),
-    PAY_SN_VERSION("03");
+    PAY_SN_VERSION("03"),
+    RECYCLE_ORDER_SN_VERSION("04");
 
     private final String versionId;
 }

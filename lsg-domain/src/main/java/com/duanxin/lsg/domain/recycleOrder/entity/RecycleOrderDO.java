@@ -1,6 +1,9 @@
 package com.duanxin.lsg.domain.recycleOrder.entity;
 
 import com.duanxin.lsg.domain.recycleOrder.entity.valueobject.RecycleOrderStatus;
+import com.duanxin.lsg.infrastructure.common.enums.ConstantEnum;
+import com.duanxin.lsg.infrastructure.common.enums.Deleted;
+import com.duanxin.lsg.infrastructure.utils.SnUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -46,4 +49,15 @@ public class RecycleOrderDO {
     private String editor;
 
     private List<RecycleOrderDetailsDO> recycleOrderDetailsDOS;
+
+    public void create(int userId) {
+        this.setUserId(userId);
+        this.setRecycleOrderSn(SnUtil.generateRecycleOrderSn(userId));
+        this.setRecycleOrderStatus(RecycleOrderStatus.RECYCLING);
+        this.setDeleted(Deleted.NOT_DELETE.getCode());
+        this.setCdate(LocalDateTime.now());
+        this.setCreator(ConstantEnum.CREATOR.getKey());
+        this.setEdate(LocalDateTime.now());
+        this.setEditor(ConstantEnum.CREATOR.getKey());
+    }
 }

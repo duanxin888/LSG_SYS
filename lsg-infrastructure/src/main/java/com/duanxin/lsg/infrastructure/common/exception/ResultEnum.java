@@ -57,7 +57,11 @@ public enum ResultEnum {
     BOOK_STOCK_NOT_ENOUGH(405, "book stock not enough"),
     ORDER_SN_IS_BLANK(405, "order sn is blank"),
     ORDER_STATUS_NAME_IS_BLANK(405, "order status name is blank"),
-    ORDER_NOT_EXIST(405, "order not exist");
+    ORDER_NOT_EXIST(405, "order not exist"),
+
+    RECYCLE_BOOK_ISBN_IS_NOT_RULE(406, "recycle book isbn is not rule"),
+    RECYCLE_BOOK_GET_USERINFO_BY_ISBN_ERROR(406, "recycle book get userInfo by isbn error"),
+    RECYCLE_BOOK_ISBN_EXISTED_ORDER(406, "recycle book isbn existed order");
 
     private final int code;
     private final String description;

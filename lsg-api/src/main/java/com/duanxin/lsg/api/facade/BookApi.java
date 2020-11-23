@@ -2,10 +2,17 @@ package com.duanxin.lsg.api.facade;
 
 import com.duanxin.lsg.api.assembler.BookAssembler;
 import com.duanxin.lsg.api.assembler.BookCategoryAssembler;
+import com.duanxin.lsg.api.assembler.RecycleOrderDetailsAssembler;
 import com.duanxin.lsg.application.service.BookApplicationService;
+import com.duanxin.lsg.application.service.RecycleOrderApplicationService;
 import com.duanxin.lsg.domain.book.entity.BookCategoryDO;
 import com.duanxin.lsg.domain.book.entity.BookDO;
+import com.duanxin.lsg.domain.recycleOrder.entity.RecycleOrderDetailsDO;
 import com.duanxin.lsg.infrastructure.common.api.ResponseResult;
+import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
+import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +31,17 @@ public class BookApi {
 
     @Autowired
     private BookApplicationService bookApplicationService;
+    @Autowired
+    private RecycleOrderApplicationService recycleOrderApplicationService;
 
-    @PostMapping("/recycle")
-    public ResponseResult recycleBook() {
-        return ResponseResult.success();
+    @PostMapping("/users/{userId}/recycle/{isbn}")
+    public ResponseResult addRecycleBook(@PathVariable("userId") int userId,
+                                      @PathVariable("isbn") String isbn) {
+        if (isbn.length() < 10 || isbn.length() > 13 || !NumberUtils.isDigits(isbn)) {
+            throw new LSGCheckException(ResultEnum.RECYCLE_BOOK_ISBN_IS_NOT_RULE);
+        }
+        return ResponseResult.success(RecycleOrderDetailsAssembler.toDto(
+                recycleOrderApplicationService.addRecycleBook(userId, isbn)));
     }
 
     @GetMapping("/categories")

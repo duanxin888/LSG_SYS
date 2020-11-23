@@ -1,20 +1,19 @@
-package com.duanxin.lsg.infrastructure.repository.po;
+package com.duanxin.lsg.api.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * @author duanxin
  * @version 1.0
- * @className RecycleOrderDetails
- * @date 2020/11/22 17:40
+ * @className RecycleOrderDetailsDto
+ * @date 2020/11/23 19:44
  */
 @Setter
 @Getter
-public class RecycleOrderDetails {
+public class RecycleOrderDetailsDto {
 
     private int id;
 
@@ -35,14 +34,4 @@ public class RecycleOrderDetails {
     private String bookISBN13;
 
     private int bookLevelId;
-
-    private int deleted;
-
-    private LocalDateTime cdate;
-
-    private String creator;
-
-    private LocalDateTime edate;
-
-    private String editor;
 }

@@ -55,3 +55,17 @@ check:
         workQueueSize: 500
         threadPoolName: checkInvalidOrders-task
       job: 0 0/10 * * * ?  # 每十分钟运行一次
+
+## 调用阿里查询书籍信息服务
+isbn:
+  al:
+    url:
+      appcode: d1157b1a213f409d8bc63be92215a0da
+      api: https://isbn.market.alicloudapi.com/ISBN
+    request:
+      maxTotal: 10
+      defaultMaxPerRoute: 5
+      connectTimeout: 300000
+      connectionRequestTimeout: 60000
+      socketTimeout: 60000
+      validateAfterInactivity: 300000

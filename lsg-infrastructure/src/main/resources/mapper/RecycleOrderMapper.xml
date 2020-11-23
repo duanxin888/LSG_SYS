@@ -19,9 +19,26 @@
         <result property="editor" column="EDITOR" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <sql id="order">
+    <sql id="recycleOrder">
         ID, USER_ID, RECYCLE_ORDER_SN, RECYCLE_STATUS_ID, RECYCLE_TIME,
         SHIP_SN, SHIP_CHANNEL, SHIP_TIME, VERIFY_TIME,
          DELETED, CDATE, CREATOR, EDATE, EDITOR
     </sql>
+    <insert id="insert" parameterType="com.duanxin.lsg.infrastructure.repository.po.RecycleOrderPO"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into T_RECYCLE_ORDER (USER_ID, RECYCLE_ORDER_SN, RECYCLE_STATUS_ID, RECYCLE_TIME,
+        SHIP_SN, SHIP_CHANNEL, SHIP_TIME, VERIFY_TIME,
+         DELETED, CDATE, CREATOR, EDATE, EDITOR)
+         values(#{recycleOrderPO.userId}, #{recycleOrderPO.recycleOrderSn}, #{recycleOrderPO.recycleStatusId},
+         #{recycleOrderPO.recycleTime}, #{recycleOrderPO.shipSn}, #{recycleOrderPO.shipChannel},
+         #{recycleOrderPO.shipTime}, #{recycleOrderPO.verifyTime}, #{recycleOrderPO.deleted},
+         #{recycleOrderPO.cdate}, #{recycleOrderPO.creator}, #{recycleOrderPO.edate}, #{recycleOrderPO.editor})
+    </insert>
+    <select id="selectByUserId" resultMap="recycleOrderMap">
+        select
+        <include refid="recycleOrder"/>
+        from T_RECYCLE_ORDER
+        where USER_ID = #{userId} and
+        RECYCLE_STATUS_ID = 1 and DELETED = 0;
+    </select>
 </mapper>
