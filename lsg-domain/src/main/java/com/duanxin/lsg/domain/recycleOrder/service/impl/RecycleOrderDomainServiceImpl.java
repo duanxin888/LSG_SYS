@@ -17,9 +17,12 @@ import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author duanxin
@@ -72,6 +75,22 @@ public class RecycleOrderDomainServiceImpl implements RecycleOrderDomainService 
         log.info("success to add user [{}] RecycleBook [{}] by isbn [{}]",
                 userId, JsonUtil.toString(recycleOrderDetailsDO), isbn);
         return recycleOrderDetailsDO;
+    }
+
+    @Override
+    public RecycleOrderDO getRecyclingOrders(int userId) {
+        RecycleOrderPO po = recycleOrderRepository.selectByUserId(userId);
+        if (Objects.isNull(po)) {
+            return null;
+        }
+        RecycleOrderDO recycleOrderDO = recycleOrderFactory.createRecycleOrderDO(po);
+        List<RecycleOrderDetailsPO> detailsPOS = recycleOrderDetailsRepository.selectByOrderId(recycleOrderDO.getId());
+        if (CollectionUtils.isEmpty(detailsPOS)) {
+            return null;
+        }
+        recycleOrderDO.addDetails(detailsPOS.stream().
+                map(recycleOrderFactory::creRecycleOrderDetailsDO).collect(Collectors.toList()));
+        return recycleOrderDO;
     }
 
     private void checkISBNOfDetails(String isbn, int recycleOrderId) {

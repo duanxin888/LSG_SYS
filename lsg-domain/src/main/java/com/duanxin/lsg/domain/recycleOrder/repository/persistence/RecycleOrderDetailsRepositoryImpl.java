@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -31,5 +33,10 @@ public class RecycleOrderDetailsRepositoryImpl implements RecycleOrderDetailsRep
     @Override
     public RecycleOrderDetailsPO selectByISBNAndOrderId(String isbn, int recycleOrderId) {
         return recycleOrderDetailsMapper.selectByISBNAndOrderId(isbn, recycleOrderId);
+    }
+
+    @Override
+    public List<RecycleOrderDetailsPO> selectByOrderId(int recycleOrderId) {
+        return recycleOrderDetailsMapper.selectByOrderId(recycleOrderId);
     }
 }

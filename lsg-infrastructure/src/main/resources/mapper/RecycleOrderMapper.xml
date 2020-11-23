@@ -6,7 +6,7 @@
         <result property="id" column="ID" jdbcType="INTEGER"/>
         <result property="recycleOrderSn" column="RECYCLE_ORDER_SN" jdbcType="VARCHAR"/>
         <result property="userId" column="USER_ID" jdbcType="INTEGER"/>
-        <result property="recycleStatusId" column="RECYCLE_ORDER_ID" jdbcType="INTEGER"/>
+        <result property="recycleStatusId" column="RECYCLE_STATUS_ID" jdbcType="INTEGER"/>
         <result property="recycleTime" column="RECYCLE_TIME" jdbcType="TIMESTAMP"/>
         <result property="shipSn" column="SHIP_SN" jdbcType="VARCHAR"/>
         <result property="shipChannel" column="SHIP_CHANNEL" jdbcType="VARCHAR"/>

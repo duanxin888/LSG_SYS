@@ -2,21 +2,22 @@ package com.duanxin.lsg.api.facade;
 
 import com.duanxin.lsg.api.assembler.BookAssembler;
 import com.duanxin.lsg.api.assembler.BookCategoryAssembler;
+import com.duanxin.lsg.api.assembler.RecycleOrderAssembler;
 import com.duanxin.lsg.api.assembler.RecycleOrderDetailsAssembler;
 import com.duanxin.lsg.application.service.BookApplicationService;
 import com.duanxin.lsg.application.service.RecycleOrderApplicationService;
 import com.duanxin.lsg.domain.book.entity.BookCategoryDO;
 import com.duanxin.lsg.domain.book.entity.BookDO;
-import com.duanxin.lsg.domain.recycleOrder.entity.RecycleOrderDetailsDO;
+import com.duanxin.lsg.domain.recycleOrder.entity.RecycleOrderDO;
 import com.duanxin.lsg.infrastructure.common.api.ResponseResult;
 import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
 import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -42,6 +43,15 @@ public class BookApi {
         }
         return ResponseResult.success(RecycleOrderDetailsAssembler.toDto(
                 recycleOrderApplicationService.addRecycleBook(userId, isbn)));
+    }
+
+    @GetMapping("/users/{userId}/recycling")
+    public ResponseResult getRecyclingOrders(@PathVariable("userId") int userId) {
+        RecycleOrderDO recycleOrder = recycleOrderApplicationService.getRecyclingOrders(userId);
+        if (Objects.isNull(recycleOrder)) {
+            return ResponseResult.success();
+        }
+        return ResponseResult.success(RecycleOrderAssembler.toDto(recycleOrder));
     }
 
     @GetMapping("/categories")

@@ -3,6 +3,8 @@ package com.duanxin.lsg.infrastructure.repository.mapper;
 import com.duanxin.lsg.infrastructure.repository.po.RecycleOrderDetailsPO;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -14,4 +16,6 @@ public interface RecycleOrderDetailsMapper {
 
     RecycleOrderDetailsPO selectByISBNAndOrderId(@Param("isbn") String isbn,
                                                  @Param("recycleOrderId") int recycleOrderId);
+
+    List<RecycleOrderDetailsPO> selectByOrderId(@Param("recycleOrderId") int recycleOrderId);
 }

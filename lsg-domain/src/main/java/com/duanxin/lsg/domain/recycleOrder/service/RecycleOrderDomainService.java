@@ -1,5 +1,6 @@
 package com.duanxin.lsg.domain.recycleOrder.service;
 
+import com.duanxin.lsg.domain.recycleOrder.entity.RecycleOrderDO;
 import com.duanxin.lsg.domain.recycleOrder.entity.RecycleOrderDetailsDO;
 
 /**
@@ -11,4 +12,6 @@ import com.duanxin.lsg.domain.recycleOrder.entity.RecycleOrderDetailsDO;
 public interface RecycleOrderDomainService {
 
     RecycleOrderDetailsDO addRecycleBook(int userId, String isbn);
+
+    RecycleOrderDO getRecyclingOrders(int userId);
 }

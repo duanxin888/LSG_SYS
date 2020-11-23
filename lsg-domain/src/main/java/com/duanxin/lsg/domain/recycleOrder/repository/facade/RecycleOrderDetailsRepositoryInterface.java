@@ -2,6 +2,8 @@ package com.duanxin.lsg.domain.recycleOrder.repository.facade;
 
 import com.duanxin.lsg.infrastructure.repository.po.RecycleOrderDetailsPO;
 
+import java.util.List;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -12,4 +14,6 @@ public interface RecycleOrderDetailsRepositoryInterface {
     RecycleOrderDetailsPO insert(RecycleOrderDetailsPO creRecycleOrderDetailsPO);
 
     RecycleOrderDetailsPO selectByISBNAndOrderId(String isbn, int recycleOrderId);
+
+    List<RecycleOrderDetailsPO> selectByOrderId(int recycleOrderId);
 }

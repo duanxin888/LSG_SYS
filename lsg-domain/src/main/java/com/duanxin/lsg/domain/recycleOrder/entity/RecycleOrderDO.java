@@ -60,4 +60,8 @@ public class RecycleOrderDO {
         this.setEdate(LocalDateTime.now());
         this.setEditor(ConstantEnum.CREATOR.getKey());
     }
+
+    public void addDetails(List<RecycleOrderDetailsDO> orderDetailsDOS) {
+        this.setRecycleOrderDetailsDOS(orderDetailsDOS);
+    }
 }
