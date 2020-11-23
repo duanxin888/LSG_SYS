@@ -1,6 +1,7 @@
 package com.duanxin.lsg.domain.recycleOrder.repository.facade;
 
 import com.duanxin.lsg.infrastructure.repository.po.RecycleOrderDetailsPO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,4 +17,8 @@ public interface RecycleOrderDetailsRepositoryInterface {
     RecycleOrderDetailsPO selectByISBNAndOrderId(String isbn, int recycleOrderId);
 
     List<RecycleOrderDetailsPO> selectByOrderId(int recycleOrderId);
+
+    RecycleOrderDetailsPO selectById(int detailsId);
+
+    void deleteDetails(RecycleOrderDetailsPO po);
 }

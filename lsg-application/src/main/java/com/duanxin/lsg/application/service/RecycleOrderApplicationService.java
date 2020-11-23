@@ -38,6 +38,10 @@ public class RecycleOrderApplicationService {
         return recycleOrderDomainService.getRecycledOrders(userId);
     }
 
+    public void deleteRecycleOrderDetails(int detailsId) {
+        recycleOrderDomainService.deleteRecycleOrderDetails(detailsId);
+    }
+
     private void checkUserExisted(int userId) {
         userDomainService.getUserById(userId);
     }

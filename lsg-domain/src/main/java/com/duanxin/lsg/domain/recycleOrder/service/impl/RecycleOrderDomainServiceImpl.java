@@ -106,6 +106,14 @@ public class RecycleOrderDomainServiceImpl implements RecycleOrderDomainService 
         return orderDOS;
     }
 
+    @Override
+    public void deleteRecycleOrderDetails(int detailsId) {
+        RecycleOrderDetailsDO detailsDO =
+                recycleOrderFactory.creRecycleOrderDetailsDO(recycleOrderDetailsRepository.selectById(detailsId));
+        detailsDO.delete();
+        recycleOrderDetailsRepository.deleteDetails(recycleOrderFactory.creRecycleOrderDetailsPO(detailsDO));
+    }
+
     private void checkISBNOfDetails(String isbn, int recycleOrderId) {
         RecycleOrderDetailsPO po = recycleOrderDetailsRepository.selectByISBNAndOrderId(isbn, recycleOrderId);
         if (!Objects.isNull(po)) {

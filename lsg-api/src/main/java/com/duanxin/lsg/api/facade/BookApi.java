@@ -35,6 +35,12 @@ public class BookApi {
     @Autowired
     private RecycleOrderApplicationService recycleOrderApplicationService;
 
+    @DeleteMapping("/recycle/details/{detailsId}")
+    public ResponseResult deleteRecycleOrderDetails(@PathVariable("detailsId") int detailsId) {
+        recycleOrderApplicationService.deleteRecycleOrderDetails(detailsId);
+        return ResponseResult.success();
+    }
+
     @PostMapping("/users/{userId}/recycle/{isbn}")
     public ResponseResult addRecycleBook(@PathVariable("userId") int userId,
                                       @PathVariable("isbn") String isbn) {

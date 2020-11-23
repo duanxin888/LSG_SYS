@@ -781,4 +781,16 @@ response:
     ],
     "msg": "operator success!"
 }
+```  
+#### 移除回收书籍单项  
+api: /lsg/api/v1/books/recycle/details/{detailsId}  
+method:  delete  
+request: 2 (detailsId)  
+response:   
+```json
+{
+    "code": 200,
+    "data": null,
+    "msg": "operator success!"
+}
 ```

@@ -39,4 +39,15 @@ public class RecycleOrderDetailsRepositoryImpl implements RecycleOrderDetailsRep
     public List<RecycleOrderDetailsPO> selectByOrderId(int recycleOrderId) {
         return recycleOrderDetailsMapper.selectByOrderId(recycleOrderId);
     }
+
+    @Override
+    public RecycleOrderDetailsPO selectById(int detailsId) {
+        return recycleOrderDetailsMapper.selectById(detailsId);
+    }
+
+    @Override
+    public void deleteDetails(RecycleOrderDetailsPO po) {
+        recycleOrderDetailsMapper.deleteDetails(po);
+        log.info("success to deleted RecycleOrderDetails [{}]", JsonUtil.toString(po));
+    }
 }

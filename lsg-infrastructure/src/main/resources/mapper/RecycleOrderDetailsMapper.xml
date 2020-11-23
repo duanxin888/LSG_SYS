@@ -34,6 +34,11 @@
         #{recycleOrderDetailsPO.deleted}, #{recycleOrderDetailsPO.cdate}, #{recycleOrderDetailsPO.creator},
         #{recycleOrderDetailsPO.edate}, #{recycleOrderDetailsPO.editor})
     </insert>
+    <update id="deleteDetails">
+        update T_RECYCLE_ORDER_DETAILS
+        set DELETED = #{po.deleted}, EDATE = #{po.edate}, EDITOR = #{po.editor}
+        where ID = #{po.id}
+    </update>
     <select id="selectByISBNAndOrderId" resultMap="recycleOrderMap">
         select
         <include refid="recycleOrder"/>
@@ -45,5 +50,10 @@
         select <include refid="recycleOrder"/>
         from T_RECYCLE_ORDER_DETAILS
         where RECYCLE_ORDER_ID = #{recycleOrderId} and DELETED = 0;
+    </select>
+    <select id="selectById" resultMap="recycleOrderMap">
+        select <include refid="recycleOrder"/>
+        from T_RECYCLE_ORDER_DETAILS
+        where ID = #{id}
     </select>
 </mapper>

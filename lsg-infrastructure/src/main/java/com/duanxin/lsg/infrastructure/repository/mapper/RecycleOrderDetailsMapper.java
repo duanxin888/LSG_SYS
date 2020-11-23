@@ -18,4 +18,8 @@ public interface RecycleOrderDetailsMapper {
                                                  @Param("recycleOrderId") int recycleOrderId);
 
     List<RecycleOrderDetailsPO> selectByOrderId(@Param("recycleOrderId") int recycleOrderId);
+
+    RecycleOrderDetailsPO selectById(@Param("id") int detailsId);
+
+    void deleteDetails(@Param("po") RecycleOrderDetailsPO po);
 }

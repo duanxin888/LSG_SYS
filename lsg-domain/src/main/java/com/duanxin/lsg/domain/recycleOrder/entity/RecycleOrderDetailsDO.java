@@ -4,6 +4,7 @@ import com.duanxin.lsg.domain.recycleOrder.entity.valueobject.RecycleBookInfo;
 import com.duanxin.lsg.infrastructure.client.entity.AlISBNResult;
 import com.duanxin.lsg.infrastructure.common.enums.ConstantEnum;
 import com.duanxin.lsg.infrastructure.common.enums.Deleted;
+import com.duanxin.lsg.infrastructure.utils.HttpUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -56,5 +57,11 @@ public class RecycleOrderDetailsDO {
         this.setCreator(ConstantEnum.CREATOR.getKey());
         this.setEdate(LocalDateTime.now());
         this.setEditor(ConstantEnum.CREATOR.getKey());
+    }
+
+    public void delete() {
+        this.setDeleted(Deleted.IS_DELETED);
+        this.setEdate(LocalDateTime.now());
+        this.setEditor(HttpUtil.request().getRemoteHost());
     }
 }
