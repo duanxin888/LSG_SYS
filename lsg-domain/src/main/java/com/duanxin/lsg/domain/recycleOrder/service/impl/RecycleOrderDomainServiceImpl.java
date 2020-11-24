@@ -80,7 +80,7 @@ public class RecycleOrderDomainServiceImpl implements RecycleOrderDomainService 
     @Override
     public RecycleOrderDO getRecyclingOrders(int userId) {
         RecycleOrderPO po = recycleOrderRepository.selectByUserId(userId);
-        if (Objects.isNull(po) || Objects.isNull(po.getRecycleTime())) {
+        if (Objects.isNull(po) || Objects.nonNull(po.getRecycleTime())) {
             return null;
         }
         RecycleOrderDO recycleOrderDO = recycleOrderFactory.createRecycleOrderDO(po);
