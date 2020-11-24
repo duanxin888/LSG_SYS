@@ -793,4 +793,16 @@ response:
     "data": null,
     "msg": "operator success!"
 }
+```   
+#### 用户回收订单下单  
+api: /lsg/api/v1/books/users/{userId}/recycling  
+method: put  
+request: 5 (userId)  
+response:  
+```json
+{
+    "code": 200,
+    "data": null,
+    "msg": "operator success!"
+}
 ```

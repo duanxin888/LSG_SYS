@@ -61,7 +61,8 @@ public enum ResultEnum {
 
     RECYCLE_BOOK_ISBN_IS_NOT_RULE(406, "recycle book isbn is not rule"),
     RECYCLE_BOOK_GET_USERINFO_BY_ISBN_ERROR(406, "recycle book get userInfo by isbn error"),
-    RECYCLE_BOOK_ISBN_EXISTED_ORDER(406, "recycle book isbn existed order");
+    RECYCLE_BOOK_ISBN_EXISTED_ORDER(406, "recycle book isbn existed order"),
+    USER_RECYCLING_ORDER_NOT_EXIST(406, "user recycling order not exist");
 
     private final int code;
     private final String description;

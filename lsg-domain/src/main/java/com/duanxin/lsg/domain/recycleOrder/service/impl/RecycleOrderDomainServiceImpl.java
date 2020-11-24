@@ -114,6 +114,17 @@ public class RecycleOrderDomainServiceImpl implements RecycleOrderDomainService 
         recycleOrderDetailsRepository.deleteDetails(recycleOrderFactory.creRecycleOrderDetailsPO(detailsDO));
     }
 
+    @Override
+    public void submitRecyclingOrder(int userId) {
+        RecycleOrderPO recycleOrderPO = recycleOrderRepository.selectByUserId(userId);
+        if (Objects.isNull(recycleOrderPO)) {
+            throw new LSGCheckException(ResultEnum.USER_RECYCLING_ORDER_NOT_EXIST);
+        }
+        RecycleOrderDO recycleOrderDO = recycleOrderFactory.createRecycleOrderDO(recycleOrderPO);
+        recycleOrderDO.submitOrder();
+        recycleOrderRepository.updateWithSubmitOrder(recycleOrderFactory.createRecycleOrderPO(recycleOrderDO));
+    }
+
     private void checkISBNOfDetails(String isbn, int recycleOrderId) {
         RecycleOrderDetailsPO po = recycleOrderDetailsRepository.selectByISBNAndOrderId(isbn, recycleOrderId);
         if (!Objects.isNull(po)) {

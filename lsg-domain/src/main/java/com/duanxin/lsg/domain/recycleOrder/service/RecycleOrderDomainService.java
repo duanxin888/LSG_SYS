@@ -20,4 +20,6 @@ public interface RecycleOrderDomainService {
     List<RecycleOrderDO> getRecycledOrders(int userId);
 
     void deleteRecycleOrderDetails(int detailsId);
+
+    void submitRecyclingOrder(int userId);
 }

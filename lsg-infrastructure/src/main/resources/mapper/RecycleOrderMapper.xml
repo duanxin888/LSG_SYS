@@ -34,6 +34,12 @@
          #{recycleOrderPO.shipTime}, #{recycleOrderPO.verifyTime}, #{recycleOrderPO.deleted},
          #{recycleOrderPO.cdate}, #{recycleOrderPO.creator}, #{recycleOrderPO.edate}, #{recycleOrderPO.editor})
     </insert>
+    <update id="updateWithSubmitOrder" parameterType="com.duanxin.lsg.infrastructure.repository.po.RecycleOrderPO">
+        update T_RECYCLE_ORDER
+        set RECYCLE_TIME = #{recycleOrderPO.recycleTime},
+        EDATE = #{recycleOrderPO.edate}, EDITOR = #{recycleOrderPO.editor}
+        where ID = #{recycleOrderPO.id};
+    </update>
     <select id="selectByUserId" resultMap="recycleOrderMap">
         select
         <include refid="recycleOrder"/>

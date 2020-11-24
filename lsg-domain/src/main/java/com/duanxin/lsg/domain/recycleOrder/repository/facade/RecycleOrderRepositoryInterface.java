@@ -17,4 +17,6 @@ public interface RecycleOrderRepositoryInterface {
     RecycleOrderPO insert(RecycleOrderPO recycleOrderPO);
 
     List<RecycleOrderPO> selectOrdersByUserId(int userId);
+
+    void updateWithSubmitOrder(RecycleOrderPO recycleOrderPO);
 }

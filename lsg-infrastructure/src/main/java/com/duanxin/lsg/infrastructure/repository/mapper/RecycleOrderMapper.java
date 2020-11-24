@@ -18,4 +18,6 @@ public interface RecycleOrderMapper {
     void insert(@Param("recycleOrderPO") RecycleOrderPO recycleOrderPO);
 
     List<RecycleOrderPO> selectOrdersByUserId(@Param("userId") int userId);
+
+    void updateWithSubmitOrder(@Param("recycleOrderPO") RecycleOrderPO recycleOrderPO);
 }

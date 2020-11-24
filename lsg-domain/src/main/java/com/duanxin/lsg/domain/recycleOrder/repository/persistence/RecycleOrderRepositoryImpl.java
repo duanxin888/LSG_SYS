@@ -5,6 +5,7 @@ import com.duanxin.lsg.infrastructure.repository.mapper.RecycleOrderMapper;
 import com.duanxin.lsg.infrastructure.repository.po.RecycleOrderPO;
 import com.duanxin.lsg.infrastructure.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
+import net.minidev.json.JSONUtil;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,11 @@ public class RecycleOrderRepositoryImpl implements RecycleOrderRepositoryInterfa
     @Override
     public List<RecycleOrderPO> selectOrdersByUserId(int userId) {
         return recycleOrderMapper.selectOrdersByUserId(userId);
+    }
+
+    @Override
+    public void updateWithSubmitOrder(RecycleOrderPO recycleOrderPO) {
+        recycleOrderMapper.updateWithSubmitOrder(recycleOrderPO);
+        log.info("success to update recycleOrder [{}] with submit", JsonUtil.toString(recycleOrderPO));
     }
 }

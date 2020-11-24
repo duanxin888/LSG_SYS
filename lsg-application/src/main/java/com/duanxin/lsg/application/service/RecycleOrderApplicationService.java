@@ -42,6 +42,11 @@ public class RecycleOrderApplicationService {
         recycleOrderDomainService.deleteRecycleOrderDetails(detailsId);
     }
 
+    public void submitRecyclingOrder(int userId) {
+        checkUserExisted(userId);
+        recycleOrderDomainService.submitRecyclingOrder(userId);
+    }
+
     private void checkUserExisted(int userId) {
         userDomainService.getUserById(userId);
     }

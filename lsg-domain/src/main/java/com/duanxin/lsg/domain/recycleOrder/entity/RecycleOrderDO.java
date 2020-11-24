@@ -3,6 +3,7 @@ package com.duanxin.lsg.domain.recycleOrder.entity;
 import com.duanxin.lsg.domain.recycleOrder.entity.valueobject.RecycleOrderStatus;
 import com.duanxin.lsg.infrastructure.common.enums.ConstantEnum;
 import com.duanxin.lsg.infrastructure.common.enums.Deleted;
+import com.duanxin.lsg.infrastructure.utils.HttpUtil;
 import com.duanxin.lsg.infrastructure.utils.SnUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -63,5 +64,11 @@ public class RecycleOrderDO {
 
     public void addDetails(List<RecycleOrderDetailsDO> orderDetailsDOS) {
         this.setRecycleOrderDetailsDOS(orderDetailsDOS);
+    }
+
+    public void submitOrder() {
+        this.setRecycleTime(LocalDateTime.now());
+        this.setEdate(LocalDateTime.now());
+        this.setEditor(HttpUtil.request().getRemoteHost());
     }
 }
