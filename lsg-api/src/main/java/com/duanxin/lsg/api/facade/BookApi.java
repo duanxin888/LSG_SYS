@@ -44,7 +44,7 @@ public class BookApi {
     @PostMapping("/users/{userId}/recycle/{isbn}")
     public ResponseResult addRecycleBook(@PathVariable("userId") int userId,
                                       @PathVariable("isbn") String isbn) {
-        if (isbn.length() < 10 || isbn.length() > 13 || !NumberUtils.isDigits(isbn)) {
+        if (!(isbn.length() == 10 || isbn.length() == 13) || !NumberUtils.isDigits(isbn)) {
             throw new LSGCheckException(ResultEnum.RECYCLE_BOOK_ISBN_IS_NOT_RULE);
         }
         return ResponseResult.success(RecycleOrderDetailsAssembler.toDto(
