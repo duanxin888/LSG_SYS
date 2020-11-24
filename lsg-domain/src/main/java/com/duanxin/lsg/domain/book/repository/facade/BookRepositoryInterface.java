@@ -2,6 +2,7 @@ package com.duanxin.lsg.domain.book.repository.facade;
 
 import com.duanxin.lsg.infrastructure.repository.po.BookPO;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -14,4 +15,8 @@ public interface BookRepositoryInterface {
     List<BookPO> selectBooksByCategoryId(int firstCategoryId);
 
     BookPO selectBookById(int bookId);
+
+    List<BookPO> getByBookAuthor(String searchContent);
+
+    List<BookPO> getByBookName(String searchContent);
 }

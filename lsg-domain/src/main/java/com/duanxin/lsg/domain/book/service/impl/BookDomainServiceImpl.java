@@ -95,4 +95,16 @@ public class BookDomainServiceImpl implements BookDomainService {
         bookStockDO.upStock();
         bookStockRepository.updateStockAndSale(bookFactory.createBookStockPO(bookStockDO));
     }
+
+    @Override
+    public List<BookDO> getByBookAuthor(String searchContent) {
+        return bookRepository.getByBookAuthor(searchContent).
+                stream().map(bookFactory::createBookDO).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BookDO> getByBookName(String searchContent) {
+        return bookRepository.getByBookName(searchContent).
+                stream().map(bookFactory::createBookDO).collect(Collectors.toList());
+    }
 }

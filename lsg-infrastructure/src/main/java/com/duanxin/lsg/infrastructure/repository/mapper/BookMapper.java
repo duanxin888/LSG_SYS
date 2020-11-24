@@ -15,4 +15,8 @@ public interface BookMapper {
     List<BookPO> selectBooksByCategoryId(@Param("categoryId") int firstCategoryId);
 
     BookPO selectBookById(@Param("id") int id);
+
+    List<BookPO> getByBookAuthor(@Param("searchContent") String searchContent);
+
+    List<BookPO> getByBookName(@Param("searchContent") String searchContent);
 }

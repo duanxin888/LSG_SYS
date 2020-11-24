@@ -33,4 +33,14 @@ public class BookRepositoryImpl implements BookRepositoryInterface {
         BookPO bookPO = bookMapper.selectBookById(bookId);
         return Optional.ofNullable(bookPO).orElseThrow(() -> new LSGCheckException(ResultEnum.BOOK_NOT_EXIST));
     }
+
+    @Override
+    public List<BookPO> getByBookAuthor(String searchContent) {
+        return bookMapper.getByBookAuthor(searchContent);
+    }
+
+    @Override
+    public List<BookPO> getByBookName(String searchContent) {
+        return bookMapper.getByBookName(searchContent);
+    }
 }

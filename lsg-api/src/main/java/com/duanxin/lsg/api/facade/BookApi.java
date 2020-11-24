@@ -4,8 +4,11 @@ import com.duanxin.lsg.api.assembler.BookAssembler;
 import com.duanxin.lsg.api.assembler.BookCategoryAssembler;
 import com.duanxin.lsg.api.assembler.RecycleOrderAssembler;
 import com.duanxin.lsg.api.assembler.RecycleOrderDetailsAssembler;
+import com.duanxin.lsg.api.dto.BookDto;
+import com.duanxin.lsg.infrastructure.common.enums.SearchType;
 import com.duanxin.lsg.application.service.BookApplicationService;
 import com.duanxin.lsg.application.service.RecycleOrderApplicationService;
+import com.duanxin.lsg.application.service.SearchApplicationService;
 import com.duanxin.lsg.domain.book.entity.BookCategoryDO;
 import com.duanxin.lsg.domain.book.entity.BookDO;
 import com.duanxin.lsg.domain.recycleOrder.entity.RecycleOrderDO;
@@ -34,6 +37,15 @@ public class BookApi {
     private BookApplicationService bookApplicationService;
     @Autowired
     private RecycleOrderApplicationService recycleOrderApplicationService;
+    @Autowired
+    private SearchApplicationService searchApplicationService;
+
+    @GetMapping("/search/{searchContent}/type/{searchType}")
+    public ResponseResult searchBook(@PathVariable("searchContent") String searchContent,
+                                     @PathVariable("searchType") SearchType searchType) {
+        return ResponseResult.success(searchApplicationService.search(searchContent, searchType).
+                stream().map(BookAssembler::toDto).collect(Collectors.toList()));
+    }
 
     @PutMapping("/users/{userId}/recycling")
     public ResponseResult submitRecyclingOrder(@PathVariable("userId") int userId) {

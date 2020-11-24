@@ -31,4 +31,8 @@ public interface BookDomainService {
     void downStock(BookStockDO bookStockDO);
 
     void upStock(BookStockDO bookStockDO);
+
+    List<BookDO> getByBookAuthor(String searchContent);
+
+    List<BookDO> getByBookName(String searchContent);
 }

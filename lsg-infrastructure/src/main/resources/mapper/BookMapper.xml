@@ -35,4 +35,16 @@
         where ID = #{id} and DELETED = 0;
     </select>
 
+    <select id="getByBookAuthor" resultMap="bookMap">
+        select <include refid="book"/>
+        from T_BOOK
+        where AUTHOR like '%${searchContent}%'
+    </select>
+
+    <select id="getByBookName" resultMap="bookMap">
+        select <include refid="book"/>
+        from T_BOOK
+        where BOOK_NAME like '%${searchContent}%'
+    </select>
+
 </mapper>
