@@ -91,6 +91,7 @@ public class UserApi {
     }
 
     @GetMapping("/page")
+    @CrossOrigin
     public ResponseResult pageUser(int pageNum, int pageSize) {
         PageInfo<UserDO> userDOS =
                 userApplicationService.pageUser(pageNum, pageSize);

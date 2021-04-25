@@ -15,6 +15,7 @@ import com.duanxin.lsg.domain.recycleOrder.entity.RecycleOrderDO;
 import com.duanxin.lsg.infrastructure.common.api.ResponseResult;
 import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
 import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,5 +113,12 @@ public class BookApi {
     @GetMapping("/levels/{id}")
     public ResponseResult showBookLevels(@PathVariable("id") int bookId) {
         return ResponseResult.success(BookAssembler.toDto(bookApplicationService.getLevelsByBookId(bookId)));
+    }
+
+    @GetMapping("/categories/{cid}/page")
+    @CrossOrigin
+    public ResponseResult pageBookByCid(@PathVariable int cid, int pageNum, int pageSize) {
+        PageInfo<BookDO> pageInfo = bookApplicationService.pageBookByCid(cid, pageNum, pageSize);
+        return ResponseResult.success(BookAssembler.do2PageResponseDto(pageInfo));
     }
 }

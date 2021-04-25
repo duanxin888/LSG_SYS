@@ -5,6 +5,7 @@ import com.duanxin.lsg.domain.book.entity.BookDO;
 import com.duanxin.lsg.domain.book.entity.BookLevelDO;
 import com.duanxin.lsg.domain.book.entity.BookStockDO;
 import com.duanxin.lsg.domain.book.entity.valueobject.BookLevel;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -35,4 +36,6 @@ public interface BookDomainService {
     List<BookDO> getByBookAuthor(String searchContent);
 
     List<BookDO> getByBookName(String searchContent);
+
+    PageInfo<BookDO> pageBookByCid(int cid, int pageNum, int pageSize);
 }

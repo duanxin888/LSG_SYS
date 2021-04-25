@@ -3,6 +3,7 @@ package com.duanxin.lsg.application.service;
 import com.duanxin.lsg.domain.book.entity.BookCategoryDO;
 import com.duanxin.lsg.domain.book.entity.BookDO;
 import com.duanxin.lsg.domain.book.service.BookDomainService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,9 @@ public class BookApplicationService {
 
     public BookDO getLevelsByBookId(int bookId) {
         return bookDomainService.getLevelsByBookId(bookId);
+    }
+
+    public PageInfo<BookDO> pageBookByCid(int cid, int pageNum, int pageSize) {
+        return bookDomainService.pageBookByCid(cid, pageNum, pageSize);
     }
 }

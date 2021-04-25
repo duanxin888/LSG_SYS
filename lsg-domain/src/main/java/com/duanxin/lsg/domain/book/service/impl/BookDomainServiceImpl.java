@@ -16,6 +16,8 @@ import com.duanxin.lsg.infrastructure.repository.po.BookCategoryPO;
 import com.duanxin.lsg.infrastructure.repository.po.BookPO;
 import com.duanxin.lsg.infrastructure.repository.po.BookStockPO;
 import com.duanxin.lsg.domain.book.service.BookDomainService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,5 +108,13 @@ public class BookDomainServiceImpl implements BookDomainService {
     public List<BookDO> getByBookName(String searchContent) {
         return bookRepository.getByBookName(searchContent).
                 stream().map(bookFactory::createBookDO).collect(Collectors.toList());
+    }
+
+    @Override
+    public PageInfo<BookDO> pageBookByCid(int cid, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<BookDO> bookDOS = bookRepository.selectBooksByCategoryId(cid).stream().
+                map(bookFactory::createBookDO).collect(Collectors.toList());
+        return new PageInfo<>(bookDOS);
     }
 }
