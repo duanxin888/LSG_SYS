@@ -22,34 +22,45 @@
     </resultMap>
 
     <sql id="user">
-        ID, USER_NAME, PASSWORD, PHONE, USER_IMG_URL, USER_ACCOUNT_ID, NICKNAME,
+        ID
+        , USER_NAME, PASSWORD, PHONE, USER_IMG_URL, USER_ACCOUNT_ID, NICKNAME,
         WX_OPENID, WX_SESSION_KEY, STATUS, DELETED, CDATE, CREATOR, EDATE, EDITOR, GENDER
     </sql>
     <insert id="insert" parameterType="com.duanxin.lsg.infrastructure.repository.po.UserPO"
             useGeneratedKeys="true" keyProperty="id">
         insert into T_USER(USER_NAME, PASSWORD, PHONE, USER_IMG_URL, USER_ACCOUNT_ID, NICKNAME,
-        WX_OPENID, WX_SESSION_KEY, STATUS, DELETED, CDATE, CREATOR, EDATE, EDITOR, GENDER)
-        values(#{user.userName}, #{user.password}, #{user.phone}, #{user.userImgUrl}, #{user.userAccountId},
-        #{user.nickname}, #{user.wxOpenid}, #{user.wxSessionKey}, #{user.status}, #{user.deleted},
-        #{user.cdate}, #{user.creator}, #{user.edate}, #{user.editor}, #{user.gender});
+                           WX_OPENID, WX_SESSION_KEY, STATUS, DELETED, CDATE, CREATOR, EDATE, EDITOR, GENDER)
+        values (#{user.userName}, #{user.password}, #{user.phone}, #{user.userImgUrl}, #{user.userAccountId},
+                #{user.nickname}, #{user.wxOpenid}, #{user.wxSessionKey}, #{user.status}, #{user.deleted},
+                #{user.cdate}, #{user.creator}, #{user.edate}, #{user.editor}, #{user.gender});
     </insert>
     <update id="updateWXSessionKey">
         update T_USER
         set WX_SESSION_KEY = #{user.wxSessionKey},
-        EDATE = #{user.edate}, EDITOR = #{user.editor}
+            EDATE          = #{user.edate},
+            EDITOR         = #{user.editor}
         where ID = #{user.id};
     </update>
 
     <select id="getUserByOpenId" resultMap="TUserMap">
-        select <include refid="user"/>
+        select
+        <include refid="user"/>
         from T_USER
         where WX_OPENID = #{openId} and DELETED = 0;
     </select>
 
     <select id="selectByPrimaryKey" resultMap="TUserMap">
-        select <include refid="user"/>
+        select
+        <include refid="user"/>
         from T_USER
         where ID = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="TUserMap">
+        select
+        <include refid="user"/>
+        from T_USER
+        order by CDATE;
     </select>
 
 </mapper>

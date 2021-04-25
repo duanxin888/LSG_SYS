@@ -2,8 +2,11 @@ package com.duanxin.lsg.application.service;
 
 import com.duanxin.lsg.domain.user.entity.UserAccountDO;
 import com.duanxin.lsg.domain.user.entity.UserAddressDO;
+import com.duanxin.lsg.domain.user.entity.UserDO;
+import com.duanxin.lsg.domain.user.repository.facade.UserRepositoryInterface;
 import com.duanxin.lsg.domain.user.service.UserAddressDomainService;
 import com.duanxin.lsg.domain.user.service.UserDomainService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,8 @@ public class UserApplicationService {
     private UserAddressDomainService userAddressDomainService;
     @Autowired
     private UserDomainService userDomainService;
+    @Autowired
+    private UserRepositoryInterface userRepositoryInterface;
 
     public void addAddress(UserAddressDO addressDO) {
         checkUserExist(addressDO.getUserId());
@@ -46,6 +51,10 @@ public class UserApplicationService {
     public UserAccountDO getUserAccount(int userId) {
         checkUserExist(userId);
         return userDomainService.getUserAccount(userId);
+    }
+
+    public PageInfo<UserDO> pageUser(int pageNum, int pageSize) {
+        return userRepositoryInterface.pageUser(pageNum, pageSize);
     }
 
     private void checkUserExist(int id) {

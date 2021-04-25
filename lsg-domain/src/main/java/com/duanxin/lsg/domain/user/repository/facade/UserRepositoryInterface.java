@@ -1,7 +1,9 @@
 package com.duanxin.lsg.domain.user.repository.facade;
 
 
+import com.duanxin.lsg.domain.user.entity.UserDO;
 import com.duanxin.lsg.infrastructure.repository.po.UserPO;
+import com.github.pagehelper.PageInfo;
 
 /**
  * @author duanxin
@@ -18,4 +20,6 @@ public interface UserRepositoryInterface {
     UserPO updateWXSessionKey(UserPO user);
 
     UserPO selectByPrimaryId(int userId);
+
+    PageInfo<UserDO> pageUser(int pageNum, int pageSize);
 }

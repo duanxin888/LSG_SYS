@@ -3,6 +3,8 @@ package com.duanxin.lsg.api.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -28,4 +30,8 @@ public class UserInfo {
     private String language;
 
     private int gender;
+
+    private String accountSn;
+
+    private BigDecimal balance;
 }

@@ -3,6 +3,8 @@ package com.duanxin.lsg.infrastructure.repository.mapper;
 import com.duanxin.lsg.infrastructure.repository.po.UserPO;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 用户表(TUser)表数据库访问层
  *
@@ -18,4 +20,6 @@ public interface UserMapper {
     void updateWXSessionKey(@Param("user") UserPO user);
 
     UserPO selectByPrimaryKey(@Param("id") int userId);
+
+    List<UserPO> selectAll();
 }

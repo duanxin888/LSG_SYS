@@ -2,6 +2,7 @@ package com.duanxin.lsg.domain.order.entity.valueobject;
 
 import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
 import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
+import com.duanxin.lsg.infrastructure.utils.JsonUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

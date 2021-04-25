@@ -2,19 +2,18 @@ package com.duanxin.lsg.api.facade;
 
 import com.duanxin.lsg.api.assembler.UserAccountAssembler;
 import com.duanxin.lsg.api.assembler.UserAddressAssembler;
+import com.duanxin.lsg.api.assembler.UserAssembler;
 import com.duanxin.lsg.api.assembler.WxLoginAssembler;
 import com.duanxin.lsg.api.dto.UserAddressDto;
 import com.duanxin.lsg.api.dto.WXLoginRequestDto;
 import com.duanxin.lsg.application.service.LoginApplicationService;
 import com.duanxin.lsg.application.service.UserApplicationService;
-import com.duanxin.lsg.domain.user.entity.UserAccountDO;
 import com.duanxin.lsg.domain.user.entity.UserAddressDO;
 import com.duanxin.lsg.domain.user.entity.UserDO;
 import com.duanxin.lsg.infrastructure.common.api.ResponseResult;
 import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
 import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
-import com.sun.org.apache.regexp.internal.RE;
-import jdk.nashorn.internal.objects.annotations.Getter;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +88,13 @@ public class UserApi {
     @GetMapping("/accounts/{userId}")
     public ResponseResult getUserAccount(@PathVariable("userId") int userId) {
         return ResponseResult.success(UserAccountAssembler.toDto(userApplicationService.getUserAccount(userId), userId));
+    }
+
+    @GetMapping("/page")
+    public ResponseResult pageUser(int pageNum, int pageSize) {
+        PageInfo<UserDO> userDOS =
+                userApplicationService.pageUser(pageNum, pageSize);
+        return ResponseResult.success(UserAssembler.do2PageResponseDto(userDOS));
     }
 
     private void checkDto(UserAddressDto dto) {

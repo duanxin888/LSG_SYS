@@ -16,6 +16,7 @@ import com.duanxin.lsg.infrastructure.common.api.ResponseResult;
 import com.duanxin.lsg.infrastructure.common.exception.LSGCheckException;
 import com.duanxin.lsg.infrastructure.common.exception.ResultEnum;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.jasypt.encryption.StringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +40,13 @@ public class BookApi {
     private RecycleOrderApplicationService recycleOrderApplicationService;
     @Autowired
     private SearchApplicationService searchApplicationService;
+    @Autowired
+    private StringEncryptor stringEncryptor;
+
+    @GetMapping
+    public ResponseResult encrypt(String str) {
+        return ResponseResult.success(stringEncryptor.encrypt(str));
+    }
 
     @GetMapping("/search/{searchContent}/type/{searchType}")
     public ResponseResult searchBook(@PathVariable("searchContent") String searchContent,
