@@ -126,4 +126,15 @@ public class BookDomainServiceImpl implements BookDomainService {
         }
         bookCategoryRepository.insert(bookFactory.createBookCategoryPO(categoryDO));
     }
+
+    @Override
+    public void deleteCategory(int id) {
+        BookCategoryPO po = bookCategoryRepository.selectById(id);
+        if (Objects.isNull(po)) {
+            throw new LSGCheckException(ResultEnum.BOOK_CATEGORY_NOT_EXIST);
+        }
+        BookCategoryDO categoryDO = bookFactory.createBookCategoryDO(po);
+        categoryDO.delete();
+        bookCategoryRepository.update4Delete(categoryDO.getId(), categoryDO.getDeleted().getCode(), categoryDO.getEdate());
+    }
 }

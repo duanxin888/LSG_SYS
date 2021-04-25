@@ -37,4 +37,9 @@ public class BookCategoryDO {
     private LocalDateTime edate = LocalDateTime.now();
 
     private String editor = Constants.EDITOR;
+
+    public void delete() {
+        this.setDeleted(Deleted.IS_DELETED);
+        this.setEdate(LocalDateTime.now());
+    }
 }

@@ -45,4 +45,8 @@ public class BookApplicationService {
     public void addCategory(BookCategoryDO categoryDO) {
         bookDomainService.addCategory(categoryDO);
     }
+
+    public void deleteCategory(int id) {
+        bookDomainService.deleteCategory(id);
+    }
 }

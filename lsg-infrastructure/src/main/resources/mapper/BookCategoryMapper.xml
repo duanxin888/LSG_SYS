@@ -28,6 +28,13 @@
                 #{po.deleted}, #{po.cdate}, #{po.creator}, #{po.edate}, #{po.editor})
     </insert>
 
+    <update id="update4Delete">
+        update T_BOOK_CATEGORY
+        set DELETED = #{deleted},
+            EDATE   = #{edate}
+        where ID = #{id}
+    </update>
+
     <select id="selectCategoriesByLevel" resultMap="bookCategoryMap">
         select
         <include refid="bookCategory"/>
@@ -40,6 +47,13 @@
         <include refid="bookCategory"/>
         from T_BOOK_CATEGORY
         where CATEGORY_NAME = #{categoryName}
+    </select>
+
+    <select id="selectById" resultMap="bookCategoryMap">
+        select
+        <include refid="bookCategory"/>
+        from T_BOOK_CATEGORY
+        where ID = #{id}
     </select>
 
 </mapper>

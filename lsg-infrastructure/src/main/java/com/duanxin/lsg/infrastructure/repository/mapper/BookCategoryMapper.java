@@ -3,6 +3,7 @@ package com.duanxin.lsg.infrastructure.repository.mapper;
 import com.duanxin.lsg.infrastructure.repository.po.BookCategoryPO;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -17,4 +18,10 @@ public interface BookCategoryMapper {
     void insert(@Param("po") BookCategoryPO po);
 
     BookCategoryPO selectByName(@Param("categoryName") String categoryName);
+
+    BookCategoryPO selectById(@Param("id") int id);
+
+    void update4Delete(@Param("id") int id,
+                       @Param("deleted") int deleted,
+                       @Param("edate") LocalDateTime edate);
 }

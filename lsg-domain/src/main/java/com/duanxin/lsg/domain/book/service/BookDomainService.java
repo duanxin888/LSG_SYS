@@ -40,4 +40,6 @@ public interface BookDomainService {
     PageInfo<BookDO> pageBookByCid(int cid, int pageNum, int pageSize);
 
     void addCategory(BookCategoryDO categoryDO);
+
+    void deleteCategory(int id);
 }

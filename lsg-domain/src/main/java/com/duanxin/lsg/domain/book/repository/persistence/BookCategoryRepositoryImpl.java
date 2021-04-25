@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -37,5 +38,16 @@ public class BookCategoryRepositoryImpl implements BookCategoryRepositoryInterfa
     @Override
     public BookCategoryPO selectByName(String categoryName) {
         return bookCategoryMapper.selectByName(categoryName);
+    }
+
+    @Override
+    public BookCategoryPO selectById(int id) {
+        return bookCategoryMapper.selectById(id);
+    }
+
+    @Override
+    public void update4Delete(int id, int deleted, LocalDateTime edate) {
+        bookCategoryMapper.update4Delete(id, deleted, edate);
+        log.info("success to delete book category [{}]", id);
     }
 }

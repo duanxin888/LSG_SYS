@@ -2,6 +2,7 @@ package com.duanxin.lsg.domain.book.repository.facade;
 
 import com.duanxin.lsg.infrastructure.repository.po.BookCategoryPO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -16,4 +17,8 @@ public interface BookCategoryRepositoryInterface {
     void insert(BookCategoryPO bookCategoryPO);
 
     BookCategoryPO selectByName(String categoryName);
+
+    BookCategoryPO selectById(int id);
+
+    void update4Delete(int id, int deleted, LocalDateTime edate);
 }

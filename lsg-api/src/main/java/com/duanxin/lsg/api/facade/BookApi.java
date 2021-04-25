@@ -128,4 +128,10 @@ public class BookApi {
         bookApplicationService.addCategory(BookCategoryAssembler.toDO(dto));
         return ResponseResult.success();
     }
+
+    @DeleteMapping("/categories/{id}")
+    public ResponseResult deleteCategory(@PathVariable int id) {
+        bookApplicationService.deleteCategory(id);
+        return ResponseResult.success();
+    }
 }
