@@ -38,4 +38,6 @@ public interface BookDomainService {
     List<BookDO> getByBookName(String searchContent);
 
     PageInfo<BookDO> pageBookByCid(int cid, int pageNum, int pageSize);
+
+    void addCategory(BookCategoryDO categoryDO);
 }

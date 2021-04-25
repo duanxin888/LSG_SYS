@@ -1,6 +1,7 @@
 package com.duanxin.lsg.domain.book.entity;
 
 import com.duanxin.lsg.domain.book.entity.valueobject.BookCategoryLevel;
+import com.duanxin.lsg.infrastructure.common.enums.Constants;
 import com.duanxin.lsg.infrastructure.common.enums.Deleted;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,17 +24,17 @@ public class BookCategoryDO {
 
     private int pid;
 
-    private BookCategoryLevel categoryLevel;
+    private BookCategoryLevel categoryLevel = BookCategoryLevel.LEVEL1;
 
     private int sorted;
 
-    private Deleted deleted;
+    private Deleted deleted = Deleted.NOT_DELETE;
 
-    private LocalDateTime cdate;
+    private LocalDateTime cdate = LocalDateTime.now();
 
-    private String creator;
+    private String creator = Constants.CREATOR;
 
-    private LocalDateTime edate;
+    private LocalDateTime edate = LocalDateTime.now();
 
-    private String editor;
+    private String editor = Constants.EDITOR;
 }

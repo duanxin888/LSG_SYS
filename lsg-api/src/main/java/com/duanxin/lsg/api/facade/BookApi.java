@@ -4,6 +4,7 @@ import com.duanxin.lsg.api.assembler.BookAssembler;
 import com.duanxin.lsg.api.assembler.BookCategoryAssembler;
 import com.duanxin.lsg.api.assembler.RecycleOrderAssembler;
 import com.duanxin.lsg.api.assembler.RecycleOrderDetailsAssembler;
+import com.duanxin.lsg.api.dto.BookCategoryDto;
 import com.duanxin.lsg.api.dto.BookDto;
 import com.duanxin.lsg.infrastructure.common.enums.SearchType;
 import com.duanxin.lsg.application.service.BookApplicationService;
@@ -120,5 +121,11 @@ public class BookApi {
     public ResponseResult pageBookByCid(@PathVariable int cid, int pageNum, int pageSize) {
         PageInfo<BookDO> pageInfo = bookApplicationService.pageBookByCid(cid, pageNum, pageSize);
         return ResponseResult.success(BookAssembler.do2PageResponseDto(pageInfo));
+    }
+
+    @PostMapping("/categories")
+    public ResponseResult addCategory(@RequestBody BookCategoryDto dto) {
+        bookApplicationService.addCategory(BookCategoryAssembler.toDO(dto));
+        return ResponseResult.success();
     }
 }

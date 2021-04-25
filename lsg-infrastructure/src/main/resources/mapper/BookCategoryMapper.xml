@@ -16,12 +16,30 @@
     </resultMap>
 
     <sql id="bookCategory">
-        ID, CATEGORY_NAME, CATEGORY_LEVEL_NAME, PID, SORTED, DELETED, CDATE, CREATOR, EDATE, EDITOR
+        ID
+        , CATEGORY_NAME, CATEGORY_LEVEL_NAME, PID, SORTED, DELETED, CDATE, CREATOR, EDATE, EDITOR
     </sql>
+
+    <insert id="insert" parameterType="com.duanxin.lsg.infrastructure.repository.po.BookCategoryPO"
+            keyProperty="id" useGeneratedKeys="true">
+        insert into T_BOOK_CATEGORY(CATEGORY_NAME, CATEGORY_LEVEL_NAME, PID,
+                                    SORTED, DELETED, CDATE, CREATOR, EDATE, EDITOR)
+        values (#{po.categoryName}, #{po.categoryLevelName}, #{po.pid}, #{po.sorted},
+                #{po.deleted}, #{po.cdate}, #{po.creator}, #{po.edate}, #{po.editor})
+    </insert>
+
     <select id="selectCategoriesByLevel" resultMap="bookCategoryMap">
-        select <include refid="bookCategory"/>
+        select
+        <include refid="bookCategory"/>
         from T_BOOK_CATEGORY
         where CATEGORY_LEVEL_NAME = #{levelName} and DELETED = 0;
+    </select>
+
+    <select id="selectByName" resultMap="bookCategoryMap">
+        select
+        <include refid="bookCategory"/>
+        from T_BOOK_CATEGORY
+        where CATEGORY_NAME = #{categoryName}
     </select>
 
 </mapper>

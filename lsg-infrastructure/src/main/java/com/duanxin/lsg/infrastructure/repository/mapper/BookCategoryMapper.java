@@ -13,4 +13,8 @@ import java.util.List;
  */
 public interface BookCategoryMapper {
     List<BookCategoryPO> selectCategoriesByLevel(@Param("levelName") String levelName);
+
+    void insert(@Param("po") BookCategoryPO po);
+
+    BookCategoryPO selectByName(@Param("categoryName") String categoryName);
 }

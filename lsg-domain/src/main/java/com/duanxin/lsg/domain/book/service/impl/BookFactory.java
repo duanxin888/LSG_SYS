@@ -12,6 +12,7 @@ import com.duanxin.lsg.infrastructure.repository.po.BookLevelPO;
 import com.duanxin.lsg.infrastructure.repository.po.BookPO;
 import com.duanxin.lsg.infrastructure.repository.po.BookStockPO;
 import com.duanxin.lsg.infrastructure.common.enums.Deleted;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -101,6 +102,14 @@ public class BookFactory {
         po.setCreator(bookStockDO.getCreator());
         po.setEdate(bookStockDO.getEdate());
         po.setEditor(bookStockDO.getEditor());
+        return po;
+    }
+
+    public BookCategoryPO createBookCategoryPO(BookCategoryDO categoryDO) {
+        BookCategoryPO po = new BookCategoryPO();
+        BeanUtils.copyProperties(categoryDO, po);
+        po.setCategoryLevelName(categoryDO.getCategoryLevel().getLevelName());
+        po.setDeleted(categoryDO.getDeleted().getCode());
         return po;
     }
 }

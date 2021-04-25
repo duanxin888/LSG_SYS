@@ -3,6 +3,9 @@ package com.duanxin.lsg.api.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 /**
  * @author duanxin
  * @version 1.0
@@ -15,7 +18,8 @@ public class BookCategoryDto {
 
     private int id;
 
+    @NotBlank(message = "categoryName not null")
     private String categoryName;
 
-    private int sorted;
+    private Integer sorted = 0;
 }

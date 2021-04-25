@@ -12,4 +12,8 @@ import java.util.List;
  */
 public interface BookCategoryRepositoryInterface {
     List<BookCategoryPO> selectCategoriesByLevel(String levelName);
+
+    void insert(BookCategoryPO bookCategoryPO);
+
+    BookCategoryPO selectByName(String categoryName);
 }

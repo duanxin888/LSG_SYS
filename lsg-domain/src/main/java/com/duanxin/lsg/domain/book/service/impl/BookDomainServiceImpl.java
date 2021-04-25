@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -116,5 +117,13 @@ public class BookDomainServiceImpl implements BookDomainService {
         List<BookDO> bookDOS = bookRepository.selectBooksByCategoryId(cid).stream().
                 map(bookFactory::createBookDO).collect(Collectors.toList());
         return new PageInfo<>(bookDOS);
+    }
+
+    @Override
+    public void addCategory(BookCategoryDO categoryDO) {
+        if (Objects.nonNull(bookCategoryRepository.selectByName(categoryDO.getCategoryName()))) {
+            throw new LSGCheckException(ResultEnum.BOOK_CATEGORY_IS_EXIST);
+        }
+        bookCategoryRepository.insert(bookFactory.createBookCategoryPO(categoryDO));
     }
 }

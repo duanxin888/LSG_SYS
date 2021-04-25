@@ -41,4 +41,8 @@ public class BookApplicationService {
     public PageInfo<BookDO> pageBookByCid(int cid, int pageNum, int pageSize) {
         return bookDomainService.pageBookByCid(cid, pageNum, pageSize);
     }
+
+    public void addCategory(BookCategoryDO categoryDO) {
+        bookDomainService.addCategory(categoryDO);
+    }
 }

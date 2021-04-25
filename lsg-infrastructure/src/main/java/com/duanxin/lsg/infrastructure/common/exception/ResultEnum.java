@@ -23,6 +23,7 @@ public enum ResultEnum {
     WX_LOGIN_CODE_OR_USERINFO_IS_NULL(402, "wx login code or userinfo is null"),
 
     BOOK_CATEGORY_NOT_EXIST(404, "book category not exist"),
+    BOOK_CATEGORY_IS_EXIST(404, "book category is exist"),
     BOOK_NOT_EXIST(404, "book not exist"),
     BOOK_LEVEL_NOT_EXIST(404, "book level not exist"),
     BOOK_CATEGORY_LEVEL_NAME_NOT_EXIST(404, "book category level name not exist"),
